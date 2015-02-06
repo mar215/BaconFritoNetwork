@@ -28,7 +28,7 @@ if(session.getAttribute("user")!=null){
 <tr><td><p>Usuario</p></td>
 <td><input type="text" name="user"></td></tr>
 <tr><td><p>Password</p></td>
-<td><input type="text" name="pass"></td></tr>
+<td><input type="password" name="pass"></td></tr>
 
 <tr><td colspan="2"><input type="submit" value="Login"></td></tr>
 </table>
