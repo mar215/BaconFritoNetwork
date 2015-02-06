@@ -42,7 +42,14 @@ public class ContractClass {
 												,COLUMN_NAME_DESTINO};
     }
     
-    //GRUPO USUARIO?
+    
+    public static abstract class DatosGrupoUsuario {
+    	public static final String TABLE_NAME = "GrupoUsuario";
+    	public static final String COLUMN_NAME_IDUSUARIO		="idusuario";
+    	public static final String COLUMN_NAME_IDGRUPO			="idgrupo";
+    	public static final String[] COLUMNS = {COLUMN_NAME_IDUSUARIO, COLUMN_NAME_IDGRUPO};
+    }
+ 
     //DESAYUNO
     //CUENTA?
     //ANYTHING ELSE?
