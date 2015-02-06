@@ -2,7 +2,7 @@ package bacon.frito.db;
 
 import bacon.frito.db.ContractClass.DatosUsuario;
 
-public class AgroundsDB {
+public class Db {
 	private static final String DATABASE_CREATE_USUARIO = "CREATE TABLE if not exists "
 			+ DatosUsuario.TABLE_NAME 					+ " (" 
 			+ DatosUsuario.COLUMN_NAME_ROWID				+ " integer PRIMARY KEY autoincrement," 
