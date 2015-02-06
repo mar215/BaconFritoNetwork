@@ -33,7 +33,16 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Comprobamos session por si el usuario ha accedido directamente
+		boolean activo = (boolean) request.getSession().getAttribute("activo");
+		if(activo == true && (String) request.getSession().getAttribute("user") != null){
+			response.sendRedirect("pagina_perfil.jsp");
+		}
+		
+		// Recibimos los parámetros del login en el POST	
+		String user = request.getParameter("user");
+		String pass = request.getParameter("pass");
+		
 	}
 
 }

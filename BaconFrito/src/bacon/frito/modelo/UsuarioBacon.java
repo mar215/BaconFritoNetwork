@@ -3,7 +3,7 @@ package bacon.frito.modelo;
 import java.util.ArrayList;
 
 public class UsuarioBacon extends Usuario{
-	
+	//TODO: cumpleaños y sexo
 	private String	nombre;
 	private String	apellidos;
 	private String	telefono;
