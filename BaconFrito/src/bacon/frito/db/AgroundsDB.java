@@ -1,5 +1,7 @@
 package bacon.frito.db;
 
+import bacon.frito.db.ContractClass.DatosUsuario;
+
 public class AgroundsDB {
 	private static final String DATABASE_CREATE_USUARIO = "CREATE TABLE if not exists "
 			+ DatosUsaurio.TABLE_NAME 					+ " (" 
