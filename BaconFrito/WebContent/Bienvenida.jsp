@@ -18,7 +18,7 @@ if(session.getAttribute("user")!=null){
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Bacon Frito Network</title>
 </head>
-<body>
+<body style="background-color:#4DACFF">
 
 <h1 align="center">Bienvenido a Bacon Frito Network</h1>
 
@@ -30,6 +30,7 @@ if(session.getAttribute("user")!=null){
 <tr><td><p>Password</p></td>
 <td><input type="text" name="pass"></td></tr>
 
+<tr><td colspan="2"><input type="submit" value="Login"></td></tr>
 </table>
 </form>
 
