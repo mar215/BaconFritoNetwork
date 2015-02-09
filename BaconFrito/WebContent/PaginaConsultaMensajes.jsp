@@ -26,10 +26,10 @@
     <li><a href="">Cerrar sesión</a></li>
 </ul>
 </li>
-<li><a href="PaginaConsultarMensajes.jsp">Mensajes</a>
+<li><a href="PaginaConsultaMensajes.jsp">Mensajes</a>
 <ul>
     <li><a href="PaginaMensajes.jsp">Enviar mensaje</a></li>
-    <li><a href="PaginaConsultarMensajes.jsp">Consultar mensajes</a></li>
+    <li><a href="PaginaConsultaMensajes.jsp">Consultar mensajes</a></li>
 </ul>
 </li>
 <li><a href="">Configuración</a></li>
@@ -58,7 +58,7 @@
 <%for(int i=0; i<5; i++){
 	%>
 	<tr> <td>Igual si</td> <td>Finn el Humano</td> 
-	<td> <form action="" method="POST">
+	<td> <form action="PaginaVerMensaje.jsp" method="POST">
 	<input type="submit" value="Ver">
 	</form> </td>
 	 </tr>
