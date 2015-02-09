@@ -24,8 +24,8 @@ public class ContractClass {
         									+ "," + COLUMN_NAME_APELLIDOS + "," + COLUMN_NAME_TELEFONO
         									+ "," + COLUMN_NAME_SEXO + "," + COLUMN_NAME_FOTO
         									+ "," + COLUMN_NAME_TIPO;
-	}  
-	
+	 
+	}
 	
 	public static abstract class DatosGrupo {
 		public static final String TABLE_NAME = "Grupo";
@@ -37,6 +37,10 @@ public class ContractClass {
     	public static final String[] COLUMNS = {COLUMN_NAME_ID,COLUMN_NAME_NOMBRE
     											,COLUMN_NAME_DESCRIPCION,COLUMN_NAME_IMAGEN
     											,COLUMN_NAME_MAXINTEGRANTES};
+    	public static final String COLUMNAS = COLUMN_NAME_NOMBRE + "," +
+											COLUMN_NAME_DESCRIPCION + "," + COLUMN_NAME_IMAGEN
+											+ "," + COLUMN_NAME_MAXINTEGRANTES;
+	}
     	
     	
     public static abstract class DatosMensaje {
@@ -46,6 +50,9 @@ public class ContractClass {
     	public static final String COLUMN_NAME_DESTINO  		= "destino";		//String
     	public static final String[] COLUMNS = {COLUMN_NAME_ID,COLUMN_NAME_TEXTO
 												,COLUMN_NAME_DESTINO};
+    	public static final String COLUMNAS = COLUMN_NAME_TEXTO + "," +
+											COLUMN_NAME_DESTINO;
+    	
     }
     
     
@@ -54,12 +61,14 @@ public class ContractClass {
     	public static final String COLUMN_NAME_IDUSUARIO		="idusuario";		//int
     	public static final String COLUMN_NAME_IDGRUPO			="idgrupo";			//int	
     	public static final String[] COLUMNS = {COLUMN_NAME_IDUSUARIO, COLUMN_NAME_IDGRUPO};
+    	
+    	public static final String COLUMNAS = COLUMN_NAME_IDUSUARIO + "," +
+				COLUMN_NAME_IDGRUPO;
     }
  
     //DESAYUNO
     //CUENTA?
     //ANYTHING ELSE?
     //ffgfgfghfhf
-	}
 	
 }
