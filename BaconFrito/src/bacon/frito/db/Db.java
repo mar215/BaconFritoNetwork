@@ -8,7 +8,7 @@ import bacon.frito.db.ContractClass.DatosUsuario;
 public class Db {
 	private static final String DATABASE_CREATE_USUARIO = "CREATE TABLE if not exists "
 			+ DatosUsuario.TABLE_NAME 					+ " (" 
-			+ DatosUsuario.COLUMN_NAME_ROWID			+ "integer PRIMARY KEY, " 
+			+ DatosUsuario.COLUMN_NAME_ID			+ "integer PRIMARY KEY, " 
 			+ DatosUsuario.COLUMN_NAME_NICK				+ "varchar2(25) NOT NULL, "
 			+ DatosUsuario.COLUMN_NAME_PASS 			+ "varchar2(25) NOT NULL, "
 			+ DatosUsuario.COLUMN_NAME_NOMBRE 			+ "varchar2(25), " 
@@ -20,7 +20,7 @@ public class Db {
 	
 	private static final String DATABASE_CREATE_GRUPO = "CREATE TABLE if not exists "
 			+ DatosGrupo.TABLE_NAME						+ " ("
-			+ DatosGrupo.COLUMN_NAME_ROWID				+ "integer PRIMARY KEY,"
+			+ DatosGrupo.COLUMN_NAME_ID				+ "integer PRIMARY KEY,"
 			+ DatosGrupo.COLUMN_NAME_NOMBRE				+ "varchar2(25), "
 			+ DatosGrupo.COLUMN_NAME_DESCRIPCION		+ "varchar2(500), "
 			+ DatosGrupo.COLUMN_NAME_IMAGEN				+ "varchar2(100), "
@@ -28,7 +28,7 @@ public class Db {
 	
 	private static final String DATABASE_CREATE_MENSAJE = "CREATE TABLE if not exists "
 			+ DatosMensaje.TABLE_NAME					+ " ("
-			+ DatosMensaje.COLUMN_NAME_ROWID			+ "integer PRIMARY KEY,"
+			+ DatosMensaje.COLUMN_NAME_ID			+ "integer PRIMARY KEY,"
 			+ DatosMensaje.COLUMN_NAME_TEXTO			+ "varchar2(500), "
 			+ DatosMensaje.COLUMN_NAME_DESTINO			+ "varchar2(25) NOT NULL);";
 	

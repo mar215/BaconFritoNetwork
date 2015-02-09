@@ -35,10 +35,10 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "CREATE TABLE USUARIO ("
-				+ "ROWID INTEGER, " + "nick varchar2(25) NOT NULL, " + "pass varchar2(25) NOT NULL, "
+				+ "ID INTEGER, " + "nick varchar2(25) NOT NULL, " + "pass varchar2(25) NOT NULL, "
 				+ "nombre varchar2(25), " + "apellidos varchar2(50), " + "telefono integer, "
 				+ "sexo varchar2(25), " + "foto varchar2(100), " + "tipo varchar2(15) NOT NULL,"
-				+ "PRIMARY KEY (ROWID))";
+				+ "PRIMARY KEY (ID))";
 		oStmt.executeUpdate(sSQL);
 		oStmt.close();
 			
@@ -52,7 +52,7 @@ public class DbConstructor {
 		user.getClass().equals(bacon.frito.modelo.UsuarioBacon.class);
 		String sSQL = "INSERT INTO USUARIO("
 				+ "(ID, NICK, PASS, NOMBRE, APELLIDOS, TELEFONO, SEXO, TIPO)"
-				+ "VALUES (user.rowid, user.nick, user.pass, user.nombre, user.apellidos, "
+				+ "VALUES (user.id, user.nick, user.pass, user.nombre, user.apellidos, "
 				+ "user.telefono, user.sexo, 'usuariobacon')";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
@@ -62,7 +62,7 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		
-		String sSQL = "DELETE FROM USUARIO WHERE USUARIO.ROWID=user.rowid";
+		String sSQL = "DELETE FROM USUARIO WHERE USUARIO.ROWID=user.id";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
 	}
@@ -71,9 +71,9 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "CREATE TABLE GRUPO ("
-				+ "ROWID INTEGER, " +  "nombre varchar2(25), " + "descripcion varchar2(500), "
+				+ "ID INTEGER, " +  "nombre varchar2(25), " + "descripcion varchar2(500), "
 				+ "imagen varchar2(100), " + "maxintegrantes integer, "
-				+ "PRIMARY KEY (ROWID))";
+				+ "PRIMARY KEY (ID))";
 		oStmt.executeUpdate(sSQL);
 		oStmt.close();
 			
@@ -84,7 +84,7 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "INSERT INTO GRUPO("
 				+ "(ID, NOMBRE, DESCRIPCION, IMAGEN, MXINTEGRANTES)"
-				+ "VALUES (grup.rowid, grup.nombre, grup.descripcion, grup.imagen, "
+				+ "VALUES (grup.id, grup.nombre, grup.descripcion, grup.imagen, "
 				+ "grup.maxintegrantes)";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
@@ -94,7 +94,7 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		
-		String sSQL = "DELETE FROM GRUPO WHERE GRUPO.ROWID=grup.rowid";
+		String sSQL = "DELETE FROM GRUPO WHERE GRUPO.ROWID=grup.id";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
 	}
@@ -103,8 +103,8 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "CREATE TABLE MENSAJE ("
-				+ "ROWID INTEGER, " +  "texto varchar2(500), " + "destino varchar2(25) NOT NULL, "
-				+ "PRIMARY KEY (ROWID))";
+				+ "ID INTEGER, " +  "texto varchar2(500), " + "destino varchar2(25) NOT NULL, "
+				+ "PRIMARY KEY (ID))";
 		oStmt.executeUpdate(sSQL);
 		oStmt.close();
 			
@@ -115,7 +115,7 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "INSERT INTO MENSAJE("
 				+ "(ID, TEXTO, DESTINO)"
-				+ "VALUES (sms.rowid, sms.texto, sms.destino)";
+				+ "VALUES (sms.id, sms.texto, sms.destino)";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
@@ -124,7 +124,7 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		
-		String sSQL = "DELETE FROM MENSAJE WHERE MENSAJE.ROWID=sms.rowid";
+		String sSQL = "DELETE FROM MENSAJE WHERE MENSAJE.ID=sms.id";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
 	}
@@ -154,7 +154,7 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		
-		String sSQL = "DELETE FROM GRUPOUSUARIO WHERE GRUPOUSUARIO.ROWID=grupuser.rowid";
+		String sSQL = "DELETE FROM GRUPOUSUARIO WHERE GRUPOUSUARIO.ID=grupuser.id";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
 	}
