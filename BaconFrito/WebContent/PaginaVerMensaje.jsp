@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Inicio</title>
+<title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="HojaEstilosProyecto.css" >
 </head>
 <body>
@@ -41,7 +41,7 @@
    //que queremos buscar en la red social. Manda el parametro:
    // busqueda-----GET%>
 <form action="" method="GET">
-<input type="text" name="busqueda" placeholder="Buscar gente">
+<input type="text" name="busqueda" placeholder="Buscar gente" style="width:250px">
 <input type="submit" value="Buscar">
 </form>
 </td>
@@ -54,12 +54,8 @@
 <div id="contenido">
 <center>
 <table>
-<%for(int i=0; i<15; i++){
-	%>
-	<tr><th>FotoUsuario</th><th>Finn el Humano</th></tr>
-	<tr><td colspan="2">Este es el hueco para las actualizaciones que van a ir apareciendo</td></tr>
-<% 	
-}%>
+<tr> <th>Origen</th> <th>Mensaje</th> </tr>
+<tr> <td>Finn el humano</td> <td>Algebráico!</td> </tr>
 </table>
 </center>
 </div>
