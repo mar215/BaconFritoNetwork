@@ -18,6 +18,14 @@ align:center;
 background-color: #E6ECFF;
 }
 
+#contenidoUsuario{
+text-align: center;
+max-width: 100%;
+width: 75%;
+align:center;
+background-color: #E6ECFF;
+}
+
 #menuNav{
 	width: 100%;
 	max-width: 100%;
@@ -81,6 +89,14 @@ ul#menu li ul li {
 }
 
 #contenido table{
+	width: 70%;
+	max-width: 100%;
+	padding: 5px;
+	text-align: center;
+}
+
+#contenidoUsuario table{
+	border: solid;
 	width: 100%;
 	max-width: 100%;
 	padding: 5px;

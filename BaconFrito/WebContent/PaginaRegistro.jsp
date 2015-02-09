@@ -14,7 +14,13 @@
     * Sexo ----- sexo (los posibles valores son hombre,mujer)
     * La imagen de usuario que sea por defecto.
     * El ID del usuario que sea por defecto.
+    * El tipo de cuenta que sea normal por defecto.
     * Tipo de envio POST
+    */
+    
+    /*
+    * El formulario rellena directamente los campos de nombre, apellidos y nick en caso de llegar
+    * estos en la request (Puede pasar por un fallo al crear el usuario)
     */
     %>
     
@@ -37,15 +43,15 @@
 <table style="text-align: center">
 <tr><th>Por favor rellene el siguiente formulario para realizar el registro:<th></tr>
 <tr><th>Usuario:<th></tr>
-<tr><td><input type="text" name="nick"><td></tr>
+<tr><td><input type="text" name="nick" <%if(request.getAttribute("nick")!=null){%> value="<%=request.getAttribute("nick")%>" <%}%>><td></tr>
 <tr><th>Contraseña:<th></tr>
 <tr><td><input type="password" name="pass"><td></tr>
 <tr><th>Repita la contraseña:<th></tr>
 <tr><td><input type="password" name="pass1"><td></tr>
 <tr><th>Nombre:<th></tr>
-<tr><td><input type="text" name="nombre"><td></tr>
+<tr><td><input type="text" name="nombre" <%if(request.getAttribute("nombre")!=null){%> value="<%=request.getAttribute("nombre")%>" <%}%>><td></tr>
 <tr><th>Apellidos:<th></tr>
-<tr><td><input type="text" name="apellidos"><td></tr>
+<tr><td><input type="text" name="apellidos" <%if(request.getAttribute("apellidos")!=null){%> value="<%=request.getAttribute("apellidos")%>" <%}%>><td></tr>
 <tr><th>Teléfono:<th></tr>
 <tr><td><input type="text" name="telefono"><td></tr>
 <tr><th>Sexo:<th></tr>

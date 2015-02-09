@@ -26,7 +26,12 @@
     <li><a href="">Cerrar sesión</a></li>
 </ul>
 </li>
-<li><a href="">Mensajes</a></li>
+<li><a href="PaginaConsultarMensajes.jsp">Mensajes</a>
+<ul>
+    <li><a href="PaginaMensajes.jsp">Enviar mensaje</a></li>
+    <li><a href="PaginaConsultarMensajes.jsp">Consultar mensajes</a></li>
+</ul>
+</li>
 <li><a href="">Configuración</a></li>
 <li><a>Contacto</a></li>
 </ul>
@@ -36,7 +41,8 @@
    //que queremos buscar en la red social. Manda el parametro:
    // busqueda-----GET%>
 <form action="" method="GET">
-<input type="text" name="busqueda">
+<input type="text" name="busqueda" placeholder="Buscar gente">
+<input type="submit" value="Buscar">
 </form>
 </td>
 </tr>
@@ -46,6 +52,7 @@
 
 <center>
 <div id="contenido">
+<center>
 <table>
 <%for(int i=0; i<15; i++){
 	%>
@@ -54,6 +61,7 @@
 <% 	
 }%>
 </table>
+</center>
 </div>
 </center>
 
