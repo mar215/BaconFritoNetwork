@@ -8,34 +8,34 @@ import bacon.frito.db.ContractClass.DatosUsuario;
 public class Db {
 	private static final String DATABASE_CREATE_USUARIO = "CREATE TABLE if not exists "
 			+ DatosUsuario.TABLE_NAME 					+ " (" 
-			+ DatosUsuario.COLUMN_NAME_ROWID			+ "integer PRIMARY KEY autoincrement, " 
-			+ DatosUsuario.COLUMN_NAME_NICK				+ "varchar() NOT NULL, "
-			+ DatosUsuario.COLUMN_NAME_PASS 			+ "varchar() NOT NULL, "
-			+ DatosUsuario.COLUMN_NAME_NOMBRE 			+ "varchar(), " 
-			+ DatosUsuario.COLUMN_NAME_APELLIDOS 		+ "varchar(), " 
+			+ DatosUsuario.COLUMN_NAME_ID			+ "integer PRIMARY KEY, " 
+			+ DatosUsuario.COLUMN_NAME_NICK				+ "varchar2(25) NOT NULL, "
+			+ DatosUsuario.COLUMN_NAME_PASS 			+ "varchar2(25) NOT NULL, "
+			+ DatosUsuario.COLUMN_NAME_NOMBRE 			+ "varchar2(25), " 
+			+ DatosUsuario.COLUMN_NAME_APELLIDOS 		+ "varchar2(50), " 
 			+ DatosUsuario.COLUMN_NAME_TELEFONO			+ "integer, " 
-			+ DatosUsuario.COLUMN_NAME_SEXO				+ "varchar(), "
-			+ DatosUsuario.COLUMN_NAME_FOTO				+ "varchar(), "
-			+ DatosUsuario.COLUMN_NAME_TIPO             + "varchar() NOT NULL);";
+			+ DatosUsuario.COLUMN_NAME_SEXO				+ "varchar2(25), "
+			+ DatosUsuario.COLUMN_NAME_FOTO				+ "varchar2(100), "
+			+ DatosUsuario.COLUMN_NAME_TIPO             + "varchar2(15) NOT NULL);";
 	
 	private static final String DATABASE_CREATE_GRUPO = "CREATE TABLE if not exists "
 			+ DatosGrupo.TABLE_NAME						+ " ("
-			+ DatosGrupo.COLUMN_NAME_ROWID				+ "integer PRIMARY KEY autoincrement,"
-			+ DatosGrupo.COLUMN_NAME_NOMBRE				+ "varchar(), "
-			+ DatosGrupo.COLUMN_NAME_DESCRIPCION		+ "varchar(), "
-			+ DatosGrupo.COLUMN_NAME_IMAGEN				+ "varchar(), "
+			+ DatosGrupo.COLUMN_NAME_ID				+ "integer PRIMARY KEY,"
+			+ DatosGrupo.COLUMN_NAME_NOMBRE				+ "varchar2(25), "
+			+ DatosGrupo.COLUMN_NAME_DESCRIPCION		+ "varchar2(500), "
+			+ DatosGrupo.COLUMN_NAME_IMAGEN				+ "varchar2(100), "
 			+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES		+ "integer);";
 	
 	private static final String DATABASE_CREATE_MENSAJE = "CREATE TABLE if not exists "
 			+ DatosMensaje.TABLE_NAME					+ " ("
-			+ DatosMensaje.COLUMN_NAME_ROWID			+ "integer PRIMARY KEY autoincrement,"
-			+ DatosMensaje.COLUMN_NAME_TEXTO			+ "varchar(), "
-			+ DatosMensaje.COLUMN_NAME_DESTINO			+ "varchar());";
+			+ DatosMensaje.COLUMN_NAME_ID			+ "integer PRIMARY KEY,"
+			+ DatosMensaje.COLUMN_NAME_TEXTO			+ "varchar2(500), "
+			+ DatosMensaje.COLUMN_NAME_DESTINO			+ "varchar2(25) NOT NULL);";
 	
 	private static final String DATABASE_CREATE_GRUPOUSUARIO = "CREATE TABLE if not exists "
 			+ DatosGrupoUsuario.TABLE_NAME				+ " ("
 			+ DatosGrupoUsuario.COLUMN_NAME_IDUSUARIO	+ "integer PRIMARY KEY"
-			+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO		+ "integer PRIMARY KEY";
+			+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO		+ "integer PRIMARY KEY)";
 	//PASAR CLAVE SECUNDARIA
-			
+	//AUTOINCREMENTO DE LA ID. SOLUCIONARLO.		
 }
