@@ -5,8 +5,8 @@ public class ContractClass {
 	public ContractClass() {}
 	
 	public static abstract class DatosUsuario {
-        public static final String TABLE_NAME = "Usuario";
-        public static final String COLUMN_NAME_ID 		   	= "id";				//int
+        public static final String TABLE_NAME 					= "Usuario";
+        public static final String COLUMN_NAME_ID 		   		= "id";				//int
         public static final String COLUMN_NAME_NICK				= "nick";			//String
         public static final String COLUMN_NAME_PASS				= "pass";			//String
         public static final String COLUMN_NAME_NOMBRE 		   	= "nombre";			//String
@@ -19,7 +19,11 @@ public class ContractClass {
         										,COLUMN_NAME_APELLIDOS,COLUMN_NAME_TELEFONO
         										,COLUMN_NAME_SEXO,COLUMN_NAME_FOTO
         										,COLUMN_NAME_TIPO};
-	}
+        public static final String COLUMNAS = COLUMN_NAME_NOMBRE
+        									+ "," + COLUMN_NAME_APELLIDOS + "," + COLUMN_NAME_TELEFONO
+        									+ "," + COLUMN_NAME_SEXO + "," + COLUMN_NAME_FOTO
+        									+ "," + COLUMN_NAME_TIPO;
+	}  
 	
 	
 	public static abstract class DatosGrupo {

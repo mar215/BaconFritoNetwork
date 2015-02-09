@@ -1,22 +1,21 @@
 package bacon.frito.db;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-
-
-
 import javax.naming.NamingException;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 
-import bacon.frito.db.ContractClass.DatosGrupo;
+import com.sun.org.apache.xerces.internal.dom.DeferredAttrImpl;
+
 import bacon.frito.db.ContractClass.DatosUsuario;
+import bacon.frito.modelo.Grupo;
 import bacon.frito.modelo.Usuario;
+import bacon.frito.modelo.UsuarioBacon;
 
 public class DbConstructor {
 	
@@ -35,7 +34,8 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "CREATE TABLE USUARIO ("
-				+ "ID INTEGER, " + "nick varchar2(25) NOT NULL, " + "pass varchar2(25) NOT NULL, "
+				+ DatosUsuario.COLUMN_NAME_ID + " NUMBER(6), " 
+				+ DatosUsuario.COLUMN_NAME_NICK + "varchar2(25) NOT NULL, " + "pass varchar2(25) NOT NULL, "
 				+ "nombre varchar2(25), " + "apellidos varchar2(50), " + "telefono integer, "
 				+ "sexo varchar2(25), " + "foto varchar2(100), " + "tipo varchar2(15) NOT NULL,"
 				+ "PRIMARY KEY (ID))";
@@ -44,12 +44,17 @@ public class DbConstructor {
 			
 	}
 	
-	public void insertarUsuario(/*Datos*/Usuario user) throws SQLException, NamingException {
+	public void insertarUsuario(/*Datos*/UsuarioBacon user) throws SQLException, NamingException {
 		
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		
-		user.getClass().equals(bacon.frito.modelo.UsuarioBacon.class);
+		if(user.getClass().equals(bacon.frito.modelo.UsuarioBacon.class)){
+			String s = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
+					+ DatosUsuario.COLUMNAS +") VALUES ("
+					+ DatosUsuario.COLUMN_NAME_NOMBRE 		+ " " + user.getNombre()
+					+ DatosUsuario.COLUMN_NAME_APELLIDOS 	+ " " + user.getApellidos();	
+		}
 		String sSQL = "INSERT INTO USUARIO("
 				+ "(ID, NICK, PASS, NOMBRE, APELLIDOS, TELEFONO, SEXO, TIPO)"
 				+ "VALUES (user.id, user.nick, user.pass, user.nombre, user.apellidos, "
