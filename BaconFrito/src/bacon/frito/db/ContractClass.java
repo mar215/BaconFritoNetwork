@@ -12,6 +12,7 @@ public class ContractClass {
         public static final String COLUMN_NAME_NOMBRE 		   	= "nombre";			//String
         public static final String COLUMN_NAME_APELLIDOS 		= "apellido";		//String
         public static final String COLUMN_NAME_TELEFONO 		= "telefono";		//Int
+        public static final String COLUMN_NAME_BDAY				= "cumpleaños";		//String
         public static final String COLUMN_NAME_SEXO 	   		= "sexo";			//String
         public static final String COLUMN_NAME_FOTO 		  	= "foto";			//String
         public static final String COLUMN_NAME_TIPO 		   	= "tipo";			//String

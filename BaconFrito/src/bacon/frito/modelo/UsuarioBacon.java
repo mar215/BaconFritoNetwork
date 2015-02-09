@@ -7,6 +7,8 @@ public class UsuarioBacon extends Usuario{
 	private String	nombre;
 	private String	apellidos;
 	private String	telefono;
+	private String sexo;
+	private String bday;
 	private String	foto;
 	
 	
@@ -16,21 +18,25 @@ public class UsuarioBacon extends Usuario{
 	 * @param telefono telefono del usuario
 	 * @param foto url que contiene la foto del usuario
 	 */
-	public UsuarioBacon(int id, String user, String pass, 
-						String nombre, String apellidos, 
-						String telefono, String foto) {
-		super(id, user, pass);
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.telefono = telefono;
-		this.foto = foto;
-	}
+	
 
 	public boolean sendMessage(String destiny, String subject, String text){
 		//TODO: implementar enviar mensaje
 		return false;
 	}
 	
+	public UsuarioBacon(int id, String nick, String pass, String nombre,
+			String apellidos, String telefono, String sexo, String bday,
+			String foto) {
+		super(id, nick, pass);
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.telefono = telefono;
+		this.sexo = sexo;
+		this.bday = bday;
+		this.foto = foto;
+	}
+
 	public ArrayList<Object> readMessages(){
 		//TODO: implementar leer mensajes
 		return null;
@@ -51,69 +57,58 @@ public class UsuarioBacon extends Usuario{
 		return false;
 	}
 	
+	
+	//GET and SET
 
-	/**
-	 * @return the nombre
-	 */
 	public String getNombre() {
 		return nombre;
 	}
 
-
-	/**
-	 * @param nombre the nombre to set
-	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-
-	/**
-	 * @return the apellidos
-	 */
 	public String getApellidos() {
 		return apellidos;
 	}
 
-
-	/**
-	 * @param apellidos the apellidos to set
-	 */
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
-
-	/**
-	 * @return the telefono
-	 */
 	public String getTelefono() {
 		return telefono;
 	}
 
-
-	/**
-	 * @param telefono the telefono to set
-	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
+	public String getSexo() {
+		return sexo;
+	}
 
-	/**
-	 * @return the foto
-	 */
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public String getBday() {
+		return bday;
+	}
+
+	public void setBday(String bday) {
+		this.bday = bday;
+	}
+
 	public String getFoto() {
 		return foto;
 	}
 
-
-	/**
-	 * @param foto the foto to set
-	 */
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+	
+
 	
 	
 

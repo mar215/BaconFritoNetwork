@@ -8,12 +8,13 @@ import bacon.frito.db.ContractClass.DatosUsuario;
 public class Db {
 	private static final String DATABASE_CREATE_USUARIO = "CREATE TABLE if not exists "
 			+ DatosUsuario.TABLE_NAME 					+ " (" 
-			+ DatosUsuario.COLUMN_NAME_ID			+ "integer PRIMARY KEY, " 
+			+ DatosUsuario.COLUMN_NAME_ID				+ "number(6) PRIMARY KEY, " 
 			+ DatosUsuario.COLUMN_NAME_NICK				+ "varchar2(25) NOT NULL, "
 			+ DatosUsuario.COLUMN_NAME_PASS 			+ "varchar2(25) NOT NULL, "
 			+ DatosUsuario.COLUMN_NAME_NOMBRE 			+ "varchar2(25), " 
 			+ DatosUsuario.COLUMN_NAME_APELLIDOS 		+ "varchar2(50), " 
 			+ DatosUsuario.COLUMN_NAME_TELEFONO			+ "integer, " 
+			+ DatosUsuario.COLUMN_NAME_BDAY				+ "varchar2(10), "
 			+ DatosUsuario.COLUMN_NAME_SEXO				+ "varchar2(25), "
 			+ DatosUsuario.COLUMN_NAME_FOTO				+ "varchar2(100), "
 			+ DatosUsuario.COLUMN_NAME_TIPO             + "varchar2(15) NOT NULL);";
