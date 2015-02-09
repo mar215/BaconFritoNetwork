@@ -5,10 +5,15 @@
     *Esta página contiene un formulario que envia la siguiente informacion para dar de alta 
     *un nuevo usuario.
     * Variable ----- nombre de la variable
-    * Nombre ----- user
+    * Nombre ----- nombre
     * Apellidos ----- apellidos
     * Contraseña ----- pass
     * Contraseña repetida ----- pass1
+    * Nick Usuario ----- nick
+    * Telefono ----- telefono
+    * Sexo ----- sexo (los posibles valores son hombre,mujer)
+    * La imagen de usuario que sea por defecto.
+    * El ID del usuario que sea por defecto.
     * Tipo de envio POST
     */
     %>
@@ -31,14 +36,21 @@
 <form action="" method="POST">
 <table style="text-align: center">
 <tr><th>Por favor rellene el siguiente formulario para realizar el registro:<th></tr>
-<tr><th>Nombre:<th></tr>
-<tr><td><input type="text" name="user"><td></tr>
-<tr><th>Apellidos:<th></tr>
-<tr><td><input type="text" name="apellidos"><td></tr>
+<tr><th>Usuario:<th></tr>
+<tr><td><input type="text" name="nick"><td></tr>
 <tr><th>Contraseña:<th></tr>
 <tr><td><input type="password" name="pass"><td></tr>
 <tr><th>Repita la contraseña:<th></tr>
 <tr><td><input type="password" name="pass1"><td></tr>
+<tr><th>Nombre:<th></tr>
+<tr><td><input type="text" name="nombre"><td></tr>
+<tr><th>Apellidos:<th></tr>
+<tr><td><input type="text" name="apellidos"><td></tr>
+<tr><th>Teléfono:<th></tr>
+<tr><td><input type="text" name="telefono"><td></tr>
+<tr><th>Sexo:<th></tr>
+<tr><td><input type="radio" name="sexo" value="hombre">Hombre<td></tr>
+<tr><td><input type="radio" name="sexo" value="mujer">Mujer<td></tr>
 <tr><td><input type="submit" value="Registrarse"></td></tr>
 </table>
 </form>
