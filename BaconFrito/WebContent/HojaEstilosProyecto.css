@@ -1,0 +1,81 @@
+@CHARSET "ISO-8859-1";
+
+body{
+background-color: #4DACFF;
+}
+
+#header{
+width: 100%;
+max-width: 100%;
+border-radius: 5px 5px 0px 0px
+}
+
+#contenido{
+text-align: center;
+max-width: 100%;
+width: 75%;
+align:center;
+background-color: #E6ECFF;
+}
+
+#menuNav{
+	width: 100%;
+	max-width: 100%;
+	margin-top: 0px;
+	text-align: center;
+}
+
+#tablaNav table{
+	width: 100%;
+	max-width: 100%;
+	text-align: center;
+	border: solid black;
+}
+
+#imagenheader img{
+width: 100%;
+height:auto;
+max-width: 100%;
+background-size: cover;
+}
+
+ul, ol {
+list-style:none;
+}
+
+ul#menu{
+padding:0;
+}
+
+#menu > li {
+	float:left;
+}
+
+ul#menu li a{
+background-color:#0900BA;
+color:white;
+padding: 10px 20px;
+text-decoration:none;
+border-radius:4px 4px 0px 0px;
+display:block;
+}
+ul#menu li a:hover{
+background-color:#FCFC4D;
+color:black;
+}
+
+ul#menu li ul {
+    padding: 0px;
+    display:none;
+	position:absolute;
+	min-width:140px;
+}
+
+#menu li:hover > ul {
+display:block;
+}
+
+ul#menu li ul li {
+	position:relative;
+	height: auto;
+}

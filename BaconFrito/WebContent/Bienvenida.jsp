@@ -17,6 +17,7 @@ if(session.getAttribute("user")!=null){
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Bacon Frito Network</title>
+<link rel="stylesheet" type="text/css" href="HojaEstilosProyecto.css" >
 </head>
 <body style="background-color:#4DACFF">
 
