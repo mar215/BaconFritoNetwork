@@ -44,8 +44,18 @@
 </div>
 </div>
 
+<center>
 <div id="contenido">
+<table>
+<%for(int i=0; i<15; i++){
+	%>
+	<tr><th>FotoUsuario</th><th>Finn el Humano</th></tr>
+	<tr><td colspan="2">Este es el hueco para las actualizaciones que van a ir apareciendo</td></tr>
+<% 	
+}%>
+</table>
 </div>
+<center>
 
 </body>
 </html>
