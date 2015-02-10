@@ -15,7 +15,7 @@ public class Db {
 			+ DatosUsuario.COLUMN_NAME_PASS 			+ "varchar2(25) NOT NULL, "
 			+ DatosUsuario.COLUMN_NAME_NOMBRE 			+ "varchar2(25), " 
 			+ DatosUsuario.COLUMN_NAME_APELLIDOS 		+ "varchar2(50), " 
-			+ DatosUsuario.COLUMN_NAME_TELEFONO			+ "number(15), " 
+			+ DatosUsuario.COLUMN_NAME_TELEFONO			+ "varchar2(15), " 
 			+ DatosUsuario.COLUMN_NAME_BDAY				+ "varchar2(10), "
 			+ DatosUsuario.COLUMN_NAME_SEXO				+ "varchar2(25), "
 			+ DatosUsuario.COLUMN_NAME_FOTO				+ "varchar2(100), "

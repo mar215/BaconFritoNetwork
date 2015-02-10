@@ -62,7 +62,8 @@ public class DbConstructor {
 		if(user.getClass().equals(bacon.frito.modelo.UsuarioBacon.class)){
 			sSQL = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
 					+ DatosUsuario.COLUMNAS +") VALUES ("
-					+ " " + user.getNombre()
+					+ " "  + Db.DATABASE_USUARIO_NEXT_ID
+					+ ", " + user.getNombre()
 					+ ", " + user.getApellidos()
 					+ ", " + user.getTelefono()
 					+ ", " + user.getBday()
@@ -75,7 +76,8 @@ public class DbConstructor {
 					/////IMPORTANTE/////
 					//NECESITAMOS INTRODUCIR EL VALOR DE LA SECUENCIA
 					//PARA RELLENAR EL ID
-					+ " " +  user.getNombre()
+					+ " "  + Db.DATABASE_USUARIO_NEXT_ID
+					+ ", " + user.getNombre()
 					+ ", " + user.getApellidos()
 					+ ", " + user.getTelefono()
 					+ ", " + user.getBday()
@@ -87,7 +89,7 @@ public class DbConstructor {
 		oStmt.close();
 	}
 	
-	public void eliminarUsuario(Usuario user) throws NamingException, SQLException {
+	public void eliminarUsuario() throws NamingException, SQLException {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		
@@ -112,7 +114,8 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "INSERT INTO "+ DatosUsuario.TABLE_NAME + " ("
 				+ DatosGrupo.COLUMNAS +") VALUES ("
-				+ " " + grup.getNombre()
+				+ "  " + Db.DATABASE_GRUPO_NEXT_ID
+				+ ", " + grup.getNombre()
 				+ ", " + grup.getDescripcion()
 				+ ", " + grup.getImagen()
 				+ ", " + grup.getMaxintegrantes()+");";		
@@ -143,7 +146,8 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "INSERT INTO " + DatosMensaje.TABLE_NAME + " ("
 				+ DatosMensaje.COLUMNAS +") VALUES ("
-				+ " " + sms.getTexto()
+				+ "  " + Db.DATABASE_MENSAJE_NEXT_ID
+				+ ", " + sms.getTexto()
 				+ ", " + sms.getDestino()+");";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
