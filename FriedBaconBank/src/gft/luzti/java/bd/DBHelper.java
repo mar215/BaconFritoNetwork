@@ -201,6 +201,7 @@ public class DBHelper {
 		}
 		
 		try {
+			rs.first();
 			id = rs.getInt(1);
 		} catch (SQLException e1) {
 			System.err.println("Error al obtener el id del resultset (addCuenta)");
@@ -234,4 +235,154 @@ public class DBHelper {
 		return cuenta;
 	}
 	
+	public Cliente login(String user, String pass){
+		Connection conexion = getConexion();
+		Statement stat 		= null;
+		ResultSet rs		= null;
+		
+		//Obtenemos el Statement para hacer ejecutar la sentencia
+		try {
+			stat = conexion.createStatement();
+		} catch (SQLException e) {
+			System.err.println("Error al crear el Statement (login)");
+			e.printStackTrace();
+			return null;
+		}		
+		
+		//Obtenemos la fila del cliente que solicitamos
+		try {
+			rs = stat.executeQuery(BancoDB.getCliente(user));
+		} catch (SQLException e1) {
+			System.err.println("Error al obtener el siguiente id cuenta (login)");
+			e1.printStackTrace();
+			return null;
+		}
+		
+		//Comprobamos que hemos obtenido resultados
+		try {
+			if(!rs.first()){
+				conexion.close();
+				return null;
+			}else{//hay resultados-> comprobamos el pass
+				if(rs.getString(DatosCliente.COLUMN_NAME_PASS).equals(pass)){
+					Cliente cliente = new Cliente(rs.getString(DatosCliente.COLUMN_NAME_USER), 
+												  rs.getString(DatosCliente.COLUMN_NAME_PASS), 
+												  rs.getString(DatosCliente.COLUMN_NAME_NOMBRE), 
+												  rs.getString(DatosCliente.COLUMN_NAME_APELLIDOS), 
+												  rs.getString(DatosCliente.COLUMN_NAME_DNI), 
+												  getCuenta(rs.getInt(DatosCliente.COLUMN_NAME_CUENTA)));
+					conexion.close();
+					return cliente;
+				}else{//La password no coincide
+					conexion.close();
+					return null;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Cuenta getCuenta(int id){
+		Connection conexion = getConexion();
+		Statement stat 		= null;
+		ResultSet rs		= null;
+		
+		//Obtenemos el Statement para hacer ejecutar la sentencia
+		try {
+			stat = conexion.createStatement();
+		} catch (SQLException e) {
+			System.err.println("Error al crear el Statement (getCuenta)");
+			e.printStackTrace();
+			return null;
+		}		
+		
+		//Obtenemos la fila del cliente que solicitamos
+		try {
+			rs = stat.executeQuery(BancoDB.getCuenta(id));
+		} catch (SQLException e1) {
+			System.err.println("Error al obtener el RS de saldo (getCuenta)");
+			e1.printStackTrace();
+			return null;
+		}
+		
+		try {
+			if(!rs.first()){
+				conexion.close();
+				return null;
+			}else{
+				return new Cuenta(id, rs.getDouble(DatosCuenta.COLUMN_NAME_SALDO));
+			}
+		} catch (SQLException e) {
+			System.err.println("Error al obtener el saldo (getCuenta)");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public boolean addSaldo(int id, double saldo){
+		Connection conexion = getConexion();
+		Statement stat 		= null;
+		ResultSet rs		= null;
+		
+		//Obtenemos el Statement para hacer ejecutar la sentencia
+		try {
+			stat = conexion.createStatement();
+		} catch (SQLException e) {
+			System.err.println("Error al crear el Statement (addSaldo)");
+			e.printStackTrace();
+		}
+		
+		//Obtenemos la fila del cliente que solicitamos
+		try {
+			stat.executeQuery(BancoDB.addSaldo(id, saldo));
+			conexion.close();
+			return true;
+		} catch (SQLException e1) {
+			System.err.println("Error al actulizar el saldo (addSaldo)");
+			e1.printStackTrace();
+			return false;
+		}
+		
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
