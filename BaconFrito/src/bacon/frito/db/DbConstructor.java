@@ -287,7 +287,7 @@ public class DbConstructor {
 		oStmt.close();	
 	}
 	
-	public GrupoUsuario dameGrupoUsuario(String nick) throws SQLException, NamingException{
+	public void dameGrupoUsuario(String nick) throws SQLException, NamingException{
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "SELECT "
@@ -296,10 +296,11 @@ public class DbConstructor {
 				+ DatosGrupoUsuario.TABLE_NAME +", "+ DatosGrupo.TABLE_NAME
 				+ "WHERE ("
 				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + "AND" 
-				+ DatosUsuario.COLUMN_NAME_ID +"="+DatoGrupoUsuario.COLUMN_NAME_IDUSUARIO ")";
+				+ DatosUsuario.COLUMN_NAME_ID +"="+DatosGrupoUsuario.COLUMN_NAME_IDUSUARIO
+				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO +"="+DatosGrupo.COLUMN_NAME_ID +")";
+		oStmt.executeUpdate(sSQL);	
+		oStmt.close();
 
-		GrupoUsuario grupusuAux=null;
-		return grupusuAux;
 	}
 	
 	
