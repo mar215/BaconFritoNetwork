@@ -29,7 +29,7 @@ public class DBHelper {
 		}
 	}
 	
-	public DBHelper getInstance(){
+	public static DBHelper getInstance(){
 		return instancia;
 	}
 
@@ -235,7 +235,7 @@ public class DBHelper {
 		return cuenta;
 	}
 	
-	public Cliente login(String user, String pass){
+	public boolean login(String user, String pass){
 		Connection conexion = getConexion();
 		Statement stat 		= null;
 		ResultSet rs		= null;
@@ -246,6 +246,50 @@ public class DBHelper {
 		} catch (SQLException e) {
 			System.err.println("Error al crear el Statement (login)");
 			e.printStackTrace();
+			return false;
+		}		
+		
+		//Obtenemos la fila del cliente que solicitamos
+		try {
+			rs = stat.executeQuery(BancoDB.getCliente(user));
+		} catch (SQLException e1) {
+			System.err.println("Error al obtener el RS (login)");
+			e1.printStackTrace();
+			return false;
+		}
+		
+		//Comprobamos que hemos obtenido resultados
+		try {
+			if(!rs.first()){
+				conexion.close();
+				return false;
+			}else{//hay resultados-> comprobamos el pass
+				if(rs.getString(DatosCliente.COLUMN_NAME_PASS).equals(pass)){
+					conexion.close();
+					return true;
+				}else{//La password no coincide
+					conexion.close();
+					return false;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public Cliente getCliente(String user){
+		Connection conexion = getConexion();
+		Statement stat 		= null;
+		ResultSet rs		= null;
+		
+		//Obtenemos el Statement para hacer ejecutar la sentencia
+		try {
+			stat = conexion.createStatement();
+		} catch (SQLException e) {
+			System.err.println("Error al crear el Statement (getCliente)");
+			e.printStackTrace();
 			return null;
 		}		
 		
@@ -253,7 +297,7 @@ public class DBHelper {
 		try {
 			rs = stat.executeQuery(BancoDB.getCliente(user));
 		} catch (SQLException e1) {
-			System.err.println("Error al obtener el siguiente id cuenta (login)");
+			System.err.println("Error al obtener el RS (getCliente)");
 			e1.printStackTrace();
 			return null;
 		}
@@ -263,8 +307,7 @@ public class DBHelper {
 			if(!rs.first()){
 				conexion.close();
 				return null;
-			}else{//hay resultados-> comprobamos el pass
-				if(rs.getString(DatosCliente.COLUMN_NAME_PASS).equals(pass)){
+			}else{//hay resultados-> devolvemos el cliente
 					Cliente cliente = new Cliente(rs.getString(DatosCliente.COLUMN_NAME_USER), 
 												  rs.getString(DatosCliente.COLUMN_NAME_PASS), 
 												  rs.getString(DatosCliente.COLUMN_NAME_NOMBRE), 
@@ -273,10 +316,6 @@ public class DBHelper {
 												  getCuenta(rs.getInt(DatosCliente.COLUMN_NAME_CUENTA)));
 					conexion.close();
 					return cliente;
-				}else{//La password no coincide
-					conexion.close();
-					return null;
-				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -325,7 +364,6 @@ public class DBHelper {
 	public boolean addSaldo(int id, double saldo){
 		Connection conexion = getConexion();
 		Statement stat 		= null;
-		ResultSet rs		= null;
 		
 		//Obtenemos el Statement para hacer ejecutar la sentencia
 		try {
