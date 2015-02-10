@@ -29,7 +29,8 @@ public class Db {
 			+ DatosGrupo.COLUMN_NAME_NOMBRE				+ "varchar2(25), "
 			+ DatosGrupo.COLUMN_NAME_DESCRIPCION		+ "varchar2(500), "
 			+ DatosGrupo.COLUMN_NAME_IMAGEN				+ "varchar2(100), "
-			+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES		+ "number(3));";
+			+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES		+ "number(3)"
+			+ DatosGrupo.COLUMN_NAME_ACTIVO				+ "varchar(10));";
 	
 	public static final String DATABASE_CREATE_MENSAJE = "CREATE TABLE if not exists "
 			+ DatosMensaje.TABLE_NAME					+ " ("

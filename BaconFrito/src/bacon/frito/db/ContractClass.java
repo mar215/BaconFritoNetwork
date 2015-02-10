@@ -16,17 +16,17 @@ public class ContractClass {
         public static final String COLUMN_NAME_SEXO 	   		= "sexo";			//String
         public static final String COLUMN_NAME_FOTO 		  	= "foto";			//String
         public static final String COLUMN_NAME_TIPO 		   	= "tipo";			//String
-        public static final String COLUMN_NAME_ACTIVO			= "activo";
+        public static final String COLUMN_NAME_ACTIVO			= "activo";			//String
         public static final String CONSTRAINT_USUARIO			= "idusario_pk";
         public static final String SEQUENCE_USUARIO_ID			= "account_seq";
         public static final String[] COLUMNS = {COLUMN_NAME_ID, COLUMN_NAME_NOMBRE
         										,COLUMN_NAME_APELLIDOS,COLUMN_NAME_TELEFONO
         										,COLUMN_NAME_SEXO,COLUMN_NAME_FOTO
-        										,COLUMN_NAME_TIPO};
+        										,COLUMN_NAME_TIPO, COLUMN_NAME_ACTIVO};
         public static final String COLUMNAS = COLUMN_NAME_NOMBRE
         									+ "," + COLUMN_NAME_APELLIDOS + "," + COLUMN_NAME_TELEFONO
         									+ "," + COLUMN_NAME_SEXO + "," + COLUMN_NAME_FOTO
-        									+ "," + COLUMN_NAME_TIPO;
+        									+ "," + COLUMN_NAME_TIPO+ "," + COLUMN_NAME_ACTIVO;
 	 
 	}
 	
@@ -37,14 +37,15 @@ public class ContractClass {
     	public static final String COLUMN_NAME_DESCRIPCION 	   	= "descripcion";	//String
     	public static final String COLUMN_NAME_IMAGEN 	  		= "imagen";			//String
     	public static final String COLUMN_NAME_MAXINTEGRANTES	= "maxintegrantes";	//int
+    	public static final String COLUMN_NAME_ACTIVO			= "activo";			//String
     	public static final String CONSTRAINT_GRUPO				= "idgrupo_pk";
     	public static final String SEQUENCE_GRUPO_ID			= "account_seq";
     	public static final String[] COLUMNS = {COLUMN_NAME_ID,COLUMN_NAME_NOMBRE
     											,COLUMN_NAME_DESCRIPCION,COLUMN_NAME_IMAGEN
-    											,COLUMN_NAME_MAXINTEGRANTES};
+    											,COLUMN_NAME_MAXINTEGRANTES, COLUMN_NAME_ACTIVO};
     	public static final String COLUMNAS = COLUMN_NAME_NOMBRE + "," +
 											COLUMN_NAME_DESCRIPCION + "," + COLUMN_NAME_IMAGEN
-											+ "," + COLUMN_NAME_MAXINTEGRANTES;
+											+ "," + COLUMN_NAME_MAXINTEGRANTES+ "," + COLUMN_NAME_ACTIVO;
 	}
     	
     	
