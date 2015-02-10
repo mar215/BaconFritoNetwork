@@ -72,7 +72,10 @@ public class DbConstructor {
 		} else {
 			sSQL = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
 					+ DatosUsuario.COLUMNAS +") VALUES ("
-					+ " " + user.getNombre()
+					/////IMPORTANTE/////
+					//NECESITAMOS INTRODUCIR EL VALOR DE LA SECUENCIA
+					//PARA RELLENAR EL ID
+					+ " " +  user.getNombre()
 					+ ", " + user.getApellidos()
 					+ ", " + user.getTelefono()
 					+ ", " + user.getBday()
@@ -88,7 +91,9 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		
-		String sSQL = "DELETE FROM USUARIO WHERE ";
+		String sSQL = "DELETE "+ DatosUsuario.TABLE_NAME + "("
+				+ "FROM USUARIO WHERE "
+				+ ;
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
 	}
