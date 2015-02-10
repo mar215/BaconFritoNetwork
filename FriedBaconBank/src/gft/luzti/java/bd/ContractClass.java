@@ -6,7 +6,7 @@ public class ContractClass {
 	
 	public static abstract class DatosCliente {
         public static final String TABLE_NAME = "Clientes";
-        public static final String COLUMN_NAME_USER			= "user";		//int primary key
+        public static final String COLUMN_NAME_USER			= "usuario";	//int primary key
         public static final String COLUMN_NAME_PASS 		= "pass";		//String
         public static final String COLUMN_NAME_NOMBRE 		= "nombre";		//String
         public static final String COLUMN_NAME_APELLIDOS 	= "apellidos";	//String

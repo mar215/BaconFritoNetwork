@@ -5,12 +5,12 @@ import gft.luzti.java.bd.ContractClass.DatosCuenta;
 
 public class BancoDB {
 
-	public static final String DATABASE_CREATE_ACCOUNTS = "CREATE TABLE if not exists"
+	public static final String DATABASE_CREATE_ACCOUNTS = "CREATE TABLE "
 			+ DatosCuenta.TABLE_NAME					+ " ("
 			+ DatosCuenta.COLUMN_NAME_ROWID				+ " NUMBER(6),"
 			+ DatosCuenta.COLUMN_NAME_SALDO				+ " NUMBER(10,2))";
 	
-	public static final String DATABASE_CREATE_CLIENTS = "CREATE TABLE if not exists "
+	public static final String DATABASE_CREATE_CLIENTS = "CREATE TABLE "
 			+ DatosCliente.TABLE_NAME 					+ " (" 
 			+ DatosCliente.COLUMN_NAME_USER				+ " VARCHAR2(10),"
 			+ DatosCliente.COLUMN_NAME_PASS				+ " VARCHAR2(20),"
@@ -45,7 +45,7 @@ public class BancoDB {
 	*/
 	
 	public static String getCliente(String user){		
-		return "SELECT * FROM " + DatosCliente.TABLE_NAME + " WHERE " + DatosCliente.COLUMN_NAME_USER + " = " + user;
+		return "SELECT * FROM " + DatosCliente.TABLE_NAME + " WHERE " + DatosCliente.COLUMN_NAME_USER + " = '" + user + "'";
 	}
 	
 	public static String getCuenta(int id){		

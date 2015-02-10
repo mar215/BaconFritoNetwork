@@ -25,7 +25,7 @@
 			<input type="submit" value="Login" />
 		</form>
 		<br><br>
-		<a href="Nuevo"><button>Nuevo Usuario</button></a>
+		<a href="nuevo.jsp"><button>Nuevo Usuario</button></a>
 		<br><br><br><br>
 		<br><br><br><br>
 	</div>

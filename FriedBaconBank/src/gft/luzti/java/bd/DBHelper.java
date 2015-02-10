@@ -23,10 +23,39 @@ public class DBHelper {
 		instancia 	= new DBHelper();
 	}
 	
-	private DBHelper(){
-		if(!init()){
-			System.err.println("Error en el constructor de DBHelper");
+	private DBHelper(){/*
+		Connection conexion = getConexion();
+		Statement  stat 	= null;
+		ResultSet  rs		= null;
+		try {
+			stat = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		} catch (SQLException e) {
+			System.err.println("Error al crear el Statement (constructor DBHelper)");
+			e.printStackTrace();
 		}
+		
+		// Comprobamos si ya se han creado las tablas
+		try {
+			rs = stat.executeQuery("select * from user_tables where table_name like 'CUENTAS'");
+		} catch (SQLException e) {
+			System.err.println("Error al obtener el RS (constructor DBHelper)");
+			e.printStackTrace();
+		}
+		
+		try {
+			if(rs.first()){
+				return;
+			}else{
+				if(!init()){
+					System.err.println("Error en el constructor de DBHelper");
+				}
+			}			
+		} catch (SQLException e1) {
+			System.err.println("Error al comprobar la existencia de tablas (constructor DBHelper)");
+			e1.printStackTrace();
+		}
+		*/
+		
 	}
 	
 	public static DBHelper getInstance(){
@@ -101,21 +130,12 @@ public class DBHelper {
 			e.printStackTrace();
 			return false;
 		}
-		/*
-		// Creamos, si no exite, la constraint de secuencia para cuentas
-		try {
-			stat.executeUpdate(BancoDB.DATABASE_ACCOUNT_TRIGGER);
-		} catch (SQLException e) {
-			System.err.println("Error al crear el trigger para la secuencia de cuentas (init)");
-			e.printStackTrace();
-			return false;
-		}
-		*/	
+		
 		// Creamos, si no exite, la tabla de clientes
 		try {
-			stat.executeUpdate(BancoDB.DATABASE_CREATE_ACCOUNTS);
+			stat.executeUpdate(BancoDB.DATABASE_CREATE_CLIENTS);
 		} catch (SQLException e) {
-			System.err.println("Error al crear la tabla cuentas (init)");
+			System.err.println("Error al crear la tabla clientes (init)");
 			e.printStackTrace();
 			return false;
 		}
@@ -129,6 +149,16 @@ public class DBHelper {
 			return false;
 		}
 		
+		// Creamos, si no exite, la constraint primary key de clientes
+		try {
+			stat.executeUpdate("commit");
+		} catch (SQLException e) {
+			System.err.println("Error al hacer commit (init)");
+			e.printStackTrace();
+			return false;
+		}
+		
+		//Cerramos la conexión
 		try {
 			conexion.close();
 		} catch (SQLException e) {
@@ -154,9 +184,10 @@ public class DBHelper {
 		// TODO: Comprobar que no existe un usuario con el mismo user
 		
 		String insertar = "INSERT INTO " + DatosCliente.TABLE_NAME + "(" + DatosCliente.COLUMNAS + ") "
-						+ "VALUES (" + cliente.getUser() + "," + cliente.getPass() + ","
-									 + cliente.getNombre() + "," + cliente.getApellidos() + ","
-									 + cliente.getDni() + "," + cliente.getCuenta().getNumeroCuenta() + ")";
+						+ "VALUES ('" + cliente.getUser() + "','" + cliente.getPass() + "','"
+									 + cliente.getNombre() + "','" + cliente.getApellidos() + "','"
+									 + cliente.getDni() + "'," + cliente.getCuenta().getNumeroCuenta() + ")";
+		System.out.println(insertar);
 		
 		try {
 			stat.executeUpdate(insertar);
@@ -185,7 +216,7 @@ public class DBHelper {
 		ResultSet 	rs			= null;
 		int 		id			= -1;
 		try {
-			stat = conexion.createStatement();
+			stat = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
 			System.err.println("Error al crear el Statement (addCuenta)");
 			e.printStackTrace();
@@ -242,7 +273,7 @@ public class DBHelper {
 		
 		//Obtenemos el Statement para hacer ejecutar la sentencia
 		try {
-			stat = conexion.createStatement();
+			stat = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
 			System.err.println("Error al crear el Statement (login)");
 			e.printStackTrace();
@@ -251,7 +282,7 @@ public class DBHelper {
 		
 		//Obtenemos la fila del cliente que solicitamos
 		try {
-			rs = stat.executeQuery(BancoDB.getCliente(user));
+			rs = stat.executeQuery(BancoDB.getCliente(user.toLowerCase()));
 		} catch (SQLException e1) {
 			System.err.println("Error al obtener el RS (login)");
 			e1.printStackTrace();
@@ -286,7 +317,7 @@ public class DBHelper {
 		
 		//Obtenemos el Statement para hacer ejecutar la sentencia
 		try {
-			stat = conexion.createStatement();
+			stat = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
 			System.err.println("Error al crear el Statement (getCliente)");
 			e.printStackTrace();
@@ -295,7 +326,7 @@ public class DBHelper {
 		
 		//Obtenemos la fila del cliente que solicitamos
 		try {
-			rs = stat.executeQuery(BancoDB.getCliente(user));
+			rs = stat.executeQuery(BancoDB.getCliente(user.toLowerCase()));
 		} catch (SQLException e1) {
 			System.err.println("Error al obtener el RS (getCliente)");
 			e1.printStackTrace();
@@ -306,6 +337,7 @@ public class DBHelper {
 		try {
 			if(!rs.first()){
 				conexion.close();
+				System.out.println("la hemos cagado");
 				return null;
 			}else{//hay resultados-> devolvemos el cliente
 					Cliente cliente = new Cliente(rs.getString(DatosCliente.COLUMN_NAME_USER), 
@@ -318,10 +350,10 @@ public class DBHelper {
 					return cliente;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.err.println("Error en la obtención de los datos de cliente (getCliente)");
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 	
 	public Cuenta getCuenta(int id){
@@ -331,7 +363,7 @@ public class DBHelper {
 		
 		//Obtenemos el Statement para hacer ejecutar la sentencia
 		try {
-			stat = conexion.createStatement();
+			stat = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
 			System.err.println("Error al crear el Statement (getCuenta)");
 			e.printStackTrace();

@@ -38,7 +38,7 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession s 	= request.getSession();	
 		DBHelper 	dbh	= DBHelper.getInstance();			
-		if(dbh.login(request.getParameter("user"), request.getParameter("password"))){
+		if(dbh.login(request.getParameter("user").toLowerCase(), request.getParameter("pass").toLowerCase())){
 			s.setAttribute("nombre", request.getParameter("user"));
 			s.setAttribute("valida", true);
 			response.sendRedirect("User");

@@ -54,4 +54,14 @@
     <servlet-name>AddSaldo</servlet-name>
     <url-pattern>/AddSaldo</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Nuevo</display-name>
+    <servlet-name>Nuevo</servlet-name>
+    <servlet-class>gft.luzti.java.controlador.Nuevo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Nuevo</servlet-name>
+    <url-pattern>/Nuevo</url-pattern>
+  </servlet-mapping>
 </web-app>
