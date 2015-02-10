@@ -18,12 +18,12 @@
 	
 	<div style="text-align:center;vertical-align:middle;">
 		<form method="post" action="Login">
-				<input type="text" name="user" id="user" value="" placeholder="User" />
-				<br>
-				<input type="password" name="pass" id="pass" value="" placeholder="Password" />
-				<br>
-				<input type="submit" value="Login" />
-			</form>
+			<input type="text" name="user" id="user" value="" placeholder="User" />
+			<br>
+			<input type="password" name="pass" id="pass" value="" placeholder="Password" />
+			<br>
+			<input type="submit" value="Login" />
+		</form>
 		<br><br>
 		<a href="Nuevo"><button>Nuevo Usuario</button></a>
 		<br><br><br><br>
@@ -34,6 +34,6 @@
 
 <%
 	}else{
-		response.sendRedirect("user.jsp");
+		response.sendRedirect("User");
 	} 
 %>
