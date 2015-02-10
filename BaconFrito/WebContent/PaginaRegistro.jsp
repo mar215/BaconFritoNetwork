@@ -43,17 +43,19 @@
 <table style="text-align: center">
 <tr><th>Por favor rellene el siguiente formulario para realizar el registro:<th></tr>
 <tr><th>Usuario:<th></tr>
-<tr><td><input type="text" name="nick" <%if(request.getAttribute("nick")!=null){%> value="<%=request.getAttribute("nick")%>" <%}%>><td></tr>
+<tr><td><input type="text" name="nick" <%if(request.getParameter("nick")!=null){%> value="<%=request.getAttribute("nick")%>" <%}%>><td></tr>
 <tr><th>Contraseña:<th></tr>
 <tr><td><input type="password" name="pass"><td></tr>
 <tr><th>Repita la contraseña:<th></tr>
 <tr><td><input type="password" name="pass1"><td></tr>
 <tr><th>Nombre:<th></tr>
-<tr><td><input type="text" name="nombre" <%if(request.getAttribute("nombre")!=null){%> value="<%=request.getAttribute("nombre")%>" <%}%>><td></tr>
+<tr><td><input type="text" name="nombre" <%if(request.getParameter("nombre")!=null){%> value="<%=request.getAttribute("nombre")%>" <%}%>><td></tr>
 <tr><th>Apellidos:<th></tr>
-<tr><td><input type="text" name="apellidos" <%if(request.getAttribute("apellidos")!=null){%> value="<%=request.getAttribute("apellidos")%>" <%}%>><td></tr>
+<tr><td><input type="text" name="apellidos" <%if(request.getParameter("apellidos")!=null){%> value="<%=request.getAttribute("apellidos")%>" <%}%>><td></tr>
 <tr><th>Teléfono:<th></tr>
 <tr><td><input type="text" name="telefono"><td></tr>
+<tr><th>Fecha de nacimiento:<th></tr>
+<tr><td><input type="date" name="bday" min="1910-01-01"><td></tr>
 <tr><th>Sexo:<th></tr>
 <tr><td><input type="radio" name="sexo" value="hombre">Hombre<td></tr>
 <tr><td><input type="radio" name="sexo" value="mujer">Mujer<td></tr>
