@@ -31,12 +31,34 @@ public class Db {
 			+ DatosMensaje.TABLE_NAME					+ " ("
 			+ DatosMensaje.COLUMN_NAME_ID				+ "number(6) PRIMARY KEY,"
 			+ DatosMensaje.COLUMN_NAME_TEXTO			+ "varchar2(500), "
-			+ DatosMensaje.COLUMN_NAME_DESTINO			+ "varchar2(25) NOT NULL);";
+			+ DatosMensaje.COLUMN_NAME_DESTINO			+ "varchar2(25) NOT NULL);"
+			+ DatosMensaje.COLUMN_NAME_IDUSUARIO		+ "number(6) CONSTRAINT fk_idusuario,"
+					+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_ID + "))";
 	
 	private static final String DATABASE_CREATE_GRUPOUSUARIO = "CREATE TABLE if not exists "
 			+ DatosGrupoUsuario.TABLE_NAME				+ " ("
-			+ DatosGrupoUsuario.COLUMN_NAME_IDUSUARIO	+ "number(6) CONSTRAINT FK_IDUSUARIO FOREIGN KEY(idusuario) REFERENCES USUARIO(id)"
-			+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO		+ "number(6) CONSTRAINT FK_IDGRUPO FOREIGN KEY(idgrupo) REFERENCES GRUPO(id) );";
+			+ DatosGrupoUsuario.COLUMN_NAME_IDUSUARIO	+ "number(6) CONSTRAINT FK_IDUSUARIO"
+			+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO		+ "number(6) CONSTRAINT FK_IDGRUPO"
+					+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_ID + "))"
+					+ "REFERENCES " + DatosGrupo.TABLE_NAME + "(" + DatosGrupo.COLUMN_NAME_ID + "))";
 	
-	//AUTOINCREMENTO DE LA ID. SOLUCIONARLO CON UNA SECUENCIA.		
+	public static final String DATABASE_ADD_CONSTRAINT_USUARIO = "ALTER TABLE " 
+			+ DatosUsuario.TABLE_NAME + " ADD (CONSTRAINT " + DatosUsuario.CONSTRAINT_USUARIO 
+			+ " PRIMARY KEY (" + DatosUsuario.COLUMN_NAME_ID + "))";
+	
+	public static final String DATABASE_ADD_CONSTRAINT_GRUPO = "ALTER TABLE " 
+			+ DatosGrupo.TABLE_NAME + " ADD (CONSTRAINT " + DatosGrupo.CONSTRAINT_GRUPO
+			+ " PRIMARY KEY (" + DatosGrupo.COLUMN_NAME_ID + "))";
+	
+	public static final String DATABASE_ADD_CONSTRAINT_MENSAJE = "ALTER TABLE " 
+			+ DatosMensaje.TABLE_NAME + " ADD (CONSTRAINT " + DatosMensaje.CONSTRAINT_MENSAJE 
+			+ " PRIMARY KEY (" + DatosMensaje.COLUMN_NAME_ID + "))";
+	
+	
+	//AUTOINCREMENTO DE LA ID. SOLUCIONARLO CON UNA SECUENCIA.
+	//DUDA AUTROINCREMENTO
+	/*CREATE SEQUENCE usuario_seq INCREMENT BY 1 START WITH 0
+	
+	INSERT INTO usuaruio (id, nick, pass, nombre, apellidos, telefono, bday, sexo, foto, tipo)
+	VALUES (usuario_seq.NEXTVAL, ...)*/
 }

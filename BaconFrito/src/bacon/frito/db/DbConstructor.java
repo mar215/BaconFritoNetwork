@@ -179,8 +179,9 @@ public class DbConstructor {
 	public void insertarGrupoUsuario(GrupoUsuario grupuser) throws NamingException, SQLException {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
-		String sSQL = "INSERT INTO " + DatosGrupousuario.TABLE_NAME + "("
-				
+		String sSQL = "INSERT INTO " + DatosGrupoUsuario.TABLE_NAME + "("
+				+ DatosGrupoUsuario.COLUMN_NAME_IDUSUARIO	+ " " + grupuser.getIdusuario()
+				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO		+ " " + grupuser.getIdgrupo()+");";		
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
