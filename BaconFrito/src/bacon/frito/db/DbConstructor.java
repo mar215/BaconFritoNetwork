@@ -1,6 +1,7 @@
 package bacon.frito.db;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -94,10 +95,63 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		
 		String sSQL = "DELETE "+ DatosUsuario.TABLE_NAME + "("
-				+ "FROM USUARIO WHERE "
-				+ ;
+				+ "FROM USUARIO WHERE ";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
+	}
+	
+	/**
+	 * Este método conecta con la base de datos para buscar que en la tabla de Usuarios existe uno
+	 * con este nick y nos devuelve true si lo ha encontrado y false si no hay ninguno.
+	 * @param nick
+	 * @return
+	 */
+	
+	public boolean buscaUsuario(String nick) throws SQLException, NamingException{
+		Connection conexion = conectarDb();
+		Statement oStmt=conexion.createStatement();
+		String sSQL = "SELECT "
+				+ DatosUsuario.COLUMN_NAME_ID + ","
+				+ DatosUsuario.COLUMN_NAME_NICK	+ ","
+				+ DatosUsuario.COLUMN_NAME_PASS	+ "FROM Usuarios"
+				+ "WHERE ("
+				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + ")";
+		ResultSet oRs = oStmt.executeQuery(sSQL);
+		return oRs.next();
+	}
+	
+	public UsuarioBacon dameUsuario(String nick) throws SQLException, NamingException{
+		Connection conexion = conectarDb();
+		Statement oStmt=conexion.createStatement();
+		String sSQL = "SELECT "
+				+ DatosUsuario.COLUMN_NAME_ID + ","
+				+ DatosUsuario.COLUMN_NAME_NICK	+ ","
+				+ DatosUsuario.COLUMN_NAME_NOMBRE	+ ","
+				+ DatosUsuario.COLUMN_NAME_APELLIDOS	+ ","
+				+ DatosUsuario.COLUMN_NAME_TELEFONO	+ ","
+				+ DatosUsuario.COLUMN_NAME_BDAY	+ ","
+				+ DatosUsuario.COLUMN_NAME_SEXO	+ ","
+				+ DatosUsuario.COLUMN_NAME_FOTO	+ ","
+				+ DatosUsuario.COLUMN_NAME_TIPO+ "FROM Usuarios"
+				+ "WHERE ("
+				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + ")";
+		ResultSet oRs = oStmt.executeQuery(sSQL);
+		UsuarioBacon userAux=null;
+		while(oRs.next()){
+			int idUser = oRs.getInt(DatosUsuario.COLUMN_NAME_ID);
+			String nickUser = oRs.getString(DatosUsuario.COLUMN_NAME_NICK);
+			String passUser = oRs.getString(DatosUsuario.COLUMN_NAME_PASS);
+			String nombreUser = oRs.getString(DatosUsuario.COLUMN_NAME_NOMBRE);
+			String apellidosUser = oRs.getString(DatosUsuario.COLUMN_NAME_APELLIDOS);
+			String telefonoUser = oRs.getString(DatosUsuario.COLUMN_NAME_TELEFONO);
+			String bdayUser = oRs.getString(DatosUsuario.COLUMN_NAME_BDAY);
+			String sexoUser = oRs.getString(DatosUsuario.COLUMN_NAME_SEXO);
+			String fotoUser = oRs.getString(DatosUsuario.COLUMN_NAME_FOTO);
+			String tipoUser = oRs.getString(DatosUsuario.COLUMN_NAME_TIPO);
+		    userAux = new UsuarioBacon(idUser,nickUser, passUser, nombreUser,
+					apellidosUser, telefonoUser, sexoUser, bdayUser, fotoUser);
+		}
+		return userAux;
 	}
 	
 	public void crearTablaGrupo() throws SQLException, NamingException  {

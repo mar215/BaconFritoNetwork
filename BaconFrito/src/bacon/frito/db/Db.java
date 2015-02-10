@@ -24,7 +24,7 @@ public class Db {
 	
 	public static final String DATABASE_CREATE_GRUPO = "CREATE TABLE if not exists "
 			+ DatosGrupo.TABLE_NAME						+ " ("
-			+ DatosGrupo.COLUMN_NAME_ID				+ "number(6) PRIMARY KEY,"
+			+ DatosGrupo.COLUMN_NAME_ID					+ "number(6) PRIMARY KEY,"
 			+ DatosGrupo.COLUMN_NAME_NOMBRE				+ "varchar2(25), "
 			+ DatosGrupo.COLUMN_NAME_DESCRIPCION		+ "varchar2(500), "
 			+ DatosGrupo.COLUMN_NAME_IMAGEN				+ "varchar2(100), "
