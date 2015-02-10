@@ -43,5 +43,19 @@ public class BancoDB {
 				+ " FROM   dual;"
 				+ "END";	
 	*/
+	
+	public static String getCliente(String user){		
+		return "SELECT * FROM " + DatosCliente.TABLE_NAME + " WHERE " + DatosCliente.COLUMN_NAME_USER + " = " + user;
+	}
+	
+	public static String getCuenta(int id){		
+		return "SELECT " + DatosCuenta.COLUMN_NAME_SALDO + " FROM " + DatosCuenta.TABLE_NAME + " WHERE " + DatosCuenta.COLUMN_NAME_ROWID + " = " + id;
+	}
+	
+	public static String addSaldo(int id, double saldo){
+		return "UPDATE " + DatosCuenta.TABLE_NAME + " SET " + DatosCuenta.COLUMN_NAME_SALDO + " = "
+				+ DatosCuenta.COLUMN_NAME_SALDO + " + " + saldo + "WHERE " + DatosCuenta.COLUMN_NAME_ROWID
+				+ " = " + id;
+	}
 
 }

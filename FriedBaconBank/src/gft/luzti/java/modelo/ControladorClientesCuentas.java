@@ -7,7 +7,7 @@ public class ControladorClientesCuentas {
 	private static ControladorClientesCuentas instancia;
 	
 	private ArrayList<Cliente>  clientes;
-	private ArrayList<Cuenta> 	cuentas;
+	//private ArrayList<Cuenta> 	cuentas;
 	private static int 			idsCuentas;
 	
 	
@@ -23,7 +23,7 @@ public class ControladorClientesCuentas {
 
 	private ControladorClientesCuentas() {
 		clientes = new ArrayList<Cliente>();
-		cuentas  = new ArrayList<Cuenta>();
+		//cuentas  = new ArrayList<Cuenta>();
 		//TODO: leer de BD los datos de clientes y cuentas
 	}
 	

@@ -1,4 +1,4 @@
-package gft.luzti.java.controlador;
+package gft.luzti.java.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
