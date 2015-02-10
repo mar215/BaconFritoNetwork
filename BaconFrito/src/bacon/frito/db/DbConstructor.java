@@ -264,7 +264,8 @@ public class DbConstructor {
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
-		
+	
+
 	
 	//FUNCIONES CON GRUPOUSUARIO
 	
@@ -286,7 +287,20 @@ public class DbConstructor {
 		oStmt.close();	
 	}
 	
+	public GrupoUsuario dameGrupoUsuario(String nick) throws SQLException, NamingException{
+		Connection conexion = conectarDb();
+		Statement oStmt=conexion.createStatement();
+		String sSQL = "SELECT "
+				+ DatosGrupo.COLUMN_NAME_ID + ","
+				+ DatosGrupo.COLUMN_NAME_NOMBRE	+ "FROM " + DatosUsuario.TABLE_NAME + ", "
+				+ DatosGrupoUsuario.TABLE_NAME +", "+ DatosGrupo.TABLE_NAME
+				+ "WHERE ("
+				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + "AND" 
+				+ DatosUsuario.COLUMN_NAME_ID +"="+DatoGrupoUsuario.COLUMN_NAME_IDUSUARIO ")";
 
+		GrupoUsuario grupusuAux=null;
+		return grupusuAux;
+	}
 	
 	
 }
