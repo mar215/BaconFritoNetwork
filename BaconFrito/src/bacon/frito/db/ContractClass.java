@@ -16,6 +16,7 @@ public class ContractClass {
         public static final String COLUMN_NAME_SEXO 	   		= "sexo";			//String
         public static final String COLUMN_NAME_FOTO 		  	= "foto";			//String
         public static final String COLUMN_NAME_TIPO 		   	= "tipo";			//String
+        public static final String COLUMN_NAME_ACTIVO			= "activo";
         public static final String CONSTRAINT_USUARIO			= "idusario_pk";
         public static final String SEQUENCE_USUARIO_ID			= "account_seq";
         public static final String[] COLUMNS = {COLUMN_NAME_ID, COLUMN_NAME_NOMBRE

@@ -10,6 +10,7 @@ public class UsuarioBacon extends Usuario{
 	private String sexo;
 	private String bday;
 	private String	foto;
+	private String activo;
 	
 	
 	/**

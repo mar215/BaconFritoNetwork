@@ -31,9 +31,11 @@ public class DbConstructor {
 		instancia = new DbConstructor();
 	}
 	
-	public DbConstructor getInstance(){
+	public static DbConstructor getInstance(){
 		return instancia;
 	}
+	
+	//CREAR CONEXION
 	
 	private Connection conectarDb() throws NamingException, SQLException {		
 		//Datasource para java
@@ -54,6 +56,8 @@ public class DbConstructor {
 		oStmt.close();
 			
 	}
+	
+	//FUNCIONES CON USUARIO
 	
 	public void insertarUsuario(UsuarioBacon user) throws SQLException, NamingException {
 		
@@ -90,12 +94,13 @@ public class DbConstructor {
 		oStmt.close();
 	}
 	
-	public void eliminarUsuario() throws NamingException, SQLException {
+	public void eliminarUsuario(String nick) throws NamingException, SQLException {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		
-		String sSQL = "DELETE "+ DatosUsuario.TABLE_NAME + "("
-				+ "FROM USUARIO WHERE ";
+		UsuarioBacon userAux = dameUsuario(nick);
+		 String sSQL = "UPDATE "+ DatosUsuario.TABLE_NAME + ""
+				+ "SET " +DatosUsuario.COLUMN_NAME_ACTIVO+"='false' (WHERE  " +nick+"="+userAux.getNick()+")";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
 	}
@@ -113,7 +118,7 @@ public class DbConstructor {
 		String sSQL = "SELECT "
 				+ DatosUsuario.COLUMN_NAME_ID + ","
 				+ DatosUsuario.COLUMN_NAME_NICK	+ ","
-				+ DatosUsuario.COLUMN_NAME_PASS	+ "FROM Usuarios"
+				+ DatosUsuario.COLUMN_NAME_PASS	+ "FROM Usuario"
 				+ "WHERE ("
 				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + ")";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
@@ -132,7 +137,7 @@ public class DbConstructor {
 				+ DatosUsuario.COLUMN_NAME_BDAY	+ ","
 				+ DatosUsuario.COLUMN_NAME_SEXO	+ ","
 				+ DatosUsuario.COLUMN_NAME_FOTO	+ ","
-				+ DatosUsuario.COLUMN_NAME_TIPO+ "FROM Usuarios"
+				+ DatosUsuario.COLUMN_NAME_TIPO+ "FROM Usuario"
 				+ "WHERE ("
 				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + ")";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
@@ -153,6 +158,9 @@ public class DbConstructor {
 		}
 		return userAux;
 	}
+	
+	
+	//FUNCIONES CON GRUPO
 	
 	public void crearTablaGrupo() throws SQLException, NamingException  {
 		Connection conexion=conectarDb();
@@ -186,6 +194,22 @@ public class DbConstructor {
 		oStmt.close();
 	}
 	
+	public boolean buscaGrupo(String nombre) throws SQLException, NamingException{
+		Connection conexion = conectarDb();
+		Statement oStmt=conexion.createStatement();
+		String sSQL = "SELECT "
+				+ DatosGrupo.COLUMN_NAME_ID + ","
+				+ DatosGrupo.COLUMN_NAME_NICK	+ ","
+				+ DatosGrupo.COLUMN_NAME_PASS	+ "FROM Grupo"
+				+ "WHERE ("
+				+ DatosUGrupo.COLUMN_NAME_NICK + "=" + nombre + ")";
+		ResultSet oRs = oStmt.executeQuery(sSQL);
+		return oRs.next();
+	}
+	
+	
+	//FUNCIONES CON MENSAJE
+	
 	public void crearTablaMensaje() throws NamingException, SQLException  {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
@@ -215,6 +239,9 @@ public class DbConstructor {
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
 	}
+	
+	
+	//FUNCIONES CON GRUPOUSUARIO
 	
 	public void crearTablaGrupoUsuario() throws SQLException, NamingException  {
 		Connection conexion=conectarDb();
