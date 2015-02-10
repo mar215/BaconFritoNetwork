@@ -24,6 +24,16 @@ import bacon.frito.modelo.UsuarioBacon;
 
 public class DbConstructor {
 	
+	private static DbConstructor instancia;
+	
+	static {
+		instancia = new DbConstructor();
+	}
+	
+	public DbConstructor getInstance(){
+		return instancia;
+	}
+	
 	private Connection conectarDb() throws NamingException, SQLException {		
 		//Datasource para java
 		DataSource miDS;
@@ -38,18 +48,7 @@ public class DbConstructor {
 	public void crearTablaUsuario() throws NamingException, SQLException  {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
-		String sSQL = "CREATE TABLE USUARIO ("
-				+ DatosUsuario.COLUMN_NAME_ID + " NUMBER(6), " 
-				+ DatosUsuario.COLUMN_NAME_NICK + "varchar2(25) NOT NULL, "
-				+ DatosUsuario.COLUMN_NAME_PASS + "varchar2(25) NOT NULL, "
-				+ DatosUsuario.COLUMN_NAME_NOMBRE + "varchar2(25), "
-				+ DatosUsuario.COLUMN_NAME_APELLIDOS + "varchar2(50), "
-				+ DatosUsuario.COLUMN_NAME_TELEFONO + "number(15), "
-				+ DatosUsuario.COLUMN_NAME_BDAY + "varchar2(10), "
-				+ DatosUsuario.COLUMN_NAME_SEXO + "varchar2(25), "
-				+ DatosUsuario.COLUMN_NAME_FOTO + "varchar2(100), " 
-				+ DatosUsuario.COLUMN_NAME_TIPO + "varchar2(15) NOT NULL,"
-				+ "PRIMARY KEY (ID));";
+		String sSQL = Db.DATABASE_CREATE_USUARIO;
 		oStmt.executeUpdate(sSQL);
 		oStmt.close();
 			
@@ -63,23 +62,23 @@ public class DbConstructor {
 		if(user.getClass().equals(bacon.frito.modelo.UsuarioBacon.class)){
 			sSQL = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
 					+ DatosUsuario.COLUMNAS +") VALUES ("
-					+ DatosUsuario.COLUMN_NAME_NOMBRE 		+ " " + user.getNombre()
-					+ DatosUsuario.COLUMN_NAME_APELLIDOS 	+ " " + user.getApellidos()
-					+ DatosUsuario.COLUMN_NAME_TELEFONO		+ " " + user.getTelefono()
-					+ DatosUsuario.COLUMN_NAME_BDAY			+ " " + user.getBday()
-					+ DatosUsuario.COLUMN_NAME_SEXO			+ " " + user.getSexo()
-					+ DatosUsuario.COLUMN_NAME_FOTO			+ " " + user.getFoto()
-					+ DatosUsuario.COLUMN_NAME_TIPO			+ "usuariobacon);";	
+					+ " " + user.getNombre()
+					+ ", " + user.getApellidos()
+					+ ", " + user.getTelefono()
+					+ ", " + user.getBday()
+					+ ", " + user.getSexo()
+					+ ", " + user.getFoto()
+					+ ", usuariobacon);";	
 		} else {
 			sSQL = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
 					+ DatosUsuario.COLUMNAS +") VALUES ("
-					+ DatosUsuario.COLUMN_NAME_NOMBRE 		+ " " + user.getNombre()
-					+ DatosUsuario.COLUMN_NAME_APELLIDOS 	+ " " + user.getApellidos()
-					+ DatosUsuario.COLUMN_NAME_TELEFONO		+ " " + user.getTelefono()
-					+ DatosUsuario.COLUMN_NAME_BDAY			+ " " + user.getBday()
-					+ DatosUsuario.COLUMN_NAME_SEXO			+ " " + user.getSexo()
-					+ DatosUsuario.COLUMN_NAME_FOTO			+ " " + user.getFoto()
-					+ DatosUsuario.COLUMN_NAME_TIPO			+ "usuariopremium);";	
+					+ " " + user.getNombre()
+					+ ", " + user.getApellidos()
+					+ ", " + user.getTelefono()
+					+ ", " + user.getBday()
+					+ ", " + user.getSexo()
+					+ ", " + user.getFoto()
+					+ ", usuariopremium);";	
 		}
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
@@ -97,14 +96,7 @@ public class DbConstructor {
 	public void crearTablaGrupo() throws SQLException, NamingException  {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
-		String sSQL = "CREATE TABLE GRUPO ("
-				+ DatosGrupo.TABLE_NAME						+ " ("
-				+ DatosGrupo.COLUMN_NAME_ID					+ "number(6),"
-				+ DatosGrupo.COLUMN_NAME_NOMBRE				+ "varchar2(25), "
-				+ DatosGrupo.COLUMN_NAME_DESCRIPCION		+ "varchar2(500), "
-				+ DatosGrupo.COLUMN_NAME_IMAGEN				+ "varchar2(100), "
-				+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES		+ "number(3)"
-				+ "PRIMARY KEY (ID));";
+		String sSQL = Db.DATABASE_CREATE_GRUPO;
 		oStmt.executeUpdate(sSQL);
 		oStmt.close();
 			
@@ -115,10 +107,10 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "INSERT INTO "+ DatosUsuario.TABLE_NAME + " ("
 				+ DatosGrupo.COLUMNAS +") VALUES ("
-				+ DatosGrupo.COLUMN_NAME_NOMBRE				+ " " + grup.getNombre()
-				+ DatosGrupo.COLUMN_NAME_DESCRIPCION		+ " " + grup.getDescripcion()
-				+ DatosGrupo.COLUMN_NAME_IMAGEN				+ " " + grup.getImagen()
-				+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES		+ " " + grup.getMaxintegrantes()+");";		
+				+ " " + grup.getNombre()
+				+ ", " + grup.getDescripcion()
+				+ ", " + grup.getImagen()
+				+ ", " + grup.getMaxintegrantes()+");";		
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
@@ -135,10 +127,7 @@ public class DbConstructor {
 	public void crearTablaMensaje() throws NamingException, SQLException  {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
-		String sSQL = "CREATE TABLE MENSAJE (" 
-				+ DatosMensaje.COLUMN_NAME_TEXTO			+ "varchar2(500), "
-				+ DatosMensaje.COLUMN_NAME_DESTINO			+ "varchar2(25) NOT NULL)"
-				+ "PRIMARY KEY (ID));";
+		String sSQL = Db.DATABASE_CREATE_MENSAJE;
 		oStmt.executeUpdate(sSQL);
 		oStmt.close();
 			
@@ -149,8 +138,8 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "INSERT INTO " + DatosMensaje.TABLE_NAME + " ("
 				+ DatosMensaje.COLUMNAS +") VALUES ("
-				+ DatosMensaje.COLUMN_NAME_TEXTO			+ " " + sms.getTexto()
-				+ DatosMensaje.COLUMN_NAME_DESTINO			+ " " + sms.getDestino()+");";
+				+ " " + sms.getTexto()
+				+ ", " + sms.getDestino()+");";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
@@ -167,11 +156,7 @@ public class DbConstructor {
 	public void crearTablaGrupoUsuario() throws SQLException, NamingException  {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
-		String sSQL = "CREATE TABLE GRUPOUSUARIO ("
-				+ DatosGrupoUsuario.COLUMN_NAME_IDUSUARIO	+ "number(6), "
-				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO		+ "number(6), "
-				+ "CONSTRAINT FK_IDUSUARIO FOREIGN KEY(idusuario) REFERENCES USUARIO(id), "
-				+ "CONSTRAINT FK_IDGRUPO FOREIGN KEY(idgrupo) REFERENCES GRUPO(id));";
+		String sSQL = Db.DATABASE_CREATE_GRUPOUSUARIO;
 		oStmt.executeUpdate(sSQL);
 		oStmt.close();
 	}
@@ -180,8 +165,8 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "INSERT INTO " + DatosGrupoUsuario.TABLE_NAME + "("
-				+ DatosGrupoUsuario.COLUMN_NAME_IDUSUARIO	+ " " + grupuser.getIdusuario()
-				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO		+ " " + grupuser.getIdgrupo()+");";		
+				+ " " + grupuser.getIdusuario()
+				+ ", " + grupuser.getIdgrupo()+");";		
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
