@@ -16,13 +16,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>Logout</display-name>
-    <servlet-name>Logout</servlet-name>
-    <servlet-class>gft.luzti.java.controlador.Logout</servlet-class>
+    <display-name>LogOut</display-name>
+    <servlet-name>LogOut</servlet-name>
+    <servlet-class>gft.luzti.java.controlador.LogOut</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Logout</servlet-name>
-    <url-pattern>/Logout</url-pattern>
+    <servlet-name>LogOut</servlet-name>
+    <url-pattern>/LogOut</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

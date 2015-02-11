@@ -45,7 +45,7 @@ public class AddSaldo extends HttpServlet {
 			
 			response.sendRedirect("index.jsp");
 		}else{
-			dbh.addSaldo(dbh.getCliente((String) s.getAttribute("user")).getCuenta().getNumeroCuenta()
+			dbh.addSaldo(dbh.getCliente((String) s.getAttribute("nombre")).getCuenta().getNumeroCuenta()
 						, Double.parseDouble(request.getParameter("saldo")));
 			response.sendRedirect("User");
 		}

@@ -1,7 +1,6 @@
 package gft.luzti.java.controlador;
 
 import gft.luzti.java.bd.DBHelper;
-import gft.luzti.java.modelo.Cliente;
 
 import java.io.IOException;
 
@@ -38,7 +37,7 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession s 	= request.getSession();	
 		DBHelper 	dbh	= DBHelper.getInstance();			
-		if(dbh.login(request.getParameter("user").toLowerCase(), request.getParameter("pass").toLowerCase())){
+		if(dbh.login(request.getParameter("user"), request.getParameter("pass"))){
 			s.setAttribute("nombre", request.getParameter("user"));
 			s.setAttribute("valida", true);
 			response.sendRedirect("User");

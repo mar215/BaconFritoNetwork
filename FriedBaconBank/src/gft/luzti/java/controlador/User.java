@@ -38,7 +38,7 @@ public class User extends HttpServlet {
 			
 			response.sendRedirect("index.jsp");
 		}else{
-			Cliente cliente = dbh.getCliente(request.getParameter("user"));
+			Cliente cliente = dbh.getCliente((String) s.getAttribute("nombre"));
 			if(cliente == null){
 				System.out.println("no puede serrlrlrlr");
 				return;

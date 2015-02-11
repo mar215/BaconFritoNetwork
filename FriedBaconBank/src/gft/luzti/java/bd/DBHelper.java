@@ -323,10 +323,10 @@ public class DBHelper {
 			e.printStackTrace();
 			return null;
 		}		
-		
+		System.out.println("getCliente: " + BancoDB.getCliente(user));
 		//Obtenemos la fila del cliente que solicitamos
 		try {
-			rs = stat.executeQuery(BancoDB.getCliente(user.toLowerCase()));
+			rs = stat.executeQuery(BancoDB.getCliente(user));
 		} catch (SQLException e1) {
 			System.err.println("Error al obtener el RS (getCliente)");
 			e1.printStackTrace();
@@ -335,19 +335,19 @@ public class DBHelper {
 		
 		//Comprobamos que hemos obtenido resultados
 		try {
-			if(!rs.first()){
+			if(rs.next()){
+				Cliente cliente = new Cliente(rs.getString(DatosCliente.COLUMN_NAME_USER), 
+						rs.getString(DatosCliente.COLUMN_NAME_PASS), 
+						rs.getString(DatosCliente.COLUMN_NAME_NOMBRE), 
+						rs.getString(DatosCliente.COLUMN_NAME_APELLIDOS), 
+						rs.getString(DatosCliente.COLUMN_NAME_DNI), 
+						getCuenta(rs.getInt(DatosCliente.COLUMN_NAME_CUENTA)));
+				conexion.close();
+				return cliente;
+			}else{//hay resultados-> devolvemos el cliente
 				conexion.close();
 				System.out.println("la hemos cagado");
 				return null;
-			}else{//hay resultados-> devolvemos el cliente
-					Cliente cliente = new Cliente(rs.getString(DatosCliente.COLUMN_NAME_USER), 
-												  rs.getString(DatosCliente.COLUMN_NAME_PASS), 
-												  rs.getString(DatosCliente.COLUMN_NAME_NOMBRE), 
-												  rs.getString(DatosCliente.COLUMN_NAME_APELLIDOS), 
-												  rs.getString(DatosCliente.COLUMN_NAME_DNI), 
-												  getCuenta(rs.getInt(DatosCliente.COLUMN_NAME_CUENTA)));
-					conexion.close();
-					return cliente;
 			}
 		} catch (SQLException e) {
 			System.err.println("Error en la obtención de los datos de cliente (getCliente)");
