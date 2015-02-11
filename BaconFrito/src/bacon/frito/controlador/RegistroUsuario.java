@@ -55,7 +55,9 @@ public class RegistroUsuario extends HttpServlet {
 		
 		if(!passUser.equals(pass1User)){
 			// No ha pasado el check de las contraseñas
+			System.out.println("validar contraseña");
 			request.getRequestDispatcher("PaginaRegistro.jsp").forward(request, response);
+			return;
 		}
 		
 		// Miramos si el usuario existe en la base de datos y si existe le mandamos hacia atrás
@@ -65,7 +67,9 @@ public class RegistroUsuario extends HttpServlet {
 		try {
 			if(contructorDb.buscaUsuario(nickUser)){
 				// Hemos encontrado al usuario en la base de datos
+				System.out.println("encontrado");
 				request.getRequestDispatcher("PaginaRegistro.jsp").forward(request, response);
+				return;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -89,8 +93,8 @@ public class RegistroUsuario extends HttpServlet {
 		
 		//Este Id de usuario es provisional y no es válido!!!
 		
-		UsuarioBacon usuarioAux = new UsuarioBacon(-1, nickUser, passUser, nombreUser,
-				apellidosUser, telefonoUser, sexoUser, bdayUser, fotoUser, activoUser);
+		UsuarioBacon usuarioAux = new UsuarioBacon(nickUser, passUser, nombreUser,
+				apellidosUser, telefonoUser, sexoUser, bdayUser, fotoUser, "usuariobacon",activoUser);
 		
 		try {
 			contructorDb.insertarUsuario(usuarioAux);

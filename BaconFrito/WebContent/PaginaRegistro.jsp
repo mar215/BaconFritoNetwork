@@ -39,7 +39,7 @@
 <h1>¡Bienvenido!</h1> 
 <h3>Esta es la página de nuevos Usuarios de BaconFrito Network.<br>
     Gracias por confiar en nosotros.</h3>
-<form action="" method="POST">
+<form action="RegistroUsuario" method="POST">
 <table style="text-align: center">
 <tr><th>Por favor rellene el siguiente formulario para realizar el registro:<th></tr>
 <tr><th>Usuario:<th></tr>
