@@ -23,7 +23,7 @@
 <li><a href="PaginaPrincipal.jsp">Inicio</a>
 <ul>
     <li><a href="PaginaUsuario.jsp">Usuario</a></li>
-    <li><a href="">Cerrar sesión</a></li>
+    <li><a href="Logout">Cerrar sesión</a></li>
 </ul>
 </li>
 <li><a href="PaginaConsultaMensajes.jsp">Mensajes</a>
@@ -53,7 +53,7 @@
 <center>
 <div id="contenido">
 <center>
-<form action="" method="POST">
+<form action="EnvioMensajes" method="POST">
 <table>
 <tr><td><input type="hidden" name="origen" value="<%= session.getAttribute("user")%>"></td></tr>
 <tr><td><input type="text" name="destino" placeholder="Destinatario" style="width: 400px"></td></tr>

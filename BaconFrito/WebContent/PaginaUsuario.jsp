@@ -28,7 +28,7 @@
 <li><a href="PaginaPrincipal.jsp">Inicio</a>
 <ul>
     <li><a href="PaginaUsuario.jsp">Usuario</a></li>
-    <li><a href="">Cerrar sesión</a></li>
+    <li><a href="Logout">Cerrar sesión</a></li>
 </ul>
 </li>
 <li><a href="PaginaConsultaMensajes.jsp">Mensajes</a>
