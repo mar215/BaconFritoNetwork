@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
+    <%@page import="bacon.frito.modelo.UsuarioBacon" %>
+    
     <%/*
     * Esta es la pagina que mostrara el perfil del usuario 
+    * Recibe en la request un usuario del que cogeremos sus datos para mostrarlos
     */%>
+    
+    <% UsuarioBacon usuario = (UsuarioBacon)request.getAttribute("usuario");%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,7 +32,7 @@
 <ul id="menu">
 <li><a href="PaginaPrincipal.jsp">Inicio</a>
 <ul>
-    <li><a href="PaginaUsuario.jsp">Usuario</a></li>
+    <li><a href="PaginaUsuario.jsp"><%= session.getAttribute("user") %></a></li>
     <li><a href="Logout">Cerrar sesión</a></li>
 </ul>
 </li>
@@ -58,13 +63,13 @@
 <center>
 <div id="contenidoUsuario">
 <table>
-<tr><td rowspan="2"><img alt=" imagen del usuario" src="http://images1.wikia.nocookie.net/__cb20130128232836/horadeaventura/es/images/2/2e/Jake_asombrado.png" style="width:100px; height:100px;"></td>
-<td><h3>Jake 85</h3></td>
-<td>Sexo: Todos los días</td>
+<tr><td rowspan="2"><img alt=" <%= usuario.getFoto() %> " style="width:100px; height:100px;"></td>
+<td><h3><%= usuario.getNick() %></h3></td>
+<td>Sexo: <%=usuario.getSexo() %></td>
 </tr>
 <tr>
-<td>Jake el perro</td>
-<td>Telefono: 698765432</td>
+<td><%=usuario.getNombre() %>, <%=usuario.getApellidos() %></td>
+<td>Telefono: <%=usuario.getTelefono() %></td>
 </tr>
 </table>
 </div>
