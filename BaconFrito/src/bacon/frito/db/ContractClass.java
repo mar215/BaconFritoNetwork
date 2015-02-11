@@ -18,14 +18,16 @@ public class ContractClass {
         public static final String COLUMN_NAME_ACTIVO			= "activo";			//String
         public static final String CONSTRAINT_USUARIO			= "idusario_pk";
         public static final String SEQUENCE_USUARIO_ID			= "account_seq";
-        public static final String[] COLUMNS = {COLUMN_NAME_NOMBRE
-        										,COLUMN_NAME_APELLIDOS,COLUMN_NAME_TELEFONO
-        										,COLUMN_NAME_SEXO,COLUMN_NAME_FOTO
-        										,COLUMN_NAME_TIPO, COLUMN_NAME_ACTIVO};
-        public static final String COLUMNAS = COLUMN_NAME_NOMBRE
-        									+ "," + COLUMN_NAME_APELLIDOS + "," + COLUMN_NAME_TELEFONO
-        									+ "," + COLUMN_NAME_SEXO + "," + COLUMN_NAME_FOTO
-        									+ "," + COLUMN_NAME_TIPO+ "," + COLUMN_NAME_ACTIVO;
+        public static final String[] COLUMNS = {COLUMN_NAME_NICK, COLUMN_NAME_PASS, COLUMN_NAME_NOMBRE
+        										, COLUMN_NAME_APELLIDOS, COLUMN_NAME_TELEFONO, COLUMN_NAME_BDAY
+        										, COLUMN_NAME_SEXO, COLUMN_NAME_FOTO
+        										, COLUMN_NAME_ACTIVO, COLUMN_NAME_TIPO};
+        public static final String COLUMNAS = COLUMN_NAME_NICK + ", " +COLUMN_NAME_PASS 
+        									+ ", " +COLUMN_NAME_NOMBRE
+        									+ ", " + COLUMN_NAME_APELLIDOS + ", " + COLUMN_NAME_TELEFONO
+        									+ ", " + COLUMN_NAME_BDAY + ", " + COLUMN_NAME_SEXO
+        									+ ", " + COLUMN_NAME_FOTO
+        									+ ", " + COLUMN_NAME_ACTIVO+ ", " + COLUMN_NAME_TIPO;
 	 
 	}
 	

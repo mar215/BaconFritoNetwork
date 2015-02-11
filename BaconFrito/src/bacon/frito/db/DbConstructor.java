@@ -72,7 +72,7 @@ public class DbConstructor {
 		String sSQL;
 		sSQL = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
 				+ DatosUsuario.COLUMNAS +") VALUES ("
-				+ " "  	 + user.getNick()
+				+ " '"  	 + user.getNick()
 				+ "', '" + user.getPass()
 				+ "', '" + user.getNombre()
 				+ "', '" + user.getApellidos()
@@ -80,9 +80,9 @@ public class DbConstructor {
 				+ "', '" + user.getBday()
 				+ "', '" + user.getSexo()
 				+ "', '" + user.getFoto()
-				+ "', 'true'"
-				+ "', 'usuariobacon')";		
-
+				+ "', 'true"
+				+ "', 'usuariobacon')";	
+		System.out.println(sSQL);
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
 	}
@@ -136,7 +136,8 @@ public class DbConstructor {
 				+ DatosUsuario.COLUMN_NAME_NICK	+ ", "
 				+ DatosUsuario.COLUMN_NAME_PASS	+ " FROM Usuario"
 				+ " WHERE ("
-				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + ")";
+				+ DatosUsuario.COLUMN_NAME_NICK + "='" + nick + "')";
+		System.out.println(sSQL);
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		return oRs.next();
 	}
@@ -146,6 +147,7 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "SELECT "
 				+ DatosUsuario.COLUMN_NAME_NICK	+ ", "
+				+ DatosUsuario.COLUMN_NAME_PASS	+ ", "
 				+ DatosUsuario.COLUMN_NAME_NOMBRE	+ ", "
 				+ DatosUsuario.COLUMN_NAME_APELLIDOS	+ ", "
 				+ DatosUsuario.COLUMN_NAME_TELEFONO	+ ", "
@@ -155,7 +157,8 @@ public class DbConstructor {
 				+ DatosUsuario.COLUMN_NAME_TIPO+ ", "
 				+ DatosUsuario.COLUMN_NAME_ACTIVO+ " FROM Usuario"
 				+ " WHERE ("
-				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + ")";
+				+ DatosUsuario.COLUMN_NAME_NICK + "='" + nick + "')";
+		System.out.println(sSQL);
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		UsuarioBacon userAux=null;
 		if(oRs.next()){
@@ -224,7 +227,7 @@ public class DbConstructor {
 				+ DatosGrupo.COLUMN_NAME_ID + ","
 				+ DatosGrupo.COLUMN_NAME_NOMBRE	+ " FROM Grupo"
 				+ " WHERE ("
-				+ DatosGrupo.COLUMN_NAME_NOMBRE + "=" + nombre + ")";
+				+ DatosGrupo.COLUMN_NAME_NOMBRE + "='" + nombre + "')";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		return oRs.next();
 	}
@@ -240,7 +243,7 @@ public class DbConstructor {
 				+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES	+ ","
 				+ DatosGrupo.COLUMN_NAME_ACTIVO	+ " FROM Usuario"
 				+ " WHERE ("
-				+ DatosGrupo.COLUMN_NAME_NOMBRE + "=" + nombre + ")";
+				+ DatosGrupo.COLUMN_NAME_NOMBRE + "='" + nombre + "')";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		Grupo grupAux=null;
 		if(oRs.next()){
@@ -279,6 +282,7 @@ public class DbConstructor {
 				+ ", '" + sms.getTexto()
 				+ "', '" + sms.getDestino()
 				+ "', '" + sms.getOrigen()+"');";
+		System.out.println(sSQL);
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
@@ -313,7 +317,7 @@ public class DbConstructor {
 				+ DatosGrupo.COLUMN_NAME_NOMBRE	+ " FROM " + DatosUsuario.TABLE_NAME + ", "
 				+ DatosGrupoUsuario.TABLE_NAME +", "+ DatosGrupo.TABLE_NAME
 				+ " WHERE ("
-				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + " AND " 
+				+ DatosUsuario.COLUMN_NAME_NICK + "='" + nick + "' AND " 
 				+ DatosUsuario.COLUMN_NAME_NICK +"="+DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO
 				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO +"="+DatosGrupo.COLUMN_NAME_ID +")";
 		oStmt.executeUpdate(sSQL);	

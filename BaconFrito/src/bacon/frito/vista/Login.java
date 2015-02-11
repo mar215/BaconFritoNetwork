@@ -41,10 +41,10 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Comprobamos session por si el usuario ha accedido directamente
-		boolean activo = (boolean) request.getSession().getAttribute("activo");
+		/*boolean activo = (boolean) request.getSession().getAttribute("activo");
 		if(activo == true && (String) request.getSession().getAttribute("user") != null){
 			response.sendRedirect("PaginaPrincipal.jsp");
-		}
+		}*/
 		
 		// Recibimos los parámetros del login en el POST	
 		String user = request.getParameter("user");
@@ -62,7 +62,7 @@ public class Login extends HttpServlet {
 					sesion.setAttribute("user", user);
 					boolean activa = true;
 					sesion.setAttribute("activo", activa);
-					response.sendRedirect("PaginalPrincipal.jsp");
+					response.sendRedirect("PaginaPrincipal.jsp");
 				}else{
 					//Si falla le mandamos a bienvenida para que se logee
 					response.sendRedirect("Bienvenida.jsp");
