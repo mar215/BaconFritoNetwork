@@ -68,14 +68,14 @@ public class DbConstructor {
 			sSQL = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
 					+ DatosUsuario.COLUMNAS +") VALUES ("
 					+ " "  + Db.DATABASE_USUARIO_NEXT_ID
-					+ ", " + user.getNombre()
-					+ ", " + user.getApellidos()
-					+ ", " + user.getTelefono()
-					+ ", " + user.getBday()
-					+ ", " + user.getSexo()
-					+ ", " + user.getFoto()
-					+ ", true"
-					+ ", usuariobacon);";	
+					+ ", '" + user.getNombre()
+					+ "', '" + user.getApellidos()
+					+ "', '" + user.getTelefono()
+					+ "', '" + user.getBday()
+					+ "', '" + user.getSexo()
+					+ "', '" + user.getFoto()
+					+ "', 'true'"
+					+ "', 'usuariobacon')";	
 		} else {
 			sSQL = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
 					+ DatosUsuario.COLUMNAS +") VALUES ("
@@ -84,14 +84,14 @@ public class DbConstructor {
 					//PARA RELLENAR EL ID
 					// NECESITA COMILLAS????				
 					+ " "  + Db.DATABASE_USUARIO_NEXT_ID
-					+ ", " + user.getNombre()
-					+ ", " + user.getApellidos()
-					+ ", " + user.getTelefono()
-					+ ", " + user.getBday()
-					+ ", " + user.getSexo()
-					+ ", " + user.getFoto()
-					+ ", true"
-					+ ", usuariopremium);";	
+					+ ", '" + user.getNombre()
+					+ "', '" + user.getApellidos()
+					+ "', '" + user.getTelefono()
+					+ "', '" + user.getBday()
+					+ "', '" + user.getSexo()
+					+ "', '" + user.getFoto()
+					+ "', 'true'"
+					+ ", 'usuariopremium')";	
 		}
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
@@ -182,11 +182,11 @@ public class DbConstructor {
 		String sSQL = "INSERT INTO "+ DatosUsuario.TABLE_NAME + " ("
 				+ DatosGrupo.COLUMNAS +") VALUES ("
 				+ "  " + Db.DATABASE_GRUPO_NEXT_ID
-				+ ", " + grup.getNombre()
-				+ ", " + grup.getDescripcion()
-				+ ", " + grup.getImagen()
-				+ ", " + grup.getMaxintegrantes()
-				+ ", true);";		
+				+ ", '" + grup.getNombre()
+				+ "', '" + grup.getDescripcion()
+				+ "', '" + grup.getImagen()
+				+ "', " + grup.getMaxintegrantes()
+				+ ", 'true');";		
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
@@ -259,8 +259,8 @@ public class DbConstructor {
 		String sSQL = "INSERT INTO " + DatosMensaje.TABLE_NAME + " ("
 				+ DatosMensaje.COLUMNAS +") VALUES ("
 				+ "  " + Db.DATABASE_MENSAJE_NEXT_ID
-				+ ", " + sms.getTexto()
-				+ ", " + sms.getDestino()+");";
+				+ ", '" + sms.getTexto()
+				+ "', '" + sms.getDestino()+"');";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
