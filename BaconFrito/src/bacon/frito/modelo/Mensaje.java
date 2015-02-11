@@ -4,13 +4,15 @@ public class Mensaje {
 	private int id;
 	private String texto;
 	private String destino;
+	private String origen;
 	
 	
-	public Mensaje(int id, String texto, String destino) {
+	public Mensaje(int id, String texto, String destino, String origen) {
 		super();
 		this.id = id;
 		this.texto = texto;
 		this.destino = destino;
+		this.origen = origen;
 	}
 
 
@@ -42,6 +44,19 @@ public class Mensaje {
 	public void setDestino(String destino) {
 		this.destino = destino;
 	}
+
+
+	public String getOrigen() {
+		return origen;
+	}
+
+
+	public void setOrigen(String origen) {
+		this.origen = origen;
+	}
+	
+	
+	
 	
 	
 	

@@ -260,7 +260,8 @@ public class DbConstructor {
 				+ DatosMensaje.COLUMNAS +") VALUES ("
 				+ "  " + Db.DATABASE_MENSAJE_NEXT_ID
 				+ ", '" + sms.getTexto()
-				+ "', '" + sms.getDestino()+"');";
+				+ ", '" + sms.getDestino()
+				+ "', '" + sms.getOrigen()+"');";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}

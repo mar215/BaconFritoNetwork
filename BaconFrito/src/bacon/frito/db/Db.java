@@ -37,6 +37,7 @@ public class Db {
 			+ DatosMensaje.COLUMN_NAME_ID				+ "number(6) PRIMARY KEY, "
 			+ DatosMensaje.COLUMN_NAME_TEXTO			+ "varchar2(500), "
 			+ DatosMensaje.COLUMN_NAME_DESTINO			+ "varchar2(25) NOT NULL), "
+			+ DatosMensaje.COLUMN_NAME_ORIGEN			+ "varchar2(25) NOT NULL), "
 			+ DatosMensaje.COLUMN_NAME_IDUSUARIO		+ "number(6) CONSTRAINT fk_idusuario, "
 					+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_ID + "));";
 	

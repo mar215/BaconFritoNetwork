@@ -54,13 +54,14 @@ public class ContractClass {
     	public static final String COLUMN_NAME_ID 		   		= "id";				//int
     	public static final String COLUMN_NAME_TEXTO 		   	= "texto";			//String
     	public static final String COLUMN_NAME_DESTINO  		= "destino";		//String
+    	public static final String COLUMN_NAME_ORIGEN  			= "origen";			//String
     	public static final String COLUMN_NAME_IDUSUARIO		= "idusuario";		//int clave ajena usuario
     	public static final String CONSTRAINT_MENSAJE			= "idmensaje_pk";
     	public static final String SEQUENCE_MENSAJE_ID			= "account_seq";
     	public static final String[] COLUMNS = {COLUMN_NAME_ID,COLUMN_NAME_TEXTO
-												,COLUMN_NAME_DESTINO};
+												,COLUMN_NAME_DESTINO, COLUMN_NAME_ORIGEN};
     	public static final String COLUMNAS = COLUMN_NAME_TEXTO + "," +
-											COLUMN_NAME_DESTINO;
+											COLUMN_NAME_DESTINO + "," + COLUMN_NAME_ORIGEN;
     	
     }
     

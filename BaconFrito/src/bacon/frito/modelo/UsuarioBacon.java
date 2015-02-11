@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class UsuarioBacon extends Usuario{
 	//TODO: cumpleaños y sexo
-	private String	nombre;
-	private String	apellidos;
-	private String	telefono;
-	private String sexo;
-	private String bday;
-	private String	foto;
-	private String activo;
+	public String	nombre;
+	public String	apellidos;
+	public String	telefono;
+	public String 	sexo;
+	public String 	bday;
+	public String	foto;
+	public String 	activo;
 	
 	
 	/**
