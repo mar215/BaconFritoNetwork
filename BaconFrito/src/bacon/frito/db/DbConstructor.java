@@ -11,9 +11,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
 
-import com.sun.org.apache.xerces.internal.dom.DeferredAttrImpl;
+
+import javax.sql.DataSource;
 
 import bacon.frito.db.ContractClass.DatosGrupo;
 import bacon.frito.db.ContractClass.DatosGrupoUsuario;
@@ -47,7 +47,7 @@ public class DbConstructor {
 		//Datasource para java
 		DataSource miDS;
 		Context ic = new InitialContext();
-		miDS = (DataSource)ic.lookup("java:comp/env/jdbc/DatasourceLocal1");
+		miDS = (DataSource)ic.lookup("java:comp/env/jdbc/DataSourceLocal1");
 		Connection conexion=null;
 		conexion=miDS.getConnection();
 		return conexion;
@@ -133,9 +133,9 @@ public class DbConstructor {
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "SELECT "
-				+ DatosUsuario.COLUMN_NAME_NICK	+ ","
-				+ DatosUsuario.COLUMN_NAME_PASS	+ "FROM Usuario"
-				+ "WHERE ("
+				+ DatosUsuario.COLUMN_NAME_NICK	+ ", "
+				+ DatosUsuario.COLUMN_NAME_PASS	+ " FROM Usuario"
+				+ " WHERE ("
 				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + ")";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		return oRs.next();
@@ -153,8 +153,8 @@ public class DbConstructor {
 				+ DatosUsuario.COLUMN_NAME_SEXO	+ ", "
 				+ DatosUsuario.COLUMN_NAME_FOTO	+ ", "
 				+ DatosUsuario.COLUMN_NAME_TIPO+ ", "
-				+ DatosUsuario.COLUMN_NAME_ACTIVO+ "FROM Usuario"
-				+ "WHERE ("
+				+ DatosUsuario.COLUMN_NAME_ACTIVO+ " FROM Usuario"
+				+ " WHERE ("
 				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + ")";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		UsuarioBacon userAux=null;
@@ -222,8 +222,8 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "SELECT "
 				+ DatosGrupo.COLUMN_NAME_ID + ","
-				+ DatosGrupo.COLUMN_NAME_NOMBRE	+ "FROM Grupo"
-				+ "WHERE ("
+				+ DatosGrupo.COLUMN_NAME_NOMBRE	+ " FROM Grupo"
+				+ " WHERE ("
 				+ DatosGrupo.COLUMN_NAME_NOMBRE + "=" + nombre + ")";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		return oRs.next();
@@ -238,8 +238,8 @@ public class DbConstructor {
 				+ DatosGrupo.COLUMN_NAME_DESCRIPCION + ","
 				+ DatosGrupo.COLUMN_NAME_IMAGEN + ","	
 				+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES	+ ","
-				+ DatosGrupo.COLUMN_NAME_ACTIVO	+ "FROM Usuario"
-				+ "WHERE ("
+				+ DatosGrupo.COLUMN_NAME_ACTIVO	+ " FROM Usuario"
+				+ " WHERE ("
 				+ DatosGrupo.COLUMN_NAME_NOMBRE + "=" + nombre + ")";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		Grupo grupAux=null;
@@ -310,10 +310,10 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "SELECT "
 				+ DatosGrupo.COLUMN_NAME_ID + ","
-				+ DatosGrupo.COLUMN_NAME_NOMBRE	+ "FROM " + DatosUsuario.TABLE_NAME + ", "
+				+ DatosGrupo.COLUMN_NAME_NOMBRE	+ " FROM " + DatosUsuario.TABLE_NAME + ", "
 				+ DatosGrupoUsuario.TABLE_NAME +", "+ DatosGrupo.TABLE_NAME
-				+ "WHERE ("
-				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + "AND" 
+				+ " WHERE ("
+				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + " AND " 
 				+ DatosUsuario.COLUMN_NAME_NICK +"="+DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO
 				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO +"="+DatosGrupo.COLUMN_NAME_ID +")";
 		oStmt.executeUpdate(sSQL);	
