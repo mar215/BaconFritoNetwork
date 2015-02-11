@@ -1,5 +1,7 @@
 package bacon.frito.db;
 
+
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +24,7 @@ import bacon.frito.modelo.GrupoUsuario;
 import bacon.frito.modelo.Mensaje;
 import bacon.frito.modelo.Usuario;
 import bacon.frito.modelo.UsuarioBacon;
+import bacon.frito.modelo.UsuarioPremium;
 
 public class DbConstructor {
 	
@@ -34,6 +37,9 @@ public class DbConstructor {
 	public static DbConstructor getInstance(){
 		return instancia;
 	}
+
+	//HACER UN RESULTSET PARA EL AUTOINCREMENTO DE ID
+
 	
 	//CREAR CONEXION
 	
@@ -64,37 +70,45 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL;
-		if(user.getClass().equals(bacon.frito.modelo.UsuarioBacon.class)){
-			sSQL = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
-					+ DatosUsuario.COLUMNAS +") VALUES ("
-					+ " "  + Db.DATABASE_USUARIO_NEXT_ID
-					+ ", '" + user.getNombre()
-					+ "', '" + user.getApellidos()
-					+ "', '" + user.getTelefono()
-					+ "', '" + user.getBday()
-					+ "', '" + user.getSexo()
-					+ "', '" + user.getFoto()
-					+ "', 'true'"
-					+ "', 'usuariobacon')";	
-		} else {
-			sSQL = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
-					+ DatosUsuario.COLUMNAS +") VALUES ("
-					/////IMPORTANTE/////
-					//NECESITAMOS INTRODUCIR EL VALOR DE LA SECUENCIA
-					//PARA RELLENAR EL ID
-					// NECESITA COMILLAS????				
-					+ " "  + Db.DATABASE_USUARIO_NEXT_ID
-					+ ", '" + user.getNombre()
-					+ "', '" + user.getApellidos()
-					+ "', '" + user.getTelefono()
-					+ "', '" + user.getBday()
-					+ "', '" + user.getSexo()
-					+ "', '" + user.getFoto()
-					+ "', 'true'"
-					+ ", 'usuariopremium')";	
-		}
+		sSQL = "INSERT INTO " + DatosUsuario.TABLE_NAME + " ("
+				+ DatosUsuario.COLUMNAS +") VALUES ("
+				+ " "  	 + user.getNick()
+				+ "', '" + user.getPass()
+				+ "', '" + user.getNombre()
+				+ "', '" + user.getApellidos()
+				+ "', '" + user.getTelefono()
+				+ "', '" + user.getBday()
+				+ "', '" + user.getSexo()
+				+ "', '" + user.getFoto()
+				+ "', 'true'"
+				+ "', 'usuariobacon')";		
+
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
+	}
+	
+	public void convertirAPremium(String nick) throws NamingException, SQLException {
+		Connection conexion=conectarDb();
+		Statement oStmt=conexion.createStatement();
+		UsuarioBacon userAux = dameUsuario(nick);
+		String sSQL = "UPDATE "+ DatosUsuario.TABLE_NAME + ""
+				+ "SET " +DatosUsuario.COLUMN_NAME_TIPO+"='usuariopremium' (WHERE  " +nick+"="+userAux.getNick()+")";
+		oStmt.executeUpdate(sSQL);	
+		oStmt.close();
+		
+	}
+	
+	public UsuarioBacon devuelveTipo(String nick) throws NamingException, SQLException {
+		Connection conexion=conectarDb();
+		Statement oStmt=conexion.createStatement();
+		UsuarioBacon userAux = dameUsuario(nick);
+		if (userAux.getTipo() == "usuariobacon") {
+			UsuarioBacon usuario = null;
+			return usuario;
+		} else {
+			UsuarioPremium usuario = null;
+			return usuario;
+		}
 	}
 	
 	public void eliminarUsuario(String nick) throws NamingException, SQLException {
@@ -119,7 +133,6 @@ public class DbConstructor {
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "SELECT "
-				+ DatosUsuario.COLUMN_NAME_ID + ","
 				+ DatosUsuario.COLUMN_NAME_NICK	+ ","
 				+ DatosUsuario.COLUMN_NAME_PASS	+ "FROM Usuario"
 				+ "WHERE ("
@@ -132,7 +145,6 @@ public class DbConstructor {
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "SELECT "
-				+ DatosUsuario.COLUMN_NAME_ID + ", "
 				+ DatosUsuario.COLUMN_NAME_NICK	+ ", "
 				+ DatosUsuario.COLUMN_NAME_NOMBRE	+ ", "
 				+ DatosUsuario.COLUMN_NAME_APELLIDOS	+ ", "
@@ -146,8 +158,7 @@ public class DbConstructor {
 				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + ")";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		UsuarioBacon userAux=null;
-		while(oRs.next()){
-			int idUser = oRs.getInt(DatosUsuario.COLUMN_NAME_ID);
+		if(oRs.next()){
 			String nickUser = oRs.getString(DatosUsuario.COLUMN_NAME_NICK);
 			String passUser = oRs.getString(DatosUsuario.COLUMN_NAME_PASS);
 			String nombreUser = oRs.getString(DatosUsuario.COLUMN_NAME_NOMBRE);
@@ -158,8 +169,8 @@ public class DbConstructor {
 			String fotoUser = oRs.getString(DatosUsuario.COLUMN_NAME_FOTO);
 			String tipoUser = oRs.getString(DatosUsuario.COLUMN_NAME_TIPO);
 			String activoUser = oRs.getString(DatosUsuario.COLUMN_NAME_ACTIVO);
-		    userAux = new UsuarioBacon(idUser,nickUser, passUser, nombreUser,
-					apellidosUser, telefonoUser, sexoUser, bdayUser, fotoUser, activoUser);
+		    userAux = new UsuarioBacon(nickUser, passUser, nombreUser,
+					apellidosUser, telefonoUser, sexoUser, bdayUser, fotoUser, tipoUser, activoUser);
 		}
 		return userAux;
 	}
@@ -178,15 +189,18 @@ public class DbConstructor {
 	
 	public void insertarGrupo(Grupo grup) throws NamingException, SQLException {
 		Connection conexion=conectarDb();
-		Statement oStmt=conexion.createStatement();
+		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		ResultSet rs = oStmt.executeQuery(Db.DATABASE_GRUPO_NEXT_ID);
+		rs.first();
+		int id = rs.getInt(1);
 		String sSQL = "INSERT INTO "+ DatosUsuario.TABLE_NAME + " ("
 				+ DatosGrupo.COLUMNAS +") VALUES ("
-				+ "  " + Db.DATABASE_GRUPO_NEXT_ID
+				+ "  " + DatosGrupo.COLUMN_NAME_ID
 				+ ", '" + grup.getNombre()
 				+ "', '" + grup.getDescripcion()
 				+ "', '" + grup.getImagen()
 				+ "', " + grup.getMaxintegrantes()
-				+ ", 'true');";		
+				+ "', 'true');";		
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
@@ -229,7 +243,7 @@ public class DbConstructor {
 				+ DatosGrupo.COLUMN_NAME_NOMBRE + "=" + nombre + ")";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		Grupo grupAux=null;
-		while(oRs.next()){
+		if(oRs.next()){
 			int idGrup = oRs.getInt(DatosGrupo.COLUMN_NAME_ID);
 			String nombreGrup = oRs.getString(DatosUsuario.COLUMN_NAME_NOMBRE);
 			String descripcionGrup = oRs.getString(DatosGrupo.COLUMN_NAME_DESCRIPCION);
@@ -255,12 +269,15 @@ public class DbConstructor {
 	
 	public void insertarMensaje(Mensaje sms) throws NamingException, SQLException {
 		Connection conexion=conectarDb();
-		Statement oStmt=conexion.createStatement();
+		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		ResultSet rs = oStmt.executeQuery(Db.DATABASE_GRUPO_NEXT_ID);
+		rs.first();
+		int id = rs.getInt(1);
 		String sSQL = "INSERT INTO " + DatosMensaje.TABLE_NAME + " ("
 				+ DatosMensaje.COLUMNAS +") VALUES ("
-				+ "  " + Db.DATABASE_MENSAJE_NEXT_ID
+				+ "  " + DatosMensaje.COLUMN_NAME_ID
 				+ ", '" + sms.getTexto()
-				+ ", '" + sms.getDestino()
+				+ "', '" + sms.getDestino()
 				+ "', '" + sms.getOrigen()+"');";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
@@ -282,7 +299,7 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "INSERT INTO " + DatosGrupoUsuario.TABLE_NAME + "("
-				+ " " + grupuser.getIdusuario()
+				+ " " + grupuser.getNickusuario()
 				+ ", " + grupuser.getIdgrupo()+");";		
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
@@ -297,7 +314,7 @@ public class DbConstructor {
 				+ DatosGrupoUsuario.TABLE_NAME +", "+ DatosGrupo.TABLE_NAME
 				+ "WHERE ("
 				+ DatosUsuario.COLUMN_NAME_NICK + "=" + nick + "AND" 
-				+ DatosUsuario.COLUMN_NAME_ID +"="+DatosGrupoUsuario.COLUMN_NAME_IDUSUARIO
+				+ DatosUsuario.COLUMN_NAME_NICK +"="+DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO
 				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO +"="+DatosGrupo.COLUMN_NAME_ID +")";
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();

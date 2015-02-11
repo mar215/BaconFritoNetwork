@@ -1,24 +1,24 @@
 package bacon.frito.modelo;
 
 public class GrupoUsuario {
-	private int idusuario;
+	private int nickusuario;
 	private int idgrupo;
 	
 	
-	public GrupoUsuario(int idusuario, int idgrupo) {
+	public GrupoUsuario(int nickusuario, int idgrupo) {
 		super();
-		this.idusuario = idusuario;
+		this.nickusuario = nickusuario;
 		this.idgrupo = idgrupo;
 	}
 
 
-	public int getIdusuario() {
-		return idusuario;
+	public int getNickusuario() {
+		return nickusuario;
 	}
 
 
-	public void setIdusuario(int idusuario) {
-		this.idusuario = idusuario;
+	public void setNickusuario(int nickusuario) {
+		this.nickusuario = nickusuario;
 	}
 
 
@@ -30,6 +30,9 @@ public class GrupoUsuario {
 	public void setIdgrupo(int idgrupo) {
 		this.idgrupo = idgrupo;
 	}
+	
+	
+	
 	
 	
 	

@@ -14,17 +14,18 @@ package bacon.frito.modelo;
  */
 public abstract class Usuario {
 	
-	private int 	id;
 	private String 	nick;
 	private String	pass;
 	
-	public Usuario(int id, String nick, String pass){
-		this.id 	= id;
-		this.nick	= nick;
-		this.pass	= pass;
+	
+	
+	
+	public Usuario(String nick, String pass) {
+		super();
+		this.nick = nick;
+		this.pass = pass;
 	}
-	
-	
+
 	/**
 	 * @param pass password to check
 	 * @return true or false depending if the pass was correct or not
@@ -37,12 +38,7 @@ public abstract class Usuario {
 		}
 	}
 
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
+
 
 	/**
 	 * @return the nick
@@ -57,6 +53,15 @@ public abstract class Usuario {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	
 	
 	
 }

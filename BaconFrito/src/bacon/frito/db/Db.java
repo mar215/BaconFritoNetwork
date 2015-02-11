@@ -10,7 +10,6 @@ public class Db {
 	
 	public static final String DATABASE_CREATE_USUARIO = "CREATE TABLE if not exists "
 			+ DatosUsuario.TABLE_NAME 					+ " (" 
-			+ DatosUsuario.COLUMN_NAME_ID				+ "number(6), " 
 			+ DatosUsuario.COLUMN_NAME_NICK				+ "varchar2(25) NOT NULL, "
 			+ DatosUsuario.COLUMN_NAME_PASS 			+ "varchar2(25) NOT NULL, "
 			+ DatosUsuario.COLUMN_NAME_NOMBRE 			+ "varchar2(25), " 
@@ -38,13 +37,13 @@ public class Db {
 			+ DatosMensaje.COLUMN_NAME_TEXTO			+ "varchar2(500), "
 			+ DatosMensaje.COLUMN_NAME_DESTINO			+ "varchar2(25) NOT NULL), "
 			+ DatosMensaje.COLUMN_NAME_ORIGEN			+ "varchar2(25) NOT NULL), "
-			+ DatosMensaje.COLUMN_NAME_IDUSUARIO		+ "number(6) CONSTRAINT fk_idusuario, "
-					+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_ID + "));";
+			+ DatosMensaje.COLUMN_NAME_NICKUSUARIO		+ "varchar2(25) CONSTRAINT fk_idusuario, "
+					+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "));";
 	
 	public static final String DATABASE_CREATE_GRUPOUSUARIO = "CREATE TABLE if not exists "
 			+ DatosGrupoUsuario.TABLE_NAME				+ " ("
-			+ DatosGrupoUsuario.COLUMN_NAME_IDUSUARIO	+ "number(6) CONSTRAINT FK_IDUSUARIO, "
-			+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_ID + "), "
+			+ DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO	+ "varchar2(25) CONSTRAINT FK_IDUSUARIO, "
+			+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "), "
 			+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO		+ "number(6) CONSTRAINT FK_IDGRUPO, "
 			+ "REFERENCES " + DatosGrupo.TABLE_NAME + "(" + DatosGrupo.COLUMN_NAME_ID + "));";
 	
@@ -52,7 +51,7 @@ public class Db {
 	
 	public static final String DATABASE_ADD_CONSTRAINT_USUARIO = "ALTER TABLE " 
 			+ DatosUsuario.TABLE_NAME + " ADD (CONSTRAINT " + DatosUsuario.CONSTRAINT_USUARIO 
-			+ " PRIMARY KEY (" + DatosUsuario.COLUMN_NAME_ID + "));";
+			+ " PRIMARY KEY (" + DatosUsuario.COLUMN_NAME_NICK + "));";
 	
 	public static final String DATABASE_ADD_CONSTRAINT_GRUPO = "ALTER TABLE " 
 			+ DatosGrupo.TABLE_NAME + " ADD (CONSTRAINT " + DatosGrupo.CONSTRAINT_GRUPO
@@ -64,10 +63,6 @@ public class Db {
 	
 	//AÑADIENDO AUTOINCREMENTO ID
 	
-	public static final String DATABASE_USUARIO_SEQUENCE = "CREATE SEQUENCE " + DatosUsuario.SEQUENCE_USUARIO_ID;
-	
-	public static final String DATABASE_USUARIO_NEXT_ID	 = "SELECT " + DatosUsuario.SEQUENCE_USUARIO_ID
-			 + ".NEXTVAL FROM DUAL";
 	
 	public static final String DATABASE_GRUPO_SEQUENCE = "CREATE SEQUENCE " + DatosGrupo.SEQUENCE_GRUPO_ID;
 	

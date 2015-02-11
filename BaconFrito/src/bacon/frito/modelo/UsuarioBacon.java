@@ -10,8 +10,9 @@ public class UsuarioBacon extends Usuario{
 	public String 	sexo;
 	public String 	bday;
 	public String	foto;
+	public String 	tipo;
 	public String 	activo;
-	
+
 	
 	/**
 	 * @param nombre nombre de usuario
@@ -28,16 +29,17 @@ public class UsuarioBacon extends Usuario{
 	
 
 
-	public UsuarioBacon(int id, String nick, String pass, String nombre,
+	public UsuarioBacon(String nick, String pass, String nombre,
 			String apellidos, String telefono, String sexo, String bday,
-			String foto, String activo) {
-		super(id, nick, pass);
+			String foto, String tipo, String activo) {
+		super(nick, pass);
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.telefono = telefono;
 		this.sexo = sexo;
 		this.bday = bday;
 		this.foto = foto;
+		this.tipo = tipo;
 		this.activo = activo;
 	}
 
@@ -63,9 +65,9 @@ public class UsuarioBacon extends Usuario{
 		return false;
 	}
 
+
 	
 	//GET and SET
-
 
 	public String getNombre() {
 		return nombre;
@@ -139,6 +141,18 @@ public class UsuarioBacon extends Usuario{
 
 
 
+	public String getTipo() {
+		return tipo;
+	}
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+
 	public String getActivo() {
 		return activo;
 	}
@@ -148,12 +162,6 @@ public class UsuarioBacon extends Usuario{
 	public void setActivo(String activo) {
 		this.activo = activo;
 	}
-	
-	
-
-
-	
-	
 	
 
 }
