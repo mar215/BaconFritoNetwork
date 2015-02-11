@@ -40,7 +40,7 @@ public class ContractClass {
     	public static final String COLUMN_NAME_MAXINTEGRANTES	= "maxintegrantes";	//int
     	public static final String COLUMN_NAME_ACTIVO			= "activo";			//String
     	public static final String CONSTRAINT_GRUPO				= "idgrupo_pk";
-    	public static final String SEQUENCE_GRUPO_ID			= "account_seq";
+    	public static final String SEQUENCE_GRUPO_ID			= "grupo_seq";
     	public static final String[] COLUMNS = {COLUMN_NAME_ID,COLUMN_NAME_NOMBRE
     											,COLUMN_NAME_DESCRIPCION,COLUMN_NAME_IMAGEN
     											,COLUMN_NAME_MAXINTEGRANTES, COLUMN_NAME_ACTIVO};
@@ -58,11 +58,11 @@ public class ContractClass {
     	public static final String COLUMN_NAME_ORIGEN  			= "origen";			//String
     	public static final String COLUMN_NAME_NICKUSUARIO		= "nickusuario";	//String clave ajena usuario
     	public static final String CONSTRAINT_MENSAJE			= "idmensaje_pk";
-    	public static final String SEQUENCE_MENSAJE_ID			= "account_seq";
+    	public static final String SEQUENCE_MENSAJE_ID			= "mensaje_seq";
     	public static final String[] COLUMNS = {COLUMN_NAME_ID,COLUMN_NAME_TEXTO
-												,COLUMN_NAME_DESTINO, COLUMN_NAME_ORIGEN};
-    	public static final String COLUMNAS = COLUMN_NAME_TEXTO + "," +
-											COLUMN_NAME_DESTINO + "," + COLUMN_NAME_ORIGEN;
+												,COLUMN_NAME_DESTINO, COLUMN_NAME_ORIGEN, COLUMN_NAME_NICKUSUARIO};
+    	public static final String COLUMNAS = COLUMN_NAME_ID + ","+COLUMN_NAME_TEXTO + "," +
+											COLUMN_NAME_DESTINO + "," + COLUMN_NAME_ORIGEN+ "," +COLUMN_NAME_NICKUSUARIO;
     	
     }
     

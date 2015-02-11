@@ -203,7 +203,7 @@ public class DbConstructor {
 				+ "', '" + grup.getDescripcion()
 				+ "', '" + grup.getImagen()
 				+ "', " + grup.getMaxintegrantes()
-				+ "', 'true');";		
+				+ "', 'true')";		
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
@@ -278,10 +278,11 @@ public class DbConstructor {
 		int id = rs.getInt(1);
 		String sSQL = "INSERT INTO " + DatosMensaje.TABLE_NAME + " ("
 				+ DatosMensaje.COLUMNAS +") VALUES ("
-				+ "  " + DatosMensaje.COLUMN_NAME_ID
+				+ "  " + id
 				+ ", '" + sms.getTexto()
 				+ "', '" + sms.getDestino()
-				+ "', '" + sms.getOrigen()+"');";
+				+ "', '" + sms.getOrigen()
+				+ "', '" + sms.getOrigen()+"')";
 		System.out.println(sSQL);
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
@@ -304,7 +305,7 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement();
 		String sSQL = "INSERT INTO " + DatosGrupoUsuario.TABLE_NAME + "("
 				+ " " + grupuser.getNickusuario()
-				+ ", " + grupuser.getIdgrupo()+");";		
+				+ ", " + grupuser.getIdgrupo()+")";		
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}

@@ -19,7 +19,7 @@ public class Db {
 			+ DatosUsuario.COLUMN_NAME_SEXO				+ " varchar2(25), "
 			+ DatosUsuario.COLUMN_NAME_FOTO				+ " varchar2(100), "
 			+ DatosUsuario.COLUMN_NAME_ACTIVO			+ " varchar2(10), "
-			+ DatosUsuario.COLUMN_NAME_TIPO             + " varchar2(15) NOT NULL);";
+			+ DatosUsuario.COLUMN_NAME_TIPO             + " varchar2(15) NOT NULL)";
 	
 	
 	public static final String DATABASE_CREATE_GRUPO = "CREATE TABLE "
@@ -29,7 +29,7 @@ public class Db {
 			+ DatosGrupo.COLUMN_NAME_DESCRIPCION		+ " varchar2(500), "
 			+ DatosGrupo.COLUMN_NAME_IMAGEN				+ " varchar2(100), "
 			+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES		+ " number(3), "
-			+ DatosGrupo.COLUMN_NAME_ACTIVO				+ " varchar(10));";
+			+ DatosGrupo.COLUMN_NAME_ACTIVO				+ " varchar(10))";
 	
 	public static final String DATABASE_CREATE_MENSAJE = "CREATE TABLE "
 			+ DatosMensaje.TABLE_NAME					+ " ("
@@ -38,28 +38,28 @@ public class Db {
 			+ DatosMensaje.COLUMN_NAME_DESTINO			+ " varchar2(25) NOT NULL, "
 			+ DatosMensaje.COLUMN_NAME_ORIGEN			+ " varchar2(25) NOT NULL, "
 			+ DatosMensaje.COLUMN_NAME_NICKUSUARIO		+ " varchar2(25) CONSTRAINT fk_nickusuario "
-					+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "));";
+					+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "))";
 	
 	public static final String DATABASE_CREATE_GRUPOUSUARIO = "CREATE TABLE "
 			+ DatosGrupoUsuario.TABLE_NAME				+ " ("
 			+ DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO	+ " varchar2(25) CONSTRAINT FK_NICKUSUARIO1 "
 			+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "), "
 			+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO		+ " number(6) CONSTRAINT FK_IDGRUPO "
-			+ "REFERENCES " + DatosGrupo.TABLE_NAME + "(" + DatosGrupo.COLUMN_NAME_ID + "));";
+			+ "REFERENCES " + DatosGrupo.TABLE_NAME + "(" + DatosGrupo.COLUMN_NAME_ID + "))";
 	
 	//AÑADIENDO CLAVES PRIMARIAS
 	
 	public static final String DATABASE_ADD_CONSTRAINT_USUARIO = "ALTER TABLE " 
 			+ DatosUsuario.TABLE_NAME + " ADD (CONSTRAINT " + DatosUsuario.CONSTRAINT_USUARIO 
-			+ " PRIMARY KEY (" + DatosUsuario.COLUMN_NAME_NICK + "));";
+			+ " PRIMARY KEY (" + DatosUsuario.COLUMN_NAME_NICK + "))";
 	
 	public static final String DATABASE_ADD_CONSTRAINT_GRUPO = "ALTER TABLE " 
 			+ DatosGrupo.TABLE_NAME + " ADD (CONSTRAINT " + DatosGrupo.CONSTRAINT_GRUPO
-			+ " PRIMARY KEY (" + DatosGrupo.COLUMN_NAME_ID + "));";
+			+ " PRIMARY KEY (" + DatosGrupo.COLUMN_NAME_ID + "))";
 	
 	public static final String DATABASE_ADD_CONSTRAINT_MENSAJE = "ALTER TABLE " 
 			+ DatosMensaje.TABLE_NAME + " ADD (CONSTRAINT " + DatosMensaje.CONSTRAINT_MENSAJE 
-			+ " PRIMARY KEY (" + DatosMensaje.COLUMN_NAME_ID + "));";
+			+ " PRIMARY KEY (" + DatosMensaje.COLUMN_NAME_ID + "))";
 	
 	//AÑADIENDO AUTOINCREMENTO ID
 	

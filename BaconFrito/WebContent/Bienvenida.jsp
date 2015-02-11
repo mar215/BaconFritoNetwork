@@ -7,7 +7,7 @@
 if(session.getAttribute("user")!=null){
 	if (session.getAttribute("activo")!=null){
 		if((Boolean)session.getAttribute("activo")!=false){
-			response.sendRedirect("Principal");
+			response.sendRedirect("PaginaPrincipal.jsp");
 		}
 	}
 }else{%>
