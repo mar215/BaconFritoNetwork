@@ -22,7 +22,7 @@
 <ul id="menu">
 <li><a href="PaginaPrincipal.jsp">Inicio</a>
 <ul>
-    <li><a href="PaginaUsuario.jsp"><%= session.getAttribute("user") %></a></li>
+    <li><a href="ServletPaginaUsuario"><%= session.getAttribute("user") %></a></li>
     <li><a href="Logout">Cerrar sesión</a></li>
 </ul>
 </li>
