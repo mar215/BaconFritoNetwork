@@ -1,5 +1,7 @@
 package gft.luzti.java.modelo;
 
+import gft.luzti.java.bd.DBHelper;
+
 public class Cuenta {
 	
 	private int		numeroCuenta;
@@ -12,8 +14,10 @@ public class Cuenta {
 	}
 	
 	public boolean cobrar(double cantidad){
+		
 		if(getSaldo() >= cantidad){
 			setSaldo(getSaldo() - cantidad);
+			DBHelper.getInstance().paySaldo(getNumeroCuenta(), cantidad);
 			return true;
 		}else{
 			return false;
@@ -22,6 +26,8 @@ public class Cuenta {
 	
 	public void ingresar(double cantidad){
 		saldo += cantidad;
+		DBHelper.getInstance().addSaldo(getNumeroCuenta(), cantidad);
+		
 	}
 	
 	@Override

@@ -187,7 +187,7 @@ public class DBHelper {
 						+ "VALUES ('" + cliente.getUser() + "','" + cliente.getPass() + "','"
 									 + cliente.getNombre() + "','" + cliente.getApellidos() + "','"
 									 + cliente.getDni() + "'," + cliente.getCuenta().getNumeroCuenta() + ")";
-		System.out.println(insertar);
+		//System.out.println(insertar);
 		
 		try {
 			stat.executeUpdate(insertar);
@@ -323,7 +323,7 @@ public class DBHelper {
 			e.printStackTrace();
 			return null;
 		}		
-		System.out.println("getCliente: " + BancoDB.getCliente(user));
+		//System.out.println("getCliente: " + BancoDB.getCliente(user));
 		//Obtenemos la fila del cliente que solicitamos
 		try {
 			rs = stat.executeQuery(BancoDB.getCliente(user));
@@ -412,6 +412,31 @@ public class DBHelper {
 			return true;
 		} catch (SQLException e1) {
 			System.err.println("Error al actulizar el saldo (addSaldo)");
+			e1.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	public boolean paySaldo(int id, double saldo){
+		Connection conexion = getConexion();
+		Statement stat 		= null;
+		
+		//Obtenemos el Statement para hacer ejecutar la sentencia
+		try {
+			stat = conexion.createStatement();
+		} catch (SQLException e) {
+			System.err.println("Error al crear el Statement (paySaldo)");
+			e.printStackTrace();
+		}
+		
+		//Obtenemos la fila del cliente que solicitamos
+		try {
+			stat.executeQuery(BancoDB.paySaldo(id, saldo));
+			conexion.close();
+			return true;
+		} catch (SQLException e1) {
+			System.err.println("Error al actulizar el saldo (paySaldo)");
 			e1.printStackTrace();
 			return false;
 		}

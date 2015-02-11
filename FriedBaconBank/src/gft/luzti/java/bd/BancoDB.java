@@ -57,5 +57,11 @@ public class BancoDB {
 				+ DatosCuenta.COLUMN_NAME_SALDO + " + " + saldo + "WHERE " + DatosCuenta.COLUMN_NAME_ROWID
 				+ " = " + id;
 	}
+	
+	public static String paySaldo(int id, double saldo){
+		return "UPDATE " + DatosCuenta.TABLE_NAME + " SET " + DatosCuenta.COLUMN_NAME_SALDO + " = "
+				+ DatosCuenta.COLUMN_NAME_SALDO + " - " + saldo + "WHERE " + DatosCuenta.COLUMN_NAME_ROWID
+				+ " = " + id;
+	}
 
 }
