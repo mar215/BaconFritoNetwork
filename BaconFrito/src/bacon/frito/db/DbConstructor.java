@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -288,6 +289,45 @@ public class DbConstructor {
 		oStmt.close();	
 	}
 	
+	/**
+	 * Funcion que recibe el nick de un usuario como parametro y busca en la base de datos y 
+	 * nos devuelve los mensajes que van destinados a este usuario
+	 * @param nick
+	 * @return ArrayList que contiene objetos de tipo Mensaje con los mensajes al usuario
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
+	
+	public ArrayList<Mensaje> dameLista (String nick) throws NamingException, SQLException{
+		ArrayList<Mensaje> listaMensajes = new ArrayList<Mensaje>();
+		Connection conexion = conectarDb();
+		Statement oStmt = conexion.createStatement();
+		
+		/*
+		 * Vamos a buscar la lista de mensanjes en la base de datos que tengan como destino al 
+		 * usuario que pasamos por parametro mediante una Query
+		 */
+		
+		String sSQL = "SELECT "
+				+ DatosMensaje.COLUMN_NAME_ID + ", "
+				+ DatosMensaje.COLUMN_NAME_TEXTO + ", "
+				+ DatosMensaje.COLUMN_NAME_DESTINO + ", "
+				+ DatosMensaje.COLUMN_NAME_NICKUSUARIO + " FROM "
+				+ DatosMensaje.TABLE_NAME + " WHERE ("
+				+ DatosMensaje.COLUMN_NAME_DESTINO + " = '"
+				+ nick + "')";
+		ResultSet resultLista = oStmt.executeQuery(sSQL);	
+		while(resultLista.next()){
+			Mensaje mensajeAux = new Mensaje(resultLista.getInt(DatosMensaje.COLUMN_NAME_ID),
+					resultLista.getString(DatosMensaje.COLUMN_NAME_TEXTO),
+					resultLista.getString(DatosMensaje.COLUMN_NAME_DESTINO),
+					resultLista.getString(DatosMensaje.COLUMN_NAME_ORIGEN));
+			
+			listaMensajes.add(mensajeAux);
+		}
+		
+		return listaMensajes;
+	}
 
 	
 	//FUNCIONES CON GRUPOUSUARIO
