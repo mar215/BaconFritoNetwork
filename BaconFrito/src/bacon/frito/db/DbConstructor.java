@@ -39,7 +39,7 @@ public class DbConstructor {
 		return instancia;
 	}
 
-	//HACER UN RESULTSET PARA EL AUTOINCREMENTO DE ID
+
 
 	
 	//CREAR CONEXION

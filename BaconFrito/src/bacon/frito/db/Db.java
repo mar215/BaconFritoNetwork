@@ -17,7 +17,7 @@ public class Db {
 			+ DatosUsuario.COLUMN_NAME_TELEFONO			+ " varchar2(15), " 
 			+ DatosUsuario.COLUMN_NAME_BDAY				+ " varchar2(10), "
 			+ DatosUsuario.COLUMN_NAME_SEXO				+ " varchar2(25), "
-			+ DatosUsuario.COLUMN_NAME_FOTO				+ " varchar2(100), "
+			+ DatosUsuario.COLUMN_NAME_FOTO				+ " varchar2(500), "
 			+ DatosUsuario.COLUMN_NAME_ACTIVO			+ " varchar2(10), "
 			+ DatosUsuario.COLUMN_NAME_TIPO             + " varchar2(15) NOT NULL)";
 	
