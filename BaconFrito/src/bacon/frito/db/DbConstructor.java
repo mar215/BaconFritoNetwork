@@ -419,6 +419,7 @@ public class DbConstructor {
 		ArrayList<Notificacion> result = new ArrayList<Notificacion>();
 		System.out.println(Db.getNotif(dameUsuarios()));
 		ResultSet oRs = oStmt.executeQuery(Db.getNotif(dameUsuarios()));
+		oRs.first();
 		while(oRs.next()){
 			result.add(new Notificacion(oRs.getString(DatosNotificacion.COLUMN_NAME_USER),
 										oRs.getString(DatosNotificacion.COLUMN_NAME_TEXT),
