@@ -69,8 +69,9 @@
 <div align="center">
 <tr><td colspan="2">¿Quieres crear tu propio grupo? </td></tr>
   <form name="form1" action="PaginaCrearGrupo.jsp" target="_blank">
-    <input type="submit" value="Crea tu grupo">
+    <input type="submit" value="Crea tu grupo">  
   </form>
+
 </div>
 </body>
 </html>
