@@ -17,13 +17,13 @@ import bacon.frito.modelo.Mensaje;
  * Servlet implementation class EnvioMensajes
  */
 @WebServlet("/EnvioMensajes")
-public class EnvioMensajes extends HttpServlet {
+public class EnvioMensajesGrupo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnvioMensajes() {
+    public EnvioMensajesGrupo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,7 +53,7 @@ public class EnvioMensajes extends HttpServlet {
 		DbConstructor constructorDb = DbConstructor.getInstance();
 		
 		try {
-			constructorDb.insertarMensaje(mensajeAux);
+			constructorDb.mensajeGrupal(mensajeAux);
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,7 +64,7 @@ public class EnvioMensajes extends HttpServlet {
 		
 		// Mandamos al usuario de nuevo a la pagina de Mensajes por si quiere mandar otro.
 		
-		response.sendRedirect("PaginaMensajes.jsp");
+		response.sendRedirect("PaginaMensajesGrupo.jsp");
 		
 	}
 
