@@ -44,7 +44,7 @@ public class ContractClass {
     	public static final String[] COLUMNS = {COLUMN_NAME_ID,COLUMN_NAME_NOMBRE
     											,COLUMN_NAME_DESCRIPCION,COLUMN_NAME_IMAGEN
     											,COLUMN_NAME_MAXINTEGRANTES, COLUMN_NAME_ACTIVO};
-    	public static final String COLUMNAS = COLUMN_NAME_NOMBRE + "," +
+    	public static final String COLUMNAS = COLUMN_NAME_ID + "," + COLUMN_NAME_NOMBRE + "," +
 											COLUMN_NAME_DESCRIPCION + "," + COLUMN_NAME_IMAGEN
 											+ "," + COLUMN_NAME_MAXINTEGRANTES+ "," + COLUMN_NAME_ACTIVO;
 	}
