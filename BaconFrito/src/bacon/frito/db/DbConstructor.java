@@ -204,7 +204,7 @@ public class DbConstructor {
 				+ "', '" + grup.getDescripcion()
 				+ "', '" + grup.getImagen()
 				+ "', " + grup.getMaxintegrantes()
-				+ "', 'true')";		
+				+ ", 'true')";		
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
 	}
