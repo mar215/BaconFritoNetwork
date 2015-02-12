@@ -313,6 +313,30 @@ public class DbConstructor {
 	}
 	
 	/**
+	 * Método que recibe un mensaje a un grupo y lo manda a todos los integrantes de dicho grupo
+	 * @param sms
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
+	
+	public void mensajeGrupal (Mensaje sms) throws NamingException, SQLException {
+		Connection conexion = conectarDb();
+		Statement oStmt = conexion.createStatement();
+		String sSQL = "SELECT"
+				+ DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO + " FROM "
+				+ DatosGrupoUsuario.TABLE_NAME + " WHERE ('"
+				+ sms.getDestino() + "' = "+DatosGrupoUsuario.COLUMN_NAME_IDGRUPO+")";
+		ResultSet resultUsers = oStmt.executeQuery(sSQL);
+		while(resultUsers.next()){
+			Mensaje mensajeAux = sms;
+			mensajeAux.setDestino(resultUsers.getString(DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO));
+			insertarMensaje(mensajeAux);
+		}
+		oStmt.close();
+		conexion.close();
+	}
+	
+	/**
 	 * Funcion que recibe el nick de un usuario como parametro y busca en la base de datos y 
 	 * nos devuelve los mensajes que van destinados a este usuario
 	 * @param nick
