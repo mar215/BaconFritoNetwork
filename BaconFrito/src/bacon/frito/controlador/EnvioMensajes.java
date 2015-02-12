@@ -53,7 +53,16 @@ public class EnvioMensajes extends HttpServlet {
 		DbConstructor constructorDb = DbConstructor.getInstance();
 		
 		try {
-			constructorDb.insertarMensaje(mensajeAux);
+			
+			// Comprobamos si el nick que nos han dado corrsponde a un grupo o a un 
+			// usuario y llamamos a los metodos correspondientes segun el caso.
+			
+			if(constructorDb.buscaUsuario(destino)){
+				constructorDb.insertarMensaje(mensajeAux);
+			}else{
+				constructorDb.mensajeGrupal(mensajeAux);
+			}
+			
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
