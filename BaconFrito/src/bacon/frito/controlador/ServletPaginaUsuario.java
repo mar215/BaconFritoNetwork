@@ -2,6 +2,7 @@ package bacon.frito.controlador;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bacon.frito.db.DbConstructor;
+import bacon.frito.modelo.Notificacion;
 import bacon.frito.modelo.UsuarioBacon;
 
 /**
@@ -41,8 +43,10 @@ public class ServletPaginaUsuario extends HttpServlet {
 		try {
 			
 			UsuarioBacon usuario = constructorDb.dameUsuario(user);
-			request.setAttribute("usuario", usuario);
-			request.getRequestDispatcher("PaginaUsuario.jsp").forward(request, response);
+			sesion.setAttribute("usuario", usuario);
+			ArrayList<Notificacion> notif = constructorDb.damePerfilUsuario(user);
+			sesion.setAttribute("notifications", notif);
+			response.sendRedirect("PaginaUsuario.jsp");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

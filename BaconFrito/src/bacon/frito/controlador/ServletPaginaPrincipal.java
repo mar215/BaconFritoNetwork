@@ -40,9 +40,6 @@ public class ServletPaginaPrincipal extends HttpServlet {
 		
 		try {
 			ArrayList<Notificacion> notif = db.dameNotificacionesUsuario(user);
-			for(Notificacion n : notif){
-				System.out.println("user: " + n.getUsuario() + " texto:" + n.getTexto() + " fecha: " + n.getFecha().toGMTString());
-			}
 			sesion.setAttribute("notifications", notif);
 		} catch (SQLException | NamingException e) {
 			// TODO Auto-generated catch block

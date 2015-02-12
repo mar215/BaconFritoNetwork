@@ -7,14 +7,16 @@
     * Esta es la pagina que mostrara el perfil del usuario 
     * Recibe en la request un usuario del que cogeremos sus datos para mostrarlos
     */%>
-    
-    <% UsuarioBacon usuario = (UsuarioBacon)request.getAttribute("usuario");%>
+    <%! UsuarioBacon usuario; %>
+    <% usuario = (UsuarioBacon) session.getAttribute("usuario");%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Usuario</title>
+<%@ page import="bacon.frito.modelo.Notificacion" %>
+<%@ page import="java.util.ArrayList;" %>
 <link rel="stylesheet" type="text/css" href="HojaEstilosProyecto.css" >
 </head>
 <body>
@@ -79,12 +81,11 @@
 <div id="contenido">
 <center>
 <table>
-<%for(int i=0; i<15; i++){
+<%for(Notificacion n : (ArrayList<Notificacion>) session.getAttribute("notifications")){
 	%>
-	<tr><th><img alt=" imagen del usuario" src="http://images1.wikia.nocookie.net/__cb20130128232836/horadeaventura/es/images/2/2e/Jake_asombrado.png" style="width:20px; height:20px;"></th>
-	<th>Jake 85</th></tr>
-	<tr><td colspan="2">Este es el hueco para las actualizaciones que haya hecho este usuario.<br>
-	Así parece que hay más cosas escritas y no queda tan mal.</td></tr>
+	<tr><th><img alt=" imagen del usuario" src="<%= usuario.getFoto() %>" style="width:20px; height:20px;"></th>
+	<th><%= n.getUsuario() %></th></tr>
+	<tr><td colspan="2"><%= n.getTexto() %></td></tr>
 <% 	
 }%>
 </table>
