@@ -348,7 +348,7 @@ public class DbConstructor {
 			Mensaje mensajeAux = new Mensaje(resultLista.getInt(DatosMensaje.COLUMN_NAME_ID),
 					resultLista.getString(DatosMensaje.COLUMN_NAME_TEXTO),
 					resultLista.getString(DatosMensaje.COLUMN_NAME_DESTINO),
-					resultLista.getString(DatosMensaje.COLUMN_NAME_ORIGEN));
+					resultLista.getString(DatosMensaje.COLUMN_NAME_NICKUSUARIO));
 			
 			listaMensajes.add(mensajeAux);
 		}

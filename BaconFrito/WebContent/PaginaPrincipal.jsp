@@ -26,10 +26,10 @@
     <li><a href="Logout">Cerrar sesión</a></li>
 </ul>
 </li>
-<li><a href="PaginaConsultaMensajes.jsp">Mensajes</a>
+<li><a href="ServletPaginaConsultaMensajes">Mensajes</a>
 <ul>
     <li><a href="PaginaMensajes.jsp">Enviar mensaje</a></li>
-    <li><a href="PaginaConsultaMensajes.jsp">Consultar mensajes</a></li>
+    <li><a href="ServletPaginaConsultaMensajes">Consultar mensajes</a></li>
 </ul>
 </li>
 <li><a href="">Configuración</a></li>

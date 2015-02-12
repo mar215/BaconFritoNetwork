@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="java.util.ArrayList" %>
+    <%@page import="java.util.Iterator" %>
+	<%@page import="bacon.frito.modelo.Mensaje" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,15 +53,24 @@
 </div>
 </div>
 
+<% 	ArrayList<Mensaje> listaMensajes = (ArrayList<Mensaje>) request.getAttribute("listaMensajes");
+	Iterator<Mensaje> it = listaMensajes.iterator();
+ %>
+
 <center>
 <div id="contenido">
 <center>
 <table>
 <tr> <th>Leido</th> <th>Origen</th> <th></th> </tr>
-<%for(int i=0; i<5; i++){
+<%while(it.hasNext()){
+	Mensaje mensajeAux = it.next();
 	%>
-	<tr> <td>Igual si</td> <td>Finn el Humano</td> 
-	<td> <form action="PaginaVerMensaje.jsp" method="POST">
+	<tr> <td>Igual si</td> <td><%=mensajeAux.getOrigen() %></td> 
+	<td> <form action="ServletVerMensaje" method="POST">
+	<input type="hidden" name="id" value="<%=mensajeAux.getId() %>">
+	<input type="hidden" name="destino" value="<%=mensajeAux.getDestino() %>">
+	<input type="hidden" name="origen" value="<%=mensajeAux.getOrigen() %>">
+	<input type="hidden" name="texto" value="<%=mensajeAux.getTexto() %>">
 	<input type="submit" value="Ver">
 	</form> </td>
 	 </tr>
