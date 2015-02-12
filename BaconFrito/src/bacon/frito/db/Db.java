@@ -128,10 +128,10 @@ public class Db {
 		String result = "SELECT " + DatosNotificacion.COLUMN_NAME_USER + ", " + DatosNotificacion.COLUMN_NAME_TEXT
 						+ ", " + DatosNotificacion.COLUMN_NAME_DATE
 						+ " FROM " + DatosNotificacion.TABLE_NAME + " WHERE ";
-		result += DatosNotificacion.COLUMN_NAME_USER + " '" + usuarios.get(0) + "' ";
+		result += DatosNotificacion.COLUMN_NAME_USER + " = '" + usuarios.get(0) + "' ";
 		if(usuarios.size() > 1){
 			for(int i = 1; i < usuarios.size(); i++){
-				result += "OR " + DatosNotificacion.COLUMN_NAME_USER + " '" + usuarios.get(i) + "' ";
+				result += "OR " + DatosNotificacion.COLUMN_NAME_USER + " = '" + usuarios.get(i) + "' ";
 			}
 		}
 		result += " ORDER BY " + DatosNotificacion.COLUMN_NAME_DATE + " DESC";

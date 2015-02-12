@@ -62,7 +62,7 @@ public class Login extends HttpServlet {
 					sesion.setAttribute("user", user);
 					boolean activa = true;
 					sesion.setAttribute("activo", activa);
-					response.sendRedirect("PaginaPrincipal.jsp");
+					response.sendRedirect("ServletPaginaPrincipal");
 				}else{
 					//Si falla le mandamos a bienvenida para que se logee
 					response.sendRedirect("Bienvenida.jsp");

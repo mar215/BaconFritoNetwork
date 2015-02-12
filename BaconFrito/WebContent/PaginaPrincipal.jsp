@@ -5,6 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Inicio</title>
+<%@ page import="bacon.frito.modelo.Notificacion" %>
+<%@ page import="java.util.ArrayList;" %>
 <link rel="stylesheet" type="text/css" href="HojaEstilosProyecto.css" >
 </head>
 <body>
@@ -54,10 +56,10 @@
 <div id="contenido">
 <center>
 <table>
-<%for(int i=0; i<15; i++){
+<%for(Notificacion n : (ArrayList<Notificacion>) session.getAttribute("notifications")){
 	%>
-	<tr><th>FotoUsuario</th><th>Finn el Humano</th></tr>
-	<tr><td colspan="2">Este es el hueco para las actualizaciones que van a ir apareciendo</td></tr>
+	<tr><th><%= n.getUsuario()  %></th><th><%= n.getFecha().toString() %></th></tr>
+	<tr><td colspan="2"><%= n.getTexto() %></td></tr>
 <% 	
 }%>
 </table>

@@ -417,6 +417,7 @@ public class DbConstructor {
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		ArrayList<Notificacion> result = new ArrayList<Notificacion>();
+		System.out.println(Db.getNotif(dameUsuarios()));
 		ResultSet oRs = oStmt.executeQuery(Db.getNotif(dameUsuarios()));
 		while(oRs.next()){
 			result.add(new Notificacion(oRs.getString(DatosNotificacion.COLUMN_NAME_USER),

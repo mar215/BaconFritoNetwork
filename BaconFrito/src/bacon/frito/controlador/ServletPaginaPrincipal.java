@@ -2,6 +2,7 @@ package bacon.frito.controlador;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bacon.frito.db.DbConstructor;
+import bacon.frito.modelo.Notificacion;
 
 /**
  * Servlet implementation class ServletPaginaPrincipal
@@ -37,7 +39,11 @@ public class ServletPaginaPrincipal extends HttpServlet {
 		DbConstructor  	db		= DbConstructor.getInstance();
 		
 		try {
-			sesion.setAttribute("notifications", db.dameNotificacionesUsuario(user));
+			ArrayList<Notificacion> notif = db.dameNotificacionesUsuario(user);
+			for(Notificacion n : notif){
+				System.out.println("user: " + n.getUsuario() + " texto:" + n.getTexto() + " fecha: " + n.getFecha().toGMTString());
+			}
+			sesion.setAttribute("notifications", notif);
 		} catch (SQLException | NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
