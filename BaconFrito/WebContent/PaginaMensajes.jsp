@@ -33,7 +33,7 @@
 </ul>
 </li>
 <li><a href="">Configuración</a></li>
-<li><a>Contacto</a></li>
+<li><a href="PaginaGrupos.jsp">Grupos</a></li>
 </ul>
 </td>
 <td>

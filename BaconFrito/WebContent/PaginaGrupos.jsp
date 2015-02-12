@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Grupos</title>
 <link rel="stylesheet" type="text/css" href="HojaEstilosProyecto.css" >
 </head>
 <body>
@@ -41,7 +41,7 @@
    //que queremos buscar en la red social. Manda el parametro:
    // busqueda-----GET%>
 <form action="" method="GET">
-<input type="text" name="busqueda" placeholder="Buscar gente" style="width:250px">
+<input type="text" name="busqueda" placeholder="Buscar gente">
 <input type="submit" value="Buscar">
 </form>
 </td>
@@ -53,10 +53,10 @@
 <center>
 <div id="contenido">
 <center>
-<table>
-<tr> <th>Origen</th> <th>Mensaje</th> </tr>
-<tr> <td>Finn el humano</td> <td>Algebráico!</td> </tr>
-</table>
+<form action="VistaGrupos" method="GET">
+<tr><td><input type="hidden" name="origen" value="<%= session.getAttribute("user")%>"></td></tr>
+
+</form>
 </center>
 </div>
 </center>

@@ -43,7 +43,7 @@
 </ul>
 </li>
 <li><a href="">Configuración</a></li>
-<li><a>Contacto</a></li>
+<li><a href="PaginaGrupos.jsp">Grupos</a></li>
 </ul>
 </td>
 <td>
@@ -63,7 +63,7 @@
 <center>
 <div id="contenidoUsuario">
 <table>
-<tr><td rowspan="2"><img alt=" <%= usuario.getFoto() %> " style="width:100px; height:100px;"></td>
+<tr><td rowspan="2"><img src=" <%= usuario.getFoto() %> " style="width:100px; height:100px;"></td>
 <td><h3><%= usuario.getNick() %></h3></td>
 <td>Sexo: <%=usuario.getSexo() %></td>
 </tr>

@@ -242,7 +242,7 @@ public class DbConstructor {
 				+ DatosGrupo.COLUMN_NAME_DESCRIPCION + ","
 				+ DatosGrupo.COLUMN_NAME_IMAGEN + ","	
 				+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES	+ ","
-				+ DatosGrupo.COLUMN_NAME_ACTIVO	+ " FROM Usuario"
+				+ DatosGrupo.COLUMN_NAME_ACTIVO	+ " FROM Grupo"
 				+ " WHERE ("
 				+ DatosGrupo.COLUMN_NAME_NOMBRE + "='" + nombre + "')";
 		ResultSet oRs = oStmt.executeQuery(sSQL);
@@ -259,6 +259,33 @@ public class DbConstructor {
 		return grupAux;
 	}
 	
+	public ArrayList<Grupo> listarGrupos(String nick) throws SQLException, NamingException {
+		Connection conexion = conectarDb();
+		Statement oStmt=conexion.createStatement();
+		String sSQL = "SELECT "
+				+ DatosGrupo.COLUMN_NAME_ID + ","
+				+ DatosGrupo.COLUMN_NAME_NOMBRE + ","
+				+ DatosGrupo.COLUMN_NAME_DESCRIPCION + ","
+				+ DatosGrupo.COLUMN_NAME_IMAGEN + ","
+				+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES + ","
+				+ DatosGrupo.COLUMN_NAME_ACTIVO + " FROM Grupo";
+		ResultSet oRs = oStmt.executeQuery(sSQL);
+		ArrayList<Grupo> listaGrupos = new ArrayList<Grupo>();
+		while (oRs.next()) {
+			Grupo grupos = new Grupo(oRs.getInt(DatosGrupo.COLUMN_NAME_ID),
+					oRs.getString(DatosGrupo.COLUMN_NAME_NOMBRE),
+					oRs.getString(DatosGrupo.COLUMN_NAME_DESCRIPCION),
+					oRs.getString(DatosGrupo.COLUMN_NAME_IMAGEN),
+					oRs.getInt(DatosGrupo.COLUMN_NAME_MAXINTEGRANTES),
+					oRs.getString(DatosGrupo.COLUMN_NAME_ACTIVO));
+			
+			listaGrupos.add(grupos);
+		}
+		
+		return listaGrupos;
+			
+	}
+		
 	
 	//FUNCIONES CON MENSAJE
 	
