@@ -78,6 +78,20 @@ public class ContractClass {
     	public static final String COLUMNAS = COLUMN_NAME_NICKUSUARIO + "," +
 				COLUMN_NAME_IDGRUPO;
     }
+    
+    public static abstract class DatosNotificacion {
+		public static final String TABLE_NAME 					= "Notificaciones";
+    	public static final String COLUMN_NAME_ID 		   		= "id";				//int
+    	public static final String COLUMN_NAME_USER 		   	= "usuario";		//String FK Usuario(nick)
+    	public static final String COLUMN_NAME_TEXT		 	   	= "texto";			//String
+    	public static final String COLUMN_NAME_DATE 	  		= "fecha";			//Date (con hora)
+    	public static final String SEQUENCE_NOTIF_ID			= "notif_seq";		//id sequence
+    	public static final String FK_USER_NOTIF				= "notif_fk";		//FK usuario
+    	public static final String[] COLUMNS = {COLUMN_NAME_ID,COLUMN_NAME_USER
+    											,COLUMN_NAME_TEXT,COLUMN_NAME_DATE};
+    	public static final String COLUMNAS = COLUMN_NAME_ID + "," + COLUMN_NAME_USER + "," +
+											COLUMN_NAME_TEXT + "," + COLUMN_NAME_DATE;
+	}
  
     //DESAYUNO
     //ANYTHING ELSE?

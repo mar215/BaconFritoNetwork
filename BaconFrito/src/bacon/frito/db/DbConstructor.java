@@ -11,19 +11,17 @@ import java.util.ArrayList;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
-
-
 import javax.sql.DataSource;
 
 import bacon.frito.db.ContractClass.DatosGrupo;
 import bacon.frito.db.ContractClass.DatosGrupoUsuario;
 import bacon.frito.db.ContractClass.DatosMensaje;
+import bacon.frito.db.ContractClass.DatosNotificacion;
 import bacon.frito.db.ContractClass.DatosUsuario;
 import bacon.frito.modelo.Grupo;
 import bacon.frito.modelo.GrupoUsuario;
 import bacon.frito.modelo.Mensaje;
-import bacon.frito.modelo.Usuario;
+import bacon.frito.modelo.Notificacion;
 import bacon.frito.modelo.UsuarioBacon;
 import bacon.frito.modelo.UsuarioPremium;
 
@@ -100,8 +98,6 @@ public class DbConstructor {
 	}
 	
 	public UsuarioBacon devuelveTipo(String nick) throws NamingException, SQLException {
-		Connection conexion=conectarDb();
-		Statement oStmt=conexion.createStatement();
 		UsuarioBacon userAux = dameUsuario(nick);
 		if (userAux.getTipo() == "usuariobacon") {
 			UsuarioBacon usuario = null;
@@ -199,7 +195,7 @@ public class DbConstructor {
 		int id = rs.getInt(1);
 		String sSQL = "INSERT INTO "+ DatosUsuario.TABLE_NAME + " ("
 				+ DatosGrupo.COLUMNAS +") VALUES ("
-				+ "  " + DatosGrupo.COLUMN_NAME_ID
+				+ "  " + id
 				+ ", '" + grup.getNombre()
 				+ "', '" + grup.getDescripcion()
 				+ "', '" + grup.getImagen()
@@ -393,5 +389,41 @@ public class DbConstructor {
 
 	}
 	
+	public ArrayList<Notificacion> dameNotificacionesUsuario(String nick) throws SQLException, NamingException{
+		Connection conexion = conectarDb();
+		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		ArrayList<Notificacion> result = new ArrayList<Notificacion>();
+		ResultSet oRs = oStmt.executeQuery(Db.getNotif(dameUsuarios()));
+		while(oRs.next()){
+			result.add(new Notificacion(oRs.getString(DatosNotificacion.COLUMN_NAME_USER),
+										oRs.getString(DatosNotificacion.COLUMN_NAME_TEXT),
+										oRs.getDate(DatosNotificacion.COLUMN_NAME_DATE)));			
+		}
+		return result;
+	}
+
+	public ArrayList<Notificacion> damePerfilUsuario(String nick) throws SQLException, NamingException{
+		Connection conexion = conectarDb();
+		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		ArrayList<Notificacion> result = new ArrayList<Notificacion>();
+		ResultSet oRs = oStmt.executeQuery(Db.getPerfil(nick));
+		while(oRs.next()){
+			result.add(new Notificacion(nick,
+										oRs.getString(DatosNotificacion.COLUMN_NAME_TEXT),
+										oRs.getDate(DatosNotificacion.COLUMN_NAME_DATE)));			
+		}
+		return result;
+	}
+
+	public ArrayList<String> dameUsuarios() throws SQLException, NamingException{
+		Connection conexion = conectarDb();
+		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		ArrayList<String> result = new ArrayList<String>();
+		ResultSet oRs = oStmt.executeQuery(Db.getUsuarios());
+		while(oRs.next()){
+			result.add(oRs.getString(DatosUsuario.COLUMN_NAME_NICK));			
+		}
+		return result;
+	}
 	
 }

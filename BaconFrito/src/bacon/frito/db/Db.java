@@ -1,8 +1,12 @@
 package bacon.frito.db;
 
+import java.sql.Date;
+import java.util.ArrayList;
+
 import bacon.frito.db.ContractClass.DatosGrupo;
 import bacon.frito.db.ContractClass.DatosGrupoUsuario;
 import bacon.frito.db.ContractClass.DatosMensaje;
+import bacon.frito.db.ContractClass.DatosNotificacion;
 import bacon.frito.db.ContractClass.DatosUsuario;
 
 public class Db {
@@ -74,5 +78,71 @@ public class Db {
 	public static final String DATABASE_MENSAJE_NEXT_ID	 = "SELECT " + DatosMensaje.SEQUENCE_MENSAJE_ID
 			 + ".NEXTVAL FROM DUAL";
 	
+	
+	//NOTIFICACIONES
+	
+	public static final String DATABASE_CREATE_NOTIF = "CREATE TABLE "
+			+ DatosNotificacion.TABLE_NAME						+ " ("
+			+ DatosNotificacion.COLUMN_NAME_ID					+ " NUMBER(6) PRIMARY KEY NOT NULL,"
+			+ DatosNotificacion.COLUMN_NAME_USER				+ " VARCHAR2(25) CONSTRAINT " 
+																+ DatosNotificacion.FK_USER_NOTIF
+																+ " REFERENCES " + DatosUsuario.TABLE_NAME 
+																+ "(" + DatosUsuario.COLUMN_NAME_NICK + ")"
+			+ DatosNotificacion.COLUMN_NAME_TEXT				+ " VARCHAR2(500), "
+			+ DatosNotificacion.COLUMN_NAME_DATE				+ " DATE)";
+
+	/*
+	CREATE TABLE Notificaciones (id NUMBER(6) PRIMARY KEY NOT NULL, 
+									usuario VARCHAR2(25) CONSTRAINT notif_fk REFERENCES Usuario(nick),
+									texto VARCHAR2(500),
+									fecha DATE);
+	*/
+
+	public static final String DATABASE_NOTIF_SEQUENCE = "CREATE SEQUENCE " + DatosNotificacion.SEQUENCE_NOTIF_ID;
+	//CREATE SEQUENCE notif_seq;
+	
+	public static final String DATABASE_NOTIF_NEXT_ID  = "SELECT " + DatosNotificacion.SEQUENCE_NOTIF_ID
+			 													   + ".NEXTVAL FROM DUAL";
+	//SELECT notif_seq.NEXTVAL FROM DUAL;
+
+	public static String addNotif(String usuario, String texto, Date fecha){
+		return "INSERT INTO " + DatosNotificacion.TABLE_NAME + " ("
+				+ DatosNotificacion.COLUMNAS +") VALUES ("
+				+ DATABASE_NOTIF_NEXT_ID
+				+ ", '"  + usuario
+				+ "', '" + texto
+				+ "', "  + fecha
+				+ ")";	
+	}
+	//INSERT INTO Notificaciones(id, nick, texto, fecha) VALUES (notif_seq.nextval, 'usuario', 'texto', fecha);
+
+	public static String getPerfil(String usuario){
+		return "SELECT " + DatosNotificacion.COLUMN_NAME_TEXT + ", " + DatosNotificacion.COLUMN_NAME_DATE
+			   + " FROM " + DatosNotificacion.TABLE_NAME
+			   + " WHERE " + DatosNotificacion.COLUMN_NAME_USER + " = '" + usuario
+			   + "' ORDER BY " + DatosNotificacion.COLUMN_NAME_DATE + " DESC";
+	}
+	//SELECT texto FROM Notificaciones WHERE usuario = 'nick' ORDER BY fecha DESC;
+
+	public static String getNotif(ArrayList<String> usuarios){
+		String result = "SELECT " + DatosNotificacion.COLUMN_NAME_USER + ", " + DatosNotificacion.COLUMN_NAME_TEXT
+						+ ", " + DatosNotificacion.COLUMN_NAME_DATE
+						+ " FROM " + DatosNotificacion.TABLE_NAME;
+		result += DatosNotificacion.COLUMN_NAME_USER + " '" + usuarios.get(0) + "' ";
+		if(usuarios.size() > 1){
+			for(int i = 1; i < usuarios.size(); i++){
+				result += "OR " + DatosNotificacion.COLUMN_NAME_USER + " '" + usuarios.get(i) + "' ";
+			}
+		}
+		result += " ORDER BY " + DatosNotificacion.COLUMN_NAME_DATE + " DESC";
+		return result;
+	}
+	//SELECT texto FROM Notificaciones WHERE usuario = 'nick' ORDER BY fecha DESC;
+
+	public static String getUsuarios(){
+		return "SELECT " + DatosUsuario.COLUMN_NAME_NICK
+			   + " FROM " + DatosUsuario.TABLE_NAME;
+	}
+	//SELECT nick FROM Usuario;
 
 }
