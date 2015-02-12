@@ -193,7 +193,7 @@ public class DbConstructor {
 		ResultSet rs = oStmt.executeQuery(Db.DATABASE_GRUPO_NEXT_ID);
 		rs.first();
 		int id = rs.getInt(1);
-		String sSQL = "INSERT INTO "+ DatosUsuario.TABLE_NAME + " ("
+		String sSQL = "INSERT INTO "+ DatosGrupo.TABLE_NAME + " ("
 				+ DatosGrupo.COLUMNAS +") VALUES ("
 				+ "  " + id
 				+ ", '" + grup.getNombre()

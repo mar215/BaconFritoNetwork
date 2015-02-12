@@ -71,7 +71,7 @@ public class RegistroGrupo extends HttpServlet {
 		}
 		
 		
-	
+		System.out.println("ey4");
 		try {
 			contructor.insertarGrupo(grup);
 		} catch (SQLException e) {
