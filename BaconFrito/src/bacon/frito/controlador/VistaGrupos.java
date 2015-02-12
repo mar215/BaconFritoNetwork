@@ -44,8 +44,8 @@ public class VistaGrupos extends HttpServlet {
 		
 		try {
 			ArrayList<Grupo> listaGrupos = mapa.listarGrupos(laSesion);
-			request.setAttribute("Lista de Grupos",listaGrupos);
-			request.getRequestDispatcher("PaginaGrupos.jsp").forward(request,response);
+			sesion.setAttribute("grupos",listaGrupos);
+			response.sendRedirect("PaginaGrupos.jsp");
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

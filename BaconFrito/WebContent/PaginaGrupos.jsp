@@ -2,9 +2,10 @@
     pageEncoding="ISO-8859-1"%>
     
     <%@page import="bacon.frito.modelo.Grupo" %>
+    <%@page import="java.util.ArrayList" %>
     
        
-    <% Grupo grupo = (Grupo)request.getAttribute("user");%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,6 +15,7 @@
 </head>
 <body>
 
+<%! ArrayList<Grupo> grupo;%>
 <div id="header">
 <div id="imagenheader">
 <img src="Imagenes\fondoheader.jpg" alt="fondo header">
@@ -56,22 +58,12 @@
 </div>
 
 <center>
-<div id="contenido">
-<center>
-<form action="VistaGrupos" method="GET">
-
-</tr>
-</form>
-</center>
-</div>
-</center>
-
 <div align="center">
 <tr><td colspan="2">¿Quieres crear tu propio grupo? </td></tr>
   <form name="form1" action="PaginaCrearGrupo.jsp" target="_blank">
     <input type="submit" value="Crea tu grupo">  
   </form>
-
+<% grupo = (ArrayList<Grupo>) session.getAttribute("grupos"); %>
 </div>
 </body>
 </html>
