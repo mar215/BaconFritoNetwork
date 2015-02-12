@@ -319,7 +319,7 @@ public class DbConstructor {
 	 * @throws SQLException
 	 */
 	
-	public void mensajeGrupal (Mensaje sms) throws NamingException, SQLException {
+	public void mensajeGrupal(Mensaje sms) throws NamingException, SQLException {
 		Connection conexion = conectarDb();
 		Statement oStmt = conexion.createStatement();
 		String sSQL = "SELECT"
