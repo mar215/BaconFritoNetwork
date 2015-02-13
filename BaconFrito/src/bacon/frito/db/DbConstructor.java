@@ -409,6 +409,14 @@ public class DbConstructor {
 
 	}
 	
+	public void entrarGrupo(String nombre) throws NamingException, SQLException {
+		Connection conexion = conectarDb();
+		Statement oStmt=conexion.createStatement();
+		String sSQL = "SELECT ";
+	}
+	
+	//NOTIFICACIONES
+	
 	public ArrayList<Notificacion> dameNotificacionesUsuario(String nick) throws SQLException, NamingException{
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -450,10 +458,13 @@ public class DbConstructor {
 	
 	public boolean nuevaNotif(String usuario, String texto) throws SQLException, NamingException{
 		Connection conexion = conectarDb();
-		Statement oStmt=conexion.createStatement();
+		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		ResultSet rs = oStmt.executeQuery(Db.DATABASE_GRUPO_NEXT_ID);
+		rs.first();
+		int id = rs.getInt(1);
 		Date fecha = new Date(Calendar.getInstance().getTime().getTime());
-		System.out.println(Db.addNotif(usuario, texto, fecha));
-		oStmt.executeQuery(Db.addNotif(usuario, texto, fecha));
+		System.out.println(Db.addNotif(id, usuario, texto, fecha));
+		oStmt.executeQuery(Db.addNotif(id, usuario, texto, fecha));
 		return true;
 	}
 	

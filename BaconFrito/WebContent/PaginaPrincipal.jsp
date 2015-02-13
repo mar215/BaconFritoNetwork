@@ -42,7 +42,7 @@
 <% //El buscador es un input de tipo text donde introducimos el nombre de la persona 
    //que queremos buscar en la red social. Manda el parametro:
    // busqueda-----GET%>
-<form action="" method="GET">
+<form action="ServletBuscador" method="GET">
 <input type="text" name="busqueda" placeholder="Buscar gente">
 <input type="submit" value="Buscar">
 </form>

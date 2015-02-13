@@ -58,19 +58,32 @@
 </div>
 
 <center>
+<div id="contenido">
+<center>
+
 <div align="center">
-<tr><td colspan="2">¿Quieres crear tu propio grupo? </td></tr>
-  <form name="form1" action="PaginaCrearGrupo.jsp" target="_blank">
+ 	<h2>¿Quieres crear tu propio grupo?</h2> 
+  <form name="form1" action="PaginaCrearGrupo.jsp">
     <input type="submit" value="Crea tu grupo">  
   </form>
+
+
+  <table>
 <% listaGrupo = (ArrayList<Grupo>) session.getAttribute("grupos"); 
 	if (listaGrupo == null){	%>
 	<tr><td>lista nula</td></tr>
  <%}else{ for(Grupo g : listaGrupo) { %>
-	<tr><td><%= g.getNombre() %></td></tr>
-
+	<tr><td><%= g.getNombre() %></td></tr> <tr><td><th><img src ="<%= g.getImagen() %>" style="width:20px; height:20px;"> </th></td></tr>
+	<tr><td colspan="2"><%= g.getDescripcion() %></td></tr>
+	<tr></tr>
 	<% }} %> 
-
+</table>
+</center>
 </div>
+</center>
+<center>
+
+
+
 </body>
 </html>

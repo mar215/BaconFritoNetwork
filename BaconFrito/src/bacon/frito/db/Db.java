@@ -105,10 +105,10 @@ public class Db {
 			 													   + ".NEXTVAL FROM DUAL";
 	//SELECT notif_seq.NEXTVAL FROM DUAL;
 
-	public static String addNotif(String usuario, String texto, Date fecha){
+	public static String addNotif(int id, String usuario, String texto, Date fecha){
 		return "INSERT INTO " + DatosNotificacion.TABLE_NAME + " ("
 				+ DatosNotificacion.COLUMNAS +") VALUES ("
-				+ DATABASE_NOTIF_NEXT_ID
+				+ id
 				+ ", '"  + usuario
 				+ "', '" + texto
 				+ "', "  + fecha
