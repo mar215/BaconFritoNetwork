@@ -66,7 +66,7 @@
 				<center>
 					<form action="NuevoEstado" method="POST">
 						<table>
-							<tr><td><input type="hidden" name="origen" value="<%= session.getAttribute("user") %>"></td></tr>
+							<tr><td><input type="hidden" name="usuario" value="<%= session.getAttribute("user") %>"></td></tr>
 							<tr><td><textarea name ="texto" style="width:400px; height: 400px;"></textarea></td></tr>
 							<tr><td><input type="submit" value="publicar"></td></tr>
 						</table>

@@ -452,7 +452,8 @@ public class DbConstructor {
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement();
 		Date fecha = new Date(Calendar.getInstance().getTime().getTime());
-		ResultSet oRs = oStmt.executeQuery(Db.addNotif(usuario, texto, fecha));
+		System.out.println(Db.addNotif(usuario, texto, fecha));
+		oStmt.executeQuery(Db.addNotif(usuario, texto, fecha));
 		return true;
 	}
 	
