@@ -53,27 +53,26 @@
 </div>
 </div>
 
-<% 	ArrayList<Mensaje> listaMensajes = (ArrayList<Mensaje>) request.getAttribute("listaMensajes");
-	Iterator<Mensaje> it = listaMensajes.iterator();
- %>
-
+<% 	ArrayList<Mensaje> listaMensajes = (ArrayList<Mensaje>) request.getAttribute("listaMensajes"); %>
+<% if(listaMensajes!=null){ %>
 <center>
 <div id="contenido">
 <center>
 <table>
 <tr> <th>Leido</th> <th>Origen</th> <th></th> </tr>
-<%while(it.hasNext()){
-	Mensaje mensajeAux = it.next();
+<%	Iterator<Mensaje> it = listaMensajes.iterator();
+	while(it.hasNext()){
+		Mensaje mensajeAux = it.next();
 	%>
-	<tr> <td>Igual si</td> <td><%=mensajeAux.getOrigen() %></td> 
-	<td> <form action="ServletVerMensaje" method="POST">
-	<input type="hidden" name="id" value="<%=mensajeAux.getId() %>">
-	<input type="hidden" name="destino" value="<%=mensajeAux.getDestino() %>">
-	<input type="hidden" name="origen" value="<%=mensajeAux.getOrigen() %>">
-	<input type="hidden" name="texto" value="<%=mensajeAux.getTexto() %>">
-	<input type="submit" value="Ver">
-	</form> </td>
-	 </tr>
+		<tr> <td>Igual si</td> <td><%=mensajeAux.getOrigen() %></td> 
+		<td> <form action="ServletVerMensaje" method="POST">
+		<input type="hidden" name="id" value="<%=mensajeAux.getId() %>">
+		<input type="hidden" name="destino" value="<%=mensajeAux.getDestino() %>">
+		<input type="hidden" name="origen" value="<%=mensajeAux.getOrigen() %>">
+		<input type="hidden" name="texto" value="<%=mensajeAux.getTexto() %>">
+		<input type="submit" value="Ver">
+		</form> </td>
+		 </tr>
 <%	
 }%>
 </table>
@@ -81,5 +80,21 @@
 </div>
 </center>
 
+<%
+}else{%>
+
+<center>
+<div id="contenido">
+<center>
+<table>
+<tr> <th>Leido</th> <th>Origen</th> </tr>
+<tr> <td colspan="2"> No se encontraron mensajes </td> </tr>
+</table>
+</center>
+</div>
+</center>
+
+<%
+}%>
 </body>
 </html>
