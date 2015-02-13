@@ -63,11 +63,14 @@
 <div id="contenido">
 <% UsuarioBacon usuario = (UsuarioBacon) session.getAttribute("usuarioCambioConfig"); %>
 <center>
+<h2>¿Quieres tener la ventajas que todo aventurer@ necesita?</h2>
+<h2>Solo tienes que hacerte premium pinchando en el siguiente enlace:</h2>
+<a href="pago_premium.jsp">Hazte Premium</a>
 <form action="ServletConfigPerfil" method="POST">
 <table>
 	<tr><th>Nick:</th><td><input type="text" name="nick" value="<%= usuario.getNick()%>">  </td></tr>
-	<tr><th>Contraseña:</th><td><input type="pass" name="pass" value="">  </td></tr>
-	<tr><th>Repita la contraseña:</th><td><input type="pass1" name="pass" value="">  </td></tr>
+	<tr><th>Contraseña:</th><td><input type="password" name="pass">  </td></tr>
+	<tr><th>Repita la contraseña:</th><td><input type="password" name="pass1">  </td></tr>
 	<tr><th>Nombre:</th><td><input type="text" name="nombre" value="<%= usuario.getNombre()%>">  </td></tr>
 	<tr><th>Apellidos:</th><td><input type="text" name="apellidos" value="<%= usuario.getApellidos()%>">  </td></tr>
 	<tr><th>Teléfono:</th><td><input type="text" name="" value="<%= usuario.getTelefono()%>">  </td></tr>
