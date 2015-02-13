@@ -55,7 +55,6 @@ public class RegistroUsuario extends HttpServlet {
 		
 		if(!passUser.equals(pass1User)){
 			// No ha pasado el check de las contraseñas
-			System.out.println("validar contraseña");
 			request.getRequestDispatcher("PaginaRegistro.jsp").forward(request, response);
 			return;
 		}
