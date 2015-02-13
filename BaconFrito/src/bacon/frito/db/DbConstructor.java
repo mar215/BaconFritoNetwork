@@ -394,7 +394,7 @@ public class DbConstructor {
 		oStmt.close();	
 	}
 	
-	public ArrayList<GrupoUsuario> entrarGrupo(String nick) throws SQLException, NamingException{
+	public ArrayList<GrupoUsuario> entrarGrupo(String nick, int idG) throws SQLException, NamingException{
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		ResultSet oRs;
@@ -402,7 +402,8 @@ public class DbConstructor {
 				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO
 				+ " FROM " + DatosGrupoUsuario.TABLE_NAME 
 				+ " WHERE "
-				+ DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO + " = '" + nick + "' ";
+				+ DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO + " = '" + nick + "' AND "
+				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO + " = " + idG ;		
 		oRs = oStmt.executeQuery(sSQL);	
 		ArrayList<GrupoUsuario> lista = new ArrayList<GrupoUsuario>();
 		while(oRs.next()){
@@ -420,12 +421,16 @@ public class DbConstructor {
 		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		ResultSet oRs;
 		String sSQL = "DELETE FROM " + DatosGrupoUsuario.TABLE_NAME;
+		oStmt.executeUpdate(sSQL);
+		System.out.println("Ey1");
 		String sSQL1 = "SELECT "
 				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO
 				+ " FROM " + DatosGrupoUsuario.TABLE_NAME 
 				+ " WHERE "
-				+ DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO + " = '" + nick + "' ";
+				+ DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO + " = '" + nick + "' AND "
+				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO + " = " + idG ;
 		oRs = oStmt.executeQuery(sSQL1);	
+		System.out.println("Ey2");
 		ArrayList<GrupoUsuario> lista = new ArrayList<GrupoUsuario>();
 		while(oRs.next()){
 			lista.add(new GrupoUsuario(nick, oRs.getInt(DatosGrupoUsuario.COLUMN_NAME_IDGRUPO)));

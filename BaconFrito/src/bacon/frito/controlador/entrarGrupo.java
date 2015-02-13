@@ -48,11 +48,11 @@ public class entrarGrupo extends HttpServlet {
 		DbConstructor constructor = DbConstructor.getInstance();
 		HttpSession sesion = request.getSession();
 		String laSesion=(String)sesion.getAttribute("user");
-
+		
 		
 		try {
-		
-			ArrayList<GrupoUsuario> lista = constructor.entrarGrupo(laSesion);			
+			Grupousuario grupusu = new GrupoUsuario(laSesion, idgrupo);
+			ArrayList<GrupoUsuario> lista = constructor.entrarGrupo(laSesion, idgrupo);			
 			
 			sesion.setAttribute("id", lista);
 			response.sendRedirect("PaginaGrupos.jsp");
