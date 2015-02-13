@@ -3,10 +3,12 @@ package bacon.frito.db;
 
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -444,6 +446,14 @@ public class DbConstructor {
 			result.add(oRs.getString(DatosUsuario.COLUMN_NAME_NICK));			
 		}
 		return result;
+	}
+	
+	public boolean nuevaNotif(String usuario, String texto) throws SQLException, NamingException{
+		Connection conexion = conectarDb();
+		Statement oStmt=conexion.createStatement();
+		Date fecha = new Date(Calendar.getInstance().getTime().getTime());
+		ResultSet oRs = oStmt.executeQuery(Db.addNotif(usuario, texto, fecha));
+		return true;
 	}
 	
 }
