@@ -473,7 +473,7 @@ public class DbConstructor {
 					 + c.get(Calendar.MINUTE)		+ ":"
 					 + c.get(Calendar.SECOND) 		+ "-"
 					 + c.get(Calendar.DAY_OF_MONTH) + "/"
-					 + c.get(Calendar.MONTH)		+ "/"
+					 + (c.get(Calendar.MONTH) + 1)	+ "/"
 					 + c.get(Calendar.YEAR);
 		System.out.println(Db.addNotif(id, usuario, texto, fecha));
 		oStmt.executeQuery(Db.addNotif(id, usuario, texto, fecha));
