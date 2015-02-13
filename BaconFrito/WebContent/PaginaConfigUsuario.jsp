@@ -18,45 +18,47 @@
 </div></div>
 
 <div id="menuNav">
-<div id="tablaNav">
-<table>
-<tr>
-<td>
-<ul id="menu">
-<li><a href="PaginaPrincipal.jsp">Inicio</a>
-<ul>
-    <li><a href="ServletPaginaUsuario"><%= session.getAttribute("user") %></a></li>
-    <li><a href="Logout">Cerrar sesión</a></li>
-</ul>
-</li>
-<li><a href="ServletPaginaConsultaMensajes">Mensajes</a>
-<ul>
-    <li><a href="PaginaMensajes.jsp">Enviar mensaje</a></li>
-    <% if(session.getAttribute("tipoUsuario")=="premium"){ %>
-    <li><a href="PaginaMensajesGrupo.jsp">Enviar mensaje a Grupo</a></li>
-    <%}%>
-    <li><a href="ServletPaginaConsultaMensajes">Consultar mensajes</a></li>
-</ul>
-</li>
-<li><a href="">Configuración</a></li>
-<ul>
-    <li><a href="ServletConfigPerfil">Configuración Perfil</a></li>
-</ul>
-<li><a href="VistaGrupos">Grupos</a></li>
-</ul>
-</td>
-<td>
-<% //El buscador es un input de tipo text donde introducimos el nombre de la persona 
-   //que queremos buscar en la red social. Manda el parametro:
-   // busqueda-----GET%>
-<form action="ServletBuscador" method="GET">
-<input type="text" name="busqueda" placeholder="Buscar gente" style="width:250px">
-<input type="submit" value="Buscar">
-</form>
-</td>
-</tr>
-</table>
-</div>
+	<div id="tablaNav">
+		<table>
+			<tr>
+				<td>
+					<ul id="menu">
+						<li><a href="ServletPaginaPrincipal">Inicio</a>
+							<ul>
+								<li><a href="ServletPaginaUsuario"><%= session.getAttribute("user") %></a></li>
+								<li><a href="nuevo_estado.jsp"> Compartir notificacion </a></li>
+								<li><a href="Logout">Cerrar sesión</a></li>
+							</ul>
+						</li>
+						<li><a href="ServletPaginaConsultaMensajes">Mensajes</a>
+							<ul>
+								<li><a href="PaginaMensajes.jsp">Enviar mensaje</a></li>
+								<% if(session.getAttribute("tipoUsuario")=="premium"){ %>
+									<li><a href="PaginaMensajesGrupo.jsp">Enviar mensaje a Grupo</a></li>
+								<%}%>
+								<li><a href="ServletPaginaConsultaMensajes">Consultar mensajes</a></li>
+							</ul>
+						</li>
+						<li><a href="">Configuración</a>
+							<ul>
+								<li><a href="ServletConfigPerfil">Configuración Perfil</a></li>
+							</ul>
+						</li>
+						<li><a href="VistaGrupos">Grupos</a></li>
+					</ul>
+				</td>
+				<td>
+					<% //El buscador es un input de tipo text donde introducimos el nombre de la persona 
+						//que queremos buscar en la red social. Manda el parametro:
+						//busqueda-----GET%>
+					<form action="ServletBuscador" method="GET">
+						<input type="text" name="busqueda" placeholder="Buscar gente" style="width:250px">
+						<input type="submit" value="Buscar">
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
 </div>
 
 <center>
