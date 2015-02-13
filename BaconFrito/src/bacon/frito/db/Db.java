@@ -111,7 +111,7 @@ public class Db {
 				+ id
 				+ ", '"  + usuario
 				+ "', '" + texto
-				+ "', "  + fecha
+				+ "', to_date('"  + fecha + "')"
 				+ ")";	
 	}
 	//INSERT INTO Notificaciones(id, nick, texto, fecha) VALUES (notif_seq.nextval, 'usuario', 'texto', fecha);
