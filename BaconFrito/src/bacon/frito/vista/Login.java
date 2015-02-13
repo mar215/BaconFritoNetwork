@@ -62,6 +62,7 @@ public class Login extends HttpServlet {
 					sesion.setAttribute("user", user);
 					boolean activa = true;
 					sesion.setAttribute("activo", activa);
+					sesion.setAttribute("tipoUsuario", usuario.getTipo());
 					response.sendRedirect("ServletPaginaPrincipal");
 				}else{
 					//Si falla le mandamos a bienvenida para que se logee
