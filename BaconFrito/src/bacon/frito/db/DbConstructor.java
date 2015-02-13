@@ -409,10 +409,15 @@ public class DbConstructor {
 
 	}
 	
-	public void entrarGrupo(String nombre) throws NamingException, SQLException {
+	public void entrarGrupo(String nick, int idG) throws NamingException, SQLException {
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement();
-		String sSQL = "SELECT ";
+		String sSQL = "UPDATE " + DatosGrupoUsuario.TABLE_NAME
+				+" SET " +DatosGrupoUsuario.COLUMN_NAME_IDGRUPO + " = " + idG
+				+DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO + " = " + nick;
+		oStmt.executeUpdate(sSQL);	
+		oStmt.close();
+				
 	}
 	
 	//NOTIFICACIONES
