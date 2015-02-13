@@ -16,16 +16,16 @@ import bacon.frito.db.DbConstructor;
 import bacon.frito.modelo.GrupoUsuario;
 
 /**
- * Servlet implementation class entrarGrupo
+ * Servlet implementation class salirGrupo
  */
-@WebServlet("/entrarGrupo")
-public class entrarGrupo extends HttpServlet {
+@WebServlet("/salirGrupo")
+public class salirGrupo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public entrarGrupo() {
+    public salirGrupo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,8 +51,7 @@ public class entrarGrupo extends HttpServlet {
 
 		
 		try {
-		
-			ArrayList<GrupoUsuario> lista = constructor.entrarGrupo(laSesion);			
+			ArrayList<GrupoUsuario> lista = constructor.salirGrupo(laSesion, idgrupo);			
 			
 			sesion.setAttribute("id", lista);
 			response.sendRedirect("PaginaGrupos.jsp");
@@ -65,7 +64,6 @@ public class entrarGrupo extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 }

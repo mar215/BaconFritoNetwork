@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     
     <%@page import="bacon.frito.modelo.Grupo" %>
+    <%@page import="bacon.frito.modelo.GrupoUsuario" %>
     <%@page import="java.util.ArrayList" %>
     
        
@@ -16,6 +17,7 @@
 <body>
 
 <% ArrayList<Grupo> listaGrupo;%>
+<% ArrayList<GrupoUsuario> listaEntra;%>
 <div id="header">
 <div id="imagenheader">
 <img src="Imagenes\fondoheader.jpg" alt="fondo header">
@@ -29,25 +31,25 @@
 <ul id="menu">
 <li><a href="PaginaPrincipal.jsp">Inicio</a>
 <ul>
-    <li><a href="ServletPaginaUsuario">Usuario</a></li>
+    <li><a href="ServletPaginaUsuario"><%= session.getAttribute("user") %></a></li>
     <li><a href="Logout">Cerrar sesión</a></li>
 </ul>
 </li>
-<li><a href="PaginaConsultaMensajes.jsp">Mensajes</a>
+<li><a href="ServletPaginaConsultaMensajes">Mensajes</a>
 <ul>
     <li><a href="PaginaMensajes.jsp">Enviar mensaje</a></li>
-    <li><a href="PaginaConsultaMensajes.jsp">Consultar mensajes</a></li>
+    <li><a href="ServletPaginaConsultaMensajes">Consultar mensajes</a></li>
 </ul>
 </li>
 <li><a href="">Configuración</a></li>
-<li><a href="PaginaGrupos.jsp">Grupos</a></li>
+<li><a href="VistaGrupos">Grupos</a></li>
 </ul>
 </td>
 <td>
 <% //El buscador es un input de tipo text donde introducimos el nombre de la persona 
    //que queremos buscar en la red social. Manda el parametro:
    // busqueda-----GET%>
-<form action="" method="GET">
+<form action="ServletBuscador" method="GET">
 <input type="text" name="busqueda" placeholder="Buscar gente">
 <input type="submit" value="Buscar">
 </form>
@@ -73,15 +75,37 @@
 	if (listaGrupo == null){	%>
 	<tr><td>lista nula</td></tr>
  <%}else{ for(Grupo g : listaGrupo) { %>
-	<tr><td><%= g.getNombre() %></td></tr> <tr><td><th><img src ="<%= g.getImagen() %>" style="width:20px; height:20px;"> </th></td></tr>
+ 
+ 
+	<tr><th><%= g.getId()  %></th><th><%= g.getNombre() %></th><td><th><img src ="<%= g.getImagen() %>" style="width:50px; height:50px;"> </th></td></tr>
+	<tr><td colspan="2"><%= g.getDescripcion() %></td></tr> 
+	
+	<% listaEntra = (ArrayList<GrupoUsuario>) session.getAttribute("id"); 
+	if (listaEntra == null){	%>
+		<td> <form action="entrarGrupo" method="POST">
+		<input type="hidden" name="id" value="<%=g.getId() %>">
+		<input type="submit" value="entrar">
+		</form> </td>
+		 </tr>
+	<%}else{  %>
+		<td> <form action="salirGrupo" method="POST">
+		<input type="hidden" name="id" value="<%=g.getId() %>">
+		<input type="submit" value="salir">
+		</form> </td>
+		 </tr>	 
+	
+ <% }}} %>
+	<%-- <tr><td><%= g.getId() %><%if(request.getParameter("grupo")!=null){%> value="<%=request.getAttribute("grupo")%>" <%}%></td></tr><tr><td><%= g.getNombre() %></td></tr> <tr><td><th><img src ="<%= g.getImagen() %>" style="width:50px; height:50px;"> </th></td></tr>
 	<tr><td colspan="2"><%= g.getDescripcion() %></td></tr>
 	<tr></tr>
-	<% }} %> 
+	<% }} %>  --%>
 </table>
 </center>
 </div>
 </center>
 <center>
+
+
 
 
 

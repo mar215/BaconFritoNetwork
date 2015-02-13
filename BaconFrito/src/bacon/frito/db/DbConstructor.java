@@ -394,31 +394,44 @@ public class DbConstructor {
 		oStmt.close();	
 	}
 	
-	public void dameGrupoUsuario(String nick) throws SQLException, NamingException{
+	public ArrayList<GrupoUsuario> entrarGrupo(String nick) throws SQLException, NamingException{
 		Connection conexion = conectarDb();
-		Statement oStmt=conexion.createStatement();
+		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		ResultSet oRs;
 		String sSQL = "SELECT "
-				+ DatosGrupo.COLUMN_NAME_ID + ","
-				+ DatosGrupo.COLUMN_NAME_NOMBRE	+ " FROM " + DatosUsuario.TABLE_NAME + ", "
-				+ DatosGrupoUsuario.TABLE_NAME +", "+ DatosGrupo.TABLE_NAME
-				+ " WHERE ("
-				+ DatosUsuario.COLUMN_NAME_NICK + "='" + nick + "' AND " 
-				+ DatosUsuario.COLUMN_NAME_NICK +"="+DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO
-				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO +"="+DatosGrupo.COLUMN_NAME_ID +")";
-		oStmt.executeUpdate(sSQL);	
+				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO
+				+ " FROM " + DatosGrupoUsuario.TABLE_NAME 
+				+ " WHERE "
+				+ DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO + " = '" + nick + "' ";
+		oRs = oStmt.executeQuery(sSQL);	
+		ArrayList<GrupoUsuario> lista = new ArrayList<GrupoUsuario>();
+		while(oRs.next()){
+			lista.add(new GrupoUsuario(nick, oRs.getInt(DatosGrupoUsuario.COLUMN_NAME_IDGRUPO)));
+		}
+		
 		oStmt.close();
+		
+		return lista;
 
 	}
 	
-	public void entrarGrupo(String nick, int idG) throws NamingException, SQLException {
+	public ArrayList<GrupoUsuario> salirGrupo(String nick, int idG) throws NamingException, SQLException {
 		Connection conexion = conectarDb();
-		Statement oStmt=conexion.createStatement();
-		String sSQL = "UPDATE " + DatosGrupoUsuario.TABLE_NAME
-				+" SET " +DatosGrupoUsuario.COLUMN_NAME_IDGRUPO + " = " + idG
-				+DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO + " = " + nick;
-		oStmt.executeUpdate(sSQL);	
+		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		ResultSet oRs;
+		String sSQL = "DELETE FROM " + DatosGrupoUsuario.TABLE_NAME;
+		String sSQL1 = "SELECT "
+				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO
+				+ " FROM " + DatosGrupoUsuario.TABLE_NAME 
+				+ " WHERE "
+				+ DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO + " = '" + nick + "' ";
+		oRs = oStmt.executeQuery(sSQL1);	
+		ArrayList<GrupoUsuario> lista = new ArrayList<GrupoUsuario>();
+		while(oRs.next()){
+			lista.add(new GrupoUsuario(nick, oRs.getInt(DatosGrupoUsuario.COLUMN_NAME_IDGRUPO)));
+		}
 		oStmt.close();
-				
+		return lista;
 	}
 	
 	//NOTIFICACIONES

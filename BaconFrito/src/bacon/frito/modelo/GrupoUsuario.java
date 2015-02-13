@@ -1,23 +1,23 @@
 package bacon.frito.modelo;
 
 public class GrupoUsuario {
-	private int nickusuario;
+	private String nickusuario;
 	private int idgrupo;
 	
 	
-	public GrupoUsuario(int nickusuario, int idgrupo) {
+	public GrupoUsuario(String nickusuario, int idgrupo) {
 		super();
 		this.nickusuario = nickusuario;
 		this.idgrupo = idgrupo;
 	}
 
 
-	public int getNickusuario() {
+	public String getNickusuario() {
 		return nickusuario;
 	}
 
 
-	public void setNickusuario(int nickusuario) {
+	public void setNickusuario(String nickusuario) {
 		this.nickusuario = nickusuario;
 	}
 
@@ -30,7 +30,6 @@ public class GrupoUsuario {
 	public void setIdgrupo(int idgrupo) {
 		this.idgrupo = idgrupo;
 	}
-	
 	
 	
 	
