@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -467,7 +468,13 @@ public class DbConstructor {
 		ResultSet rs = oStmt.executeQuery(Db.DATABASE_GRUPO_NEXT_ID);
 		rs.first();
 		int id = rs.getInt(1);
-		Date fecha = new Date(Calendar.getInstance().getTime().getTime());
+		Calendar c = new GregorianCalendar();
+		String fecha = c.get(Calendar.HOUR_OF_DAY) 	+ ":"
+					 + c.get(Calendar.MINUTE)		+ ":"
+					 + c.get(Calendar.SECOND) 		+ "-"
+					 + c.get(Calendar.DAY_OF_MONTH) + "/"
+					 + c.get(Calendar.MONTH)		+ "/"
+					 + c.get(Calendar.YEAR);
 		System.out.println(Db.addNotif(id, usuario, texto, fecha));
 		oStmt.executeQuery(Db.addNotif(id, usuario, texto, fecha));
 		return true;

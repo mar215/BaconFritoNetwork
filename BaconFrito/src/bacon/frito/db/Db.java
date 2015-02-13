@@ -105,13 +105,13 @@ public class Db {
 			 													   + ".NEXTVAL FROM DUAL";
 	//SELECT notif_seq.NEXTVAL FROM DUAL;
 
-	public static String addNotif(int id, String usuario, String texto, Date fecha){
+	public static String addNotif(int id, String usuario, String texto, String fecha){
 		return "INSERT INTO " + DatosNotificacion.TABLE_NAME + " ("
 				+ DatosNotificacion.COLUMNAS +") VALUES ("
 				+ id
 				+ ", '"  + usuario
 				+ "', '" + texto
-				+ "', to_date('"  + fecha + "')"
+				+ "', to_date('"  + fecha + "', 'hh24:mi:ss-dd/mm/yyyy')"
 				+ ")";	
 	}
 	//INSERT INTO Notificaciones(id, nick, texto, fecha) VALUES (notif_seq.nextval, 'usuario', 'texto', fecha);
