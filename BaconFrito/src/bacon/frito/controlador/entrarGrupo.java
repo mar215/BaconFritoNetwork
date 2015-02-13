@@ -48,10 +48,10 @@ public class entrarGrupo extends HttpServlet {
 		DbConstructor constructor = DbConstructor.getInstance();
 		HttpSession sesion = request.getSession();
 		String laSesion=(String)sesion.getAttribute("user");
-		
+		GrupoUsuario grupusu = new GrupoUsuario(laSesion, idgrupo);
 		
 		try {
-			Grupousuario grupusu = new GrupoUsuario(laSesion, idgrupo);
+			constructor.insertarGrupoUsuario(grupusu);
 			ArrayList<GrupoUsuario> lista = constructor.entrarGrupo(laSesion, idgrupo);			
 			
 			sesion.setAttribute("id", lista);

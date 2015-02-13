@@ -387,17 +387,18 @@ public class DbConstructor {
 	public void insertarGrupoUsuario(GrupoUsuario grupuser) throws NamingException, SQLException {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
-		String sSQL = "INSERT INTO " + DatosGrupoUsuario.TABLE_NAME + "("
-				+ " " + grupuser.getNickusuario()
-				+ ", " + grupuser.getIdgrupo()+")";		
+		String sSQL = "INSERT INTO " + DatosGrupoUsuario.TABLE_NAME + " VALUES ("
+				+ " '" + grupuser.getNickusuario()
+				+ "', " + grupuser.getIdgrupo()+")";		
 		oStmt.executeUpdate(sSQL);	
-		oStmt.close();	
+		oStmt.close();
 	}
 	
 	public ArrayList<GrupoUsuario> entrarGrupo(String nick, int idG) throws SQLException, NamingException{
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		ResultSet oRs;
+		System.out.println("Macho");
 		String sSQL = "SELECT "
 				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO
 				+ " FROM " + DatosGrupoUsuario.TABLE_NAME 
@@ -406,6 +407,7 @@ public class DbConstructor {
 				+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO + " = " + idG ;		
 		oRs = oStmt.executeQuery(sSQL);	
 		ArrayList<GrupoUsuario> lista = new ArrayList<GrupoUsuario>();
+		System.out.println("Macho2");
 		while(oRs.next()){
 			lista.add(new GrupoUsuario(nick, oRs.getInt(DatosGrupoUsuario.COLUMN_NAME_IDGRUPO)));
 		}
