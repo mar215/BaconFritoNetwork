@@ -16,7 +16,7 @@ import bacon.frito.modelo.Mensaje;
 /**
  * Servlet implementation class EnvioMensajes
  */
-@WebServlet("/EnvioMensajes")
+@WebServlet("/EnvioMensajesGrupo")
 public class EnvioMensajesGrupo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
