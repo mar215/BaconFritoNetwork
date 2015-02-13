@@ -35,7 +35,7 @@
 </ul>
 </li>
 <li><a href="">Configuración</a></li>
-<li><a href="PaginaGrupos.jsp">Grupos</a></li>
+<li><a href="VistaGrupos">Grupos</a></li>
 </ul>
 </td>
 <td>
@@ -56,12 +56,12 @@
 <div id="contenido">
 <center>
 <table>
-<%for(Notificacion n : (ArrayList<Notificacion>) session.getAttribute("notifications")){
+<% for(Notificacion n : (ArrayList<Notificacion>) session.getAttribute("notifications")){
 	%>
 	<tr><th><%= n.getUsuario()  %></th><th><%= n.getFecha().toString() %></th></tr>
 	<tr><td colspan="2"><%= n.getTexto() %></td></tr>
 <% 	
-}%>
+} %>
 </table>
 </center>
 </div>

@@ -255,16 +255,10 @@ public class DbConstructor {
 		return grupAux;
 	}
 	
-	public ArrayList<Grupo> listarGrupos(String nick) throws SQLException, NamingException {
+	public ArrayList<Grupo> listarGrupos() throws SQLException, NamingException {
 		Connection conexion = conectarDb();
-		Statement oStmt=conexion.createStatement();
-		String sSQL = "SELECT "
-				+ DatosGrupo.COLUMN_NAME_ID + ","
-				+ DatosGrupo.COLUMN_NAME_NOMBRE + ","
-				+ DatosGrupo.COLUMN_NAME_DESCRIPCION + ","
-				+ DatosGrupo.COLUMN_NAME_IMAGEN + ","
-				+ DatosGrupo.COLUMN_NAME_MAXINTEGRANTES + ","
-				+ DatosGrupo.COLUMN_NAME_ACTIVO + " FROM Grupo";
+		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		String sSQL = "SELECT * FROM " + DatosGrupo.TABLE_NAME;
 		ResultSet oRs = oStmt.executeQuery(sSQL);
 		ArrayList<Grupo> listaGrupos = new ArrayList<Grupo>();
 		while (oRs.next()) {

@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<%! ArrayList<Grupo> grupo;%>
+<% ArrayList<Grupo> listaGrupo;%>
 <div id="header">
 <div id="imagenheader">
 <img src="Imagenes\fondoheader.jpg" alt="fondo header">
@@ -63,7 +63,14 @@
   <form name="form1" action="PaginaCrearGrupo.jsp" target="_blank">
     <input type="submit" value="Crea tu grupo">  
   </form>
-<% grupo = (ArrayList<Grupo>) session.getAttribute("grupos"); %>
+<% listaGrupo = (ArrayList<Grupo>) session.getAttribute("grupos"); 
+	if (listaGrupo == null){	%>
+	<tr><td>lista nula</td></tr>
+ <%}else{ for(Grupo g : listaGrupo) { %>
+	<tr><td><%= g.getNombre() %></td></tr>
+
+	<% }} %> 
+
 </div>
 </body>
 </html>
