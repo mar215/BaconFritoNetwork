@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bacon.frito.db.DbConstructor;
 import bacon.frito.modelo.UsuarioBacon;
@@ -33,6 +34,7 @@ public class ServletBuscador extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Cogemos el nick del usuario que nos pasan y lo buscamos en la base de datos
+		HttpSession sesion = request.getSession();
 		DbConstructor constructorDb = DbConstructor.getInstance();
 		String busqueda = request.getParameter("busqueda");
 		
@@ -40,8 +42,8 @@ public class ServletBuscador extends HttpServlet {
 			
 			if(constructorDb.buscaUsuario(busqueda)){
 				UsuarioBacon usuarioBusqueda = constructorDb.dameUsuario(busqueda);
-				request.setAttribute("usuarioBusqueda", usuarioBusqueda);
-				request.getRequestDispatcher("PaginaResultadosBusqueda.jsp").forward(request, response);
+				sesion.setAttribute("usuarioBusqueda", usuarioBusqueda);
+				response.sendRedirect("PaginaResultadosBusqueda.jsp");
 			}else{
 				response.sendRedirect("PaginaPrincipal.jsp");
 			}

@@ -87,7 +87,7 @@ public class Db {
 			+ DatosNotificacion.COLUMN_NAME_USER				+ " VARCHAR2(25) CONSTRAINT " 
 																+ DatosNotificacion.FK_USER_NOTIF
 																+ " REFERENCES " + DatosUsuario.TABLE_NAME 
-																+ "(" + DatosUsuario.COLUMN_NAME_NICK + ")"
+																+ "(" + DatosUsuario.COLUMN_NAME_NICK + "),"
 			+ DatosNotificacion.COLUMN_NAME_TEXT				+ " VARCHAR2(500), "
 			+ DatosNotificacion.COLUMN_NAME_DATE				+ " DATE)";
 
