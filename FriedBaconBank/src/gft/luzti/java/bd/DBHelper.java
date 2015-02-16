@@ -23,40 +23,7 @@ public class DBHelper {
 		instancia 	= new DBHelper();
 	}
 	
-	private DBHelper(){/*
-		Connection conexion = getConexion();
-		Statement  stat 	= null;
-		ResultSet  rs		= null;
-		try {
-			stat = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-		} catch (SQLException e) {
-			System.err.println("Error al crear el Statement (constructor DBHelper)");
-			e.printStackTrace();
-		}
-		
-		// Comprobamos si ya se han creado las tablas
-		try {
-			rs = stat.executeQuery("select * from user_tables where table_name like 'CUENTAS'");
-		} catch (SQLException e) {
-			System.err.println("Error al obtener el RS (constructor DBHelper)");
-			e.printStackTrace();
-		}
-		
-		try {
-			if(rs.first()){
-				return;
-			}else{
-				if(!init()){
-					System.err.println("Error en el constructor de DBHelper");
-				}
-			}			
-		} catch (SQLException e1) {
-			System.err.println("Error al comprobar la existencia de tablas (constructor DBHelper)");
-			e1.printStackTrace();
-		}
-		*/
-		
-	}
+	private DBHelper(){}
 	
 	public static DBHelper getInstance(){
 		return instancia;
@@ -93,6 +60,7 @@ public class DBHelper {
 		return conexion;
 	}
 	
+	/*
 	private boolean init(){
 		Connection conexion = getConexion();
 		Statement  stat = null;
@@ -169,25 +137,48 @@ public class DBHelper {
 		
 		return true;
 	}
+	*/
 	
 	public boolean addCliente(Cliente cliente){
 		Connection 	conexion 	= getConexion();
+		Statement	checkU		= null;
 		Statement 	stat		= null; 
+		ResultSet	rs			= null;
 		try {
-			stat = conexion.createStatement();
+			stat 	= conexion.createStatement();
+			checkU 	= conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
-			System.err.println("Error al crear el Statement");
+			System.err.println("Error al crear el Statement (addCliente");
 			e.printStackTrace();
 			return false;
 		}
 		
 		// TODO: Comprobar que no existe un usuario con el mismo user
+		String comprobar = "SELECT * FROM " + DatosCliente.TABLE_NAME 
+						 + " WHERE " + DatosCliente.COLUMN_NAME_USER + " = '" + cliente.getUser() + "'";
+		
+		try {
+			rs = checkU.executeQuery(comprobar);
+		} catch (SQLException e) {
+			System.err.println("Error al comprobar existencia cliente (addCliente)");
+			e.printStackTrace();
+			return false;
+		}
+		
+		try {
+			if(rs.next()){
+				conexion.close();
+				return false;
+			}
+		} catch (SQLException e1) {
+			System.err.println("Error al comprobra el RS de existencia cliente (addCliente)");
+			e1.printStackTrace();
+		}
 		
 		String insertar = "INSERT INTO " + DatosCliente.TABLE_NAME + "(" + DatosCliente.COLUMNAS + ") "
 						+ "VALUES ('" + cliente.getUser() + "','" + cliente.getPass() + "','"
 									 + cliente.getNombre() + "','" + cliente.getApellidos() + "','"
 									 + cliente.getDni() + "'," + cliente.getCuenta().getNumeroCuenta() + ")";
-		//System.out.println(insertar);
 		
 		try {
 			stat.executeUpdate(insertar);
@@ -271,7 +262,6 @@ public class DBHelper {
 		Statement stat 		= null;
 		ResultSet rs		= null;
 		
-		//Obtenemos el Statement para hacer ejecutar la sentencia
 		try {
 			stat = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
@@ -280,7 +270,6 @@ public class DBHelper {
 			return false;
 		}		
 		
-		//Obtenemos la fila del cliente que solicitamos
 		try {
 			rs = stat.executeQuery(BancoDB.getCliente(user.toLowerCase()));
 		} catch (SQLException e1) {
@@ -289,22 +278,21 @@ public class DBHelper {
 			return false;
 		}
 		
-		//Comprobamos que hemos obtenido resultados
 		try {
 			if(!rs.first()){
 				conexion.close();
 				return false;
-			}else{//hay resultados-> comprobamos el pass
+			}else{
 				if(rs.getString(DatosCliente.COLUMN_NAME_PASS).equals(pass)){
 					conexion.close();
 					return true;
-				}else{//La password no coincide
+				}else{
 					conexion.close();
 					return false;
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.err.println("Error al comprobar el login (login)");
 			e.printStackTrace();
 		}
 		return false;
@@ -315,7 +303,6 @@ public class DBHelper {
 		Statement stat 		= null;
 		ResultSet rs		= null;
 		
-		//Obtenemos el Statement para hacer ejecutar la sentencia
 		try {
 			stat = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
@@ -323,8 +310,7 @@ public class DBHelper {
 			e.printStackTrace();
 			return null;
 		}		
-		//System.out.println("getCliente: " + BancoDB.getCliente(user));
-		//Obtenemos la fila del cliente que solicitamos
+		
 		try {
 			rs = stat.executeQuery(BancoDB.getCliente(user));
 		} catch (SQLException e1) {
@@ -333,7 +319,6 @@ public class DBHelper {
 			return null;
 		}
 		
-		//Comprobamos que hemos obtenido resultados
 		try {
 			if(rs.next()){
 				Cliente cliente = new Cliente(rs.getString(DatosCliente.COLUMN_NAME_USER), 
@@ -344,9 +329,8 @@ public class DBHelper {
 						getCuenta(rs.getInt(DatosCliente.COLUMN_NAME_CUENTA)));
 				conexion.close();
 				return cliente;
-			}else{//hay resultados-> devolvemos el cliente
+			}else{
 				conexion.close();
-				System.out.println("la hemos cagado");
 				return null;
 			}
 		} catch (SQLException e) {
@@ -361,7 +345,6 @@ public class DBHelper {
 		Statement stat 		= null;
 		ResultSet rs		= null;
 		
-		//Obtenemos el Statement para hacer ejecutar la sentencia
 		try {
 			stat = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
@@ -370,7 +353,6 @@ public class DBHelper {
 			return null;
 		}		
 		
-		//Obtenemos la fila del cliente que solicitamos
 		try {
 			rs = stat.executeQuery(BancoDB.getCuenta(id));
 		} catch (SQLException e1) {
@@ -397,7 +379,6 @@ public class DBHelper {
 		Connection conexion = getConexion();
 		Statement stat 		= null;
 		
-		//Obtenemos el Statement para hacer ejecutar la sentencia
 		try {
 			stat = conexion.createStatement();
 		} catch (SQLException e) {
@@ -405,7 +386,6 @@ public class DBHelper {
 			e.printStackTrace();
 		}
 		
-		//Obtenemos la fila del cliente que solicitamos
 		try {
 			stat.executeQuery(BancoDB.addSaldo(id, saldo));
 			conexion.close();
@@ -422,7 +402,6 @@ public class DBHelper {
 		Connection conexion = getConexion();
 		Statement stat 		= null;
 		
-		//Obtenemos el Statement para hacer ejecutar la sentencia
 		try {
 			stat = conexion.createStatement();
 		} catch (SQLException e) {
@@ -430,7 +409,6 @@ public class DBHelper {
 			e.printStackTrace();
 		}
 		
-		//Obtenemos la fila del cliente que solicitamos
 		try {
 			stat.executeQuery(BancoDB.paySaldo(id, saldo));
 			conexion.close();

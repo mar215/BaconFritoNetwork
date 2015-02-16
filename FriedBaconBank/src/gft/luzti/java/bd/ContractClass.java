@@ -27,7 +27,6 @@ public class ContractClass {
         public static final String COLUMN_NAME_SALDO 		= "saldo";		//double
         public static final String CONSTRAINT_ACCOUNT		= "id_account_pk";
         public static final String SEQUENCE_ACCOUNT_ID		= "account_seq";
-        //public static final String TRIGGER_ID				= "account_tri";
         public static final String[] COLUMNS = {COLUMN_NAME_ROWID, COLUMN_NAME_SALDO};
 	}
 	

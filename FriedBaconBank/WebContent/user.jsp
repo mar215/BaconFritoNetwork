@@ -14,11 +14,8 @@
 	|| ((Boolean) session.getAttribute("valida")) != true){
 		response.sendRedirect("index.jsp");
 	}else{
-		System.out.println("1ggggg");
 		cliente = (Cliente) session.getAttribute("cliente");
-		System.out.println("2ggggg");
 		if(cliente == null){
-			System.out.println("3gggggg");
 			response.sendRedirect("LogOut");
 			return;
 		}

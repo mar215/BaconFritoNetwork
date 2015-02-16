@@ -22,7 +22,6 @@ public class User extends HttpServlet {
      */
     public User() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -40,7 +39,6 @@ public class User extends HttpServlet {
 		}else{
 			Cliente cliente = dbh.getCliente((String) s.getAttribute("nombre"));
 			if(cliente == null){
-				System.out.println("no puede serrlrlrlr");
 				return;
 			}
 			s.setAttribute("cliente", cliente);
@@ -54,7 +52,6 @@ public class User extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

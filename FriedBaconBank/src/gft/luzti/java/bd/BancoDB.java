@@ -33,17 +33,6 @@ public class BancoDB {
 	public static final String DATABASE_ACCOUNT_NEXT_ID	 = "SELECT " + DatosCuenta.SEQUENCE_ACCOUNT_ID
 														 + ".NEXTVAL FROM DUAL";
 	
-	/*
-	public static final String DATABASE_ACCOUNT_TRIGGER  = "CREATE OR REPLACE TRIGGER " + DatosCuenta.TRIGGER_ID 
-			+ " BEFORE INSERT ON " + DatosCliente.TABLE_NAME 
-			+ " FOR EACH ROW "
-			+ "	BEGIN "
-				+ "SELECT " + DatosCuenta.SEQUENCE_ACCOUNT_ID + ".NEXTVAL "
-				+ " INTO   :new." + DatosCuenta.COLUMN_NAME_ROWID
-				+ " FROM   dual;"
-				+ "END";	
-	*/
-	
 	public static String getCliente(String user){		
 		return "SELECT * FROM " + DatosCliente.TABLE_NAME + " WHERE " + DatosCliente.COLUMN_NAME_USER + " = '" + user + "'";
 	}
