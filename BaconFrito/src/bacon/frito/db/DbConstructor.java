@@ -178,6 +178,34 @@ public class DbConstructor {
 		return userAux;
 	}
 	
+	/**
+	 *  Funcion que recibe un objeto de tipo usuario y lo actualiza en la base de datos
+	 * @param usuario
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
+	
+	public void actualizaUsuario(UsuarioBacon usuario) throws SQLException, NamingException{
+		Connection conexion = conectarDb();
+		Statement oStmt = conexion.createStatement();
+		String sSQL = "UPDATE "
+				+ DatosUsuario.TABLE_NAME + " SET "
+				+ DatosUsuario.COLUMN_NAME_NICK + " = '" + usuario.getNick() + "', "
+				+ DatosUsuario.COLUMN_NAME_PASS + " = '" + usuario.getPass() + "', "
+				+ DatosUsuario.COLUMN_NAME_NOMBRE + " = '" + usuario.getNombre() + "', "
+				+ DatosUsuario.COLUMN_NAME_APELLIDOS + " = '" + usuario.getApellidos() + "', "
+				+ DatosUsuario.COLUMN_NAME_TELEFONO + " = '" + usuario.getTelefono() + "', "
+				+ DatosUsuario.COLUMN_NAME_BDAY + " = '" + usuario.getBday() + "', "
+				+ DatosUsuario.COLUMN_NAME_SEXO + " = '" + usuario.getSexo() + "', "
+				+ DatosUsuario.COLUMN_NAME_FOTO + " = '" + usuario.getFoto() + "', "
+				+ DatosUsuario.COLUMN_NAME_TIPO + " = '" + usuario.getTipo()+ "', "
+				+ DatosUsuario.COLUMN_NAME_ACTIVO + " = '" + usuario.getActivo() + "' WHERE ("
+				+ DatosUsuario.COLUMN_NAME_NICK + " = '" + usuario.getNick() + "')";
+		oStmt.executeUpdate(sSQL);
+		oStmt.close();
+		conexion.close();
+	}
+	
 	
 	//FUNCIONES CON GRUPO
 	

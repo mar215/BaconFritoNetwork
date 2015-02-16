@@ -60,64 +60,110 @@ public class ServletConfigPerfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Recibimos por POST los datos nuevos que el usuario quiere actualizar y los mandamos
-		// a la base de datos para que se actualicen en la base de datos.
-		
-		String foto = "";
-		
-		if(request.getParameter("sexo").equals("hombre")){
-			foto = "http://1.bp.blogspot.com/-etWXGfUpppc/UhlR3uH7xvI/AAAAAAAAAH4/q0ZMU9BTkFU/s1600/Finn.jpg";
-		}
-		else if(request.getParameter("sexo").equals("mujer")){
-			foto = "http://images1.wikia.nocookie.net/__cb20120827232753/horadeaventura/es/images/1/13/Minimal_Marceline.jpg";
-		}
-		
-		UsuarioBacon usuario = new UsuarioBacon(request.getParameter("nick"), 
-				request.getParameter("pass"), 
-				request.getParameter("nombre"), 
-				request.getParameter("apellidos"), 
-				request.getParameter("telefono"), 
-				request.getParameter("sexo"), 
-				request.getParameter("bday"), 
-				foto, 
-				"usuariobacon", 
-				"true");
-		
-		//Comprobamos que las dos contraseñas sean las mismas
-		
-		if(usuario.getPass()!=null && request.getParameter("pass1")!=null){
-			if(!usuario.getPass().equals(request.getParameter("pass1"))){
-				// No ha pasado el check de las contraseñas
-				response.sendRedirect("ServletConfigPerfil");
-				return;
-			}
-		}
-		else if(usuario.getPass()==null || request.getParameter("pass1")==null){
-			response.sendRedirect("ServletConfigPerfil");
-			return;
-		}
-		
-		//Si llegamos aqui las contraseñas coinciden
-		// Miramos si el usuario existe en la base de datos y si existe le mandamos hacia atrás
-		
-		DbConstructor contructorDb = DbConstructor.getInstance();
-		
-		try {
-			if(contructorDb.buscaUsuario(usuario.getNick())){
-				// Hemos encontrado al usuario en la base de datos
-				request.getRequestDispatcher("PaginaRegistro.jsp").forward(request, response);
-				return;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		// Solo queda llamar a la funcion que nos va a hacer el update de la fila correspondiente
-		// a este usuario
-		
+				// a la base de datos para que se actualicen en la base de datos.
+				
+				String foto = "";
+				
+				if(request.getParameter("sexo").equals("hombre")){
+					foto = "http://1.bp.blogspot.com/-etWXGfUpppc/UhlR3uH7xvI/AAAAAAAAAH4/q0ZMU9BTkFU/s1600/Finn.jpg";
+				}
+				else if(request.getParameter("sexo").equals("mujer")){
+					foto = "http://images1.wikia.nocookie.net/__cb20120827232753/horadeaventura/es/images/1/13/Minimal_Marceline.jpg";
+				}
+				
+				UsuarioBacon usuarioNuevo = new UsuarioBacon(request.getParameter("nick"), 
+						request.getParameter("pass"), 
+						request.getParameter("nombre"), 
+						request.getParameter("apellidos"), 
+						request.getParameter("telefono"), 
+						request.getParameter("sexo"), 
+						request.getParameter("bday"), 
+						foto, 
+						"usuariobacon", 
+						"true");
+				
+				// Pedimos el usuario antiguo para comparar con el nuevo
+				
+				HttpSession sesion = request.getSession();
+				DbConstructor constructorDb = DbConstructor.getInstance();
+				UsuarioBacon usuarioViejo = null;
+				try {
+					usuarioViejo = constructorDb.dameUsuario((String)sesion.getAttribute("user"));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				//Comprobamos que las dos contraseñas sean las mismas
+				
+				if(usuarioNuevo.getPass()!=null && request.getParameter("pass1")!=null){
+					if(!usuarioNuevo.getPass().equals(request.getParameter("pass1"))){
+						// No ha pasado el check de las contraseñas
+						response.sendRedirect("ServletConfigPerfil");
+						return;
+					}
+				}
+				else if((usuarioNuevo.getPass()==null && request.getParameter("pass1")!=null) || (request.getParameter("pass1")==null && usuarioNuevo.getPass()!=null)){
+					response.sendRedirect("ServletConfigPerfil");
+					return;
+				}
+				else if (usuarioNuevo.getPass()==null && request.getParameter("pass1")==null){
+					usuarioNuevo.setPass(usuarioViejo.getPass());
+				}
+				
+				// Nick
+				
+				if(usuarioNuevo.getNick()==null){
+					usuarioNuevo.setNick(usuarioViejo.getNick());
+				}
+				
+				// Nombre
+				
+				if(usuarioNuevo.getNombre()==null){
+					usuarioNuevo.setNombre(usuarioViejo.getNombre());
+				}
+				
+				//Apellidos
+				
+				if(usuarioNuevo.getApellidos()==null){
+					usuarioNuevo.setApellidos(usuarioViejo.getApellidos());
+				}
+				
+				//Telefono 
+				
+				if(usuarioNuevo.getTelefono()==null){
+					usuarioNuevo.setTelefono(usuarioViejo.getTelefono());
+				}
+				
+				//Sexo
+				
+				if(usuarioNuevo.getSexo()==null){
+					usuarioNuevo.setSexo(usuarioViejo.getSexo());
+				}
+				
+				//Bday
+				
+				if(usuarioNuevo.getBday()==null){
+					usuarioNuevo.setBday(usuarioViejo.getBday());
+				}
+
+				// Ahora que hemos comprobado que no han borrado datos necesarios llamamos a la funcion
+				// que inserta los nuevos datos en la base de datos.
+				
+				try {
+					constructorDb.actualizaUsuario(usuarioNuevo);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				response.sendRedirect("ServletPaginaUsuario");
 		
 		
 	}
