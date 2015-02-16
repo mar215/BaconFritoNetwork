@@ -1,18 +1,23 @@
 package bacon.frito.modelo;
 
+import java.sql.Date;
+
 public class Mensaje {
 	private int id;
 	private String texto;
 	private String destino;
 	private String origen;
-	
-	
-	public Mensaje(int id, String texto, String destino, String origen) {
+	private Date fecha;
+
+
+
+	public Mensaje(int id, String texto, String destino, String origen, Date fecha) {
 		super();
 		this.id = id;
 		this.texto = texto;
 		this.destino = destino;
 		this.origen = origen;
+		this.fecha = fecha;
 	}
 
 
@@ -56,6 +61,15 @@ public class Mensaje {
 	}
 	
 	
+	
+	public Date getFecha() {
+		return fecha;
+	}
+
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 	
 	
 	

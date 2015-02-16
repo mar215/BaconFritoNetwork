@@ -1,7 +1,10 @@
 package bacon.frito.controlador;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Date;
+import java.util.Calendar;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -45,10 +48,12 @@ public class EnvioMensajes extends HttpServlet {
 		String destino = request.getParameter("destino");
 		String origen = request.getParameter("origen");
 		String mensaje = request.getParameter("mensaje");
+		Calendar calendario = Calendar.getInstance();
+		Date fecha = (Date) calendario.getTime();
 		
 		// creamos un objeto tipo mensaje que mandaremos a la funcion que lo introduce en la DB
 		
-		Mensaje mensajeAux = new Mensaje(-1, mensaje, destino, origen);
+		Mensaje mensajeAux = new Mensaje(-1, mensaje, destino, origen, fecha);
 		
 		DbConstructor constructorDb = DbConstructor.getInstance();
 		
