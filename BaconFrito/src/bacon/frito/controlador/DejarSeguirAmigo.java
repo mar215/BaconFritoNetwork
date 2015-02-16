@@ -2,7 +2,6 @@ package bacon.frito.controlador;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -13,19 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bacon.frito.db.DbConstructor;
-import bacon.frito.modelo.GrupoUsuario;
 
 /**
- * Servlet implementation class salirGrupo
+ * Servlet implementation class DejarSeguirAmigo
  */
-@WebServlet("/salirGrupo")
-public class salirGrupo extends HttpServlet {
+@WebServlet("/DejarSeguirAmigo")
+public class DejarSeguirAmigo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public salirGrupo() {
+    public DejarSeguirAmigo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,21 +40,16 @@ public class salirGrupo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		int idgrupo = Integer.parseInt(request.getParameter("id"));
-		System.out.println(idgrupo);
 		DbConstructor constructor = DbConstructor.getInstance();
 		HttpSession sesion = request.getSession();
 		String laSesion=(String)sesion.getAttribute("user");
-
+		String destino = request.getParameter("id");
 		
 		try {
-			ArrayList<GrupoUsuario> lista = constructor.salirGrupo(laSesion, idgrupo);			
+			constructor.dejarSeguir(laSesion, destino);
+			response.sendRedirect("ServletPaginaPrincipal");
 			
-			sesion.setAttribute("id", lista);
-			response.sendRedirect("VistaGrupos");
-			
-			System.out.println("Hola");
+
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,6 +57,7 @@ public class salirGrupo extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

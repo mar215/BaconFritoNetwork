@@ -55,7 +55,7 @@ public class entrarGrupo extends HttpServlet {
 			ArrayList<GrupoUsuario> lista = constructor.entrarGrupo(laSesion, idgrupo);			
 			
 			sesion.setAttribute("id", lista);
-			response.sendRedirect("PaginaGrupos.jsp");
+			response.sendRedirect("VistaGrupos");
 			
 			System.out.println("Hola");
 		} catch (NamingException e) {

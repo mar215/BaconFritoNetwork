@@ -96,9 +96,9 @@ public class ContractClass {
 	}
     
     public static abstract class DatosAmistad {
-    	public static final String TABLE_NAME = "GrupoAmistad";
+    	public static final String TABLE_NAME = "Amistad";
     	public static final String COLUMN_NAME_NICKORIGEN		="nickorigen";		//String
-    	public static final String COLUMN_NAME_NICKDESTINO			="nickdestino";			//int
+    	public static final String COLUMN_NAME_NICKDESTINO		="nickdestino";			//int
     	public static final String CONSTRAINT_NICKORIGEN		="origen_fk";		//clave ajena a idusuario
     	public static final String CONSTRAINT_NICKDESTINO		="destino_fk";			//clave ajena a idgrupo
     	public static final String[] COLUMNS = {COLUMN_NAME_NICKORIGEN, COLUMN_NAME_NICKDESTINO};

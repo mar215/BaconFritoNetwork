@@ -629,36 +629,23 @@ public class DbConstructor {
 	public boolean esAmigo(String nickO, String nickD) throws NamingException, SQLException {
 		
 		Connection conexion = conectarDb();
-		Statement oStmt = conexion.createStatement();
+		Statement oStmt = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		ArrayList<Amistad> listaSiguiendo = new ArrayList<Amistad>();
 		
-		String sSQL = "SELECT "+ DatosAmistad.TABLE_NAME +" FROM "
+		/*String sSQL = "SELECT * FROM "
 				+ DatosUsuario.TABLE_NAME + ", "
 				+ DatosAmistad.TABLE_NAME + " WHERE "
 				+ DatosAmistad.COLUMN_NAME_NICKORIGEN + " = '"
 				+ nickO + "' AND "
 				+ DatosAmistad.COLUMN_NAME_NICKDESTINO + " = '"
-				+ nickD + "' AND "+ DatosUsuario.COLUMN_NAME_NICK +" = '"+ nickD+"'";
+				+ nickD + "' AND "+ DatosUsuario.COLUMN_NAME_NICK +" = '"+ nickD+"'";*/
+		String sSQL = "SELECT * FROM " + DatosAmistad.TABLE_NAME 
+				+ " WHERE " + DatosAmistad.COLUMN_NAME_NICKORIGEN + " = '" + nickO
+				+ "' AND "+ DatosAmistad.COLUMN_NAME_NICKDESTINO + " = '" + nickD + "'";
+		System.out.println(sSQL);
 		ResultSet resultLista = oStmt.executeQuery(sSQL);
-		while (resultLista.next()) {
-			listaSiguiendo.add(new Amistad(
-					resultLista.getString(DatosAmistad.COLUMN_NAME_NICKORIGEN),
-					resultLista.getString(DatosAmistad.COLUMN_NAME_NICKDESTINO)));
-			
-			}
-		boolean amigo=false;
-		for (Amistad a:listaSiguiendo) {
-			
-			if (a.getNickDestino()==nickD) {
-				amigo=true;
-			}
-			
-		}
-		if (amigo) {
-			return true;
-		} else {
-			return false;
-		}
+		return resultLista.next();
+		
 		
 	}
 	
@@ -676,9 +663,10 @@ public class DbConstructor {
 	public void dejarSeguir(String nickO, String nickD) throws NamingException, SQLException {
 		Connection conexion = conectarDb();
 		Statement oStmt = conexion.createStatement();
-		String sSQL = "DELETE * FROM" + DatosAmistad.TABLE_NAME + " WHERE '"
+		String sSQL = "DELETE FROM " + DatosAmistad.TABLE_NAME + " WHERE '"
 				+ nickO +"' = " + DatosAmistad.COLUMN_NAME_NICKORIGEN +" AND '" + nickD
 				+ "' = " + DatosAmistad.COLUMN_NAME_NICKDESTINO; 
+		System.out.println(sSQL);
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
 	}

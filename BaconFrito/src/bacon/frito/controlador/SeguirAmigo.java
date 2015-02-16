@@ -16,16 +16,16 @@ import bacon.frito.db.DbConstructor;
 import bacon.frito.modelo.GrupoUsuario;
 
 /**
- * Servlet implementation class salirGrupo
+ * Servlet implementation class SeguirAmigo
  */
-@WebServlet("/salirGrupo")
-public class salirGrupo extends HttpServlet {
+@WebServlet("/SeguirAmigo")
+public class SeguirAmigo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public salirGrupo() {
+    public SeguirAmigo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,20 +43,16 @@ public class salirGrupo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		int idgrupo = Integer.parseInt(request.getParameter("id"));
-		System.out.println(idgrupo);
 		DbConstructor constructor = DbConstructor.getInstance();
 		HttpSession sesion = request.getSession();
 		String laSesion=(String)sesion.getAttribute("user");
-
+		String destino = request.getParameter("id");
 		
 		try {
-			ArrayList<GrupoUsuario> lista = constructor.salirGrupo(laSesion, idgrupo);			
+			constructor.seguir(laSesion, destino);
+			response.sendRedirect("ServletPaginaPrincipal");
 			
-			sesion.setAttribute("id", lista);
-			response.sendRedirect("VistaGrupos");
-			
-			System.out.println("Hola");
+
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

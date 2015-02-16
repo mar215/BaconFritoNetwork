@@ -80,16 +80,16 @@
 <center>
 		<% 
 		boolean amigo;
-		amigo = (boolean) session.getAttribute("amigo"); 
+		amigo = (Boolean) session.getAttribute("amigo"); 
 		if (amigo == true) { %>
-			<td> <form action="" method="POST">
+			<td> <form action="DejarSeguirAmigo" method="POST">
 			<input type="hidden" name="id" value="<%=usuarioBusqueda.getNick() %>">
 			<input type="submit" value="Dejar de seguir">
 			</form> </td>
 			 </tr>				
 			 <% 
 		 }else{  %>
-			 <td> <form action="entrarGrupo" method="POST">
+			 <td> <form action="SeguirAmigo" method="POST">
 			<input type="hidden" name="id" value="<%=usuarioBusqueda.getNick() %>">
 			<input type="submit" value="Seguir">
 			</form> </td>

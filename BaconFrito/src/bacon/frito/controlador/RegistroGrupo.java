@@ -82,7 +82,7 @@ public class RegistroGrupo extends HttpServlet {
 			e.printStackTrace();
 		}
 		System.out.println(grup);
-		response.sendRedirect("PaginaGrupos.jsp");
+		response.sendRedirect("VistaGrupos");
 		
 	}
 	

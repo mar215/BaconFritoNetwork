@@ -59,7 +59,7 @@ public class Db {
 			+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "), "
 			+ DatosAmistad.COLUMN_NAME_NICKDESTINO		+ " number(6) CONSTRAINT FK_NICKDESTINO "
 			+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "))";
-	
+	//CREATE TABLE amistad (nickorigen Varchar2(25) references usuario(nick), nickdestino varchar2(25) references usuario(nick));
 	
 	//AÑADIENDO CLAVES PRIMARIAS
 	
