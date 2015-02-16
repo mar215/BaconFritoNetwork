@@ -48,8 +48,7 @@ public class EnvioMensajes extends HttpServlet {
 		String destino = request.getParameter("destino");
 		String origen = request.getParameter("origen");
 		String mensaje = request.getParameter("mensaje");
-		Calendar calendario = Calendar.getInstance();
-		Date fecha = (Date) calendario.getTime();
+		Date fecha = null;
 		
 		// creamos un objeto tipo mensaje que mandaremos a la funcion que lo introduce en la DB
 		

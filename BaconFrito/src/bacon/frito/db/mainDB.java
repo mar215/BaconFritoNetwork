@@ -4,7 +4,7 @@ public class mainDB {
 
 	public static void main(String[] args) {
 		//CREACIONTABLAS
-		/*String sSQL = Db.DATABASE_CREATE_USUARIO;
+		String sSQL = Db.DATABASE_CREATE_USUARIO;
 		System.out.println(sSQL);
 		
 		String sSQL1 = Db.DATABASE_CREATE_GRUPO;
@@ -14,11 +14,11 @@ public class mainDB {
 		System.out.println(sSQL2);
 		
 		String sSQL3 = Db.DATABASE_CREATE_GRUPOUSUARIO;
-		System.out.println(sSQL3);*/
+		System.out.println(sSQL3);
 		
 		//AÑADIRSECUENCIAS
 		
-		/*String sSQL4 = Db.DATABASE_MENSAJE_SEQUENCE;
+		String sSQL4 = Db.DATABASE_MENSAJE_SEQUENCE;
 		System.out.println(sSQL4);
 		String sSQL5 = Db.DATABASE_MENSAJE_NEXT_ID;
 		System.out.println(sSQL5);
@@ -26,7 +26,7 @@ public class mainDB {
 		String sSQL6 = Db.DATABASE_GRUPO_SEQUENCE;
 		System.out.println(sSQL6);
 		String sSQL7 = Db.DATABASE_GRUPO_NEXT_ID;
-		System.out.println(sSQL7);*/
+		System.out.println(sSQL7);
 		
 		String sSQL8 = Db.DATABASE_CREATE_NOTIF;
 		System.out.println(sSQL8);

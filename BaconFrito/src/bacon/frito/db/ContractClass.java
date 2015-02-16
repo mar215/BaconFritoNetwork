@@ -61,9 +61,10 @@ public class ContractClass {
     	public static final String CONSTRAINT_MENSAJE			= "idmensaje_pk";
     	public static final String SEQUENCE_MENSAJE_ID			= "mensaje_seq";
     	public static final String[] COLUMNS = {COLUMN_NAME_ID,COLUMN_NAME_TEXTO
-												,COLUMN_NAME_DESTINO, COLUMN_NAME_ORIGEN, COLUMN_NAME_NICKUSUARIO};
+												,COLUMN_NAME_DESTINO, COLUMN_NAME_ORIGEN, COLUMN_NAME_NICKUSUARIO, COLUMN_NAME_FECHA};
     	public static final String COLUMNAS = COLUMN_NAME_ID + ","+COLUMN_NAME_TEXTO + "," +
-											COLUMN_NAME_DESTINO + "," + COLUMN_NAME_ORIGEN+ "," +COLUMN_NAME_NICKUSUARIO;
+											COLUMN_NAME_DESTINO + "," + COLUMN_NAME_ORIGEN+ "," 
+											+COLUMN_NAME_NICKUSUARIO + "," + COLUMN_NAME_FECHA;
     	
     }
     
