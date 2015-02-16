@@ -1,6 +1,7 @@
 package bacon.frito.controlador;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +44,8 @@ public class ServletVerMensaje extends HttpServlet {
 			Mensaje mensajeAux = new Mensaje(Integer.parseInt(request.getParameter("id")),
 					request.getParameter("texto"),
 					request.getParameter("destino"),
-					request.getParameter("origen"));
+					request.getParameter("origen"),
+					(Date)request.getAttribute("fechaMensaje"));
 			
 			request.setAttribute("mensaje", mensajeAux);
 			request.getRequestDispatcher("PaginaVerMensaje.jsp").forward(request, response);

@@ -67,17 +67,18 @@
 <div id="contenido">
 <center>
 <table>
-<tr> <th>Leido</th> <th>Origen</th> <th></th> </tr>
+<tr> <th>Fecha</th> <th>Origen</th> <th></th> </tr>
 <%	Iterator<Mensaje> it = listaMensajes.iterator();
 	while(it.hasNext()){
 		Mensaje mensajeAux = it.next();
 	%>
-		<tr> <td>Igual si</td> <td><%=mensajeAux.getOrigen() %></td> 
+		<tr> <td><%= mensajeAux.getFecha() %></td> <td><%=mensajeAux.getOrigen() %></td> 
 		<td> <form action="ServletVerMensaje" method="POST">
 		<input type="hidden" name="id" value="<%=mensajeAux.getId() %>">
 		<input type="hidden" name="destino" value="<%=mensajeAux.getDestino() %>">
 		<input type="hidden" name="origen" value="<%=mensajeAux.getOrigen() %>">
 		<input type="hidden" name="texto" value="<%=mensajeAux.getTexto() %>">
+		<% request.setAttribute("fechaMensaje", mensajeAux.getFecha()); %>
 		<input type="submit" value="Ver">
 		</form> </td>
 		 </tr>
