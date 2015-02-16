@@ -35,6 +35,7 @@ public class ServletBuscador extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Cogemos el nick del usuario que nos pasan y lo buscamos en la base de datos
 		HttpSession sesion = request.getSession();
+		String laSesion=(String)sesion.getAttribute("user");
 		DbConstructor constructorDb = DbConstructor.getInstance();
 		String busqueda = request.getParameter("busqueda");
 		
@@ -42,11 +43,16 @@ public class ServletBuscador extends HttpServlet {
 			
 			if(constructorDb.buscaUsuario(busqueda)){
 				UsuarioBacon usuarioBusqueda = constructorDb.dameUsuario(busqueda);
+				boolean amigo=constructorDb.esAmigo(laSesion, usuarioBusqueda.getNick());
+				sesion.setAttribute("amigo", amigo);
 				sesion.setAttribute("usuarioBusqueda", usuarioBusqueda);
 				response.sendRedirect("PaginaResultadosBusqueda.jsp");
 			}else{
 				response.sendRedirect("PaginaPrincipal.jsp");
 			}
+			
+	
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

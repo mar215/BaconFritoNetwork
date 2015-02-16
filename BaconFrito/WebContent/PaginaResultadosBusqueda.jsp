@@ -77,6 +77,26 @@
 </center>
 </div>
 </center>
+<center>
+		<% 
+		boolean amigo;
+		amigo = (boolean) session.getAttribute("amigo"); 
+		if (amigo == true) { %>
+			<td> <form action="" method="POST">
+			<input type="hidden" name="id" value="<%=usuarioBusqueda.getNick() %>">
+			<input type="submit" value="Dejar de seguir">
+			</form> </td>
+			 </tr>				
+			 <% 
+		 }else{  %>
+			 <td> <form action="entrarGrupo" method="POST">
+			<input type="hidden" name="id" value="<%=usuarioBusqueda.getNick() %>">
+			<input type="submit" value="Seguir">
+			</form> </td>
+			 </tr>
+	
+ <%		}  %>
+</center>
 
 </body>
 </html>

@@ -603,7 +603,7 @@ public class DbConstructor {
 				+ DatosAmistad.COLUMN_NAME_NICKORIGEN + " = '"
 				+ nickO + "' AND "
 				+ DatosAmistad.COLUMN_NAME_NICKDESTINO + " = '"
-				+ nickD + "' AND "+ DatosUsuario.COLUMN_NAME_NICK +" = '"+ "nickO'";
+				+ nickD + "' AND "+ DatosUsuario.COLUMN_NAME_NICK +" = '"+ nickO+"'";
 		ResultSet resultLista = oStmt.executeQuery(sSQL);
 		while (resultLista.next()) {
 			listaSeguidores.add(new UsuarioBacon(
@@ -624,6 +624,61 @@ public class DbConstructor {
 
 	}
 	
-	public boolean esAmigo()
+	public boolean esAmigo(String nickO, String nickD) throws NamingException, SQLException {
+		
+		Connection conexion = conectarDb();
+		Statement oStmt = conexion.createStatement();
+		ArrayList<Amistad> listaSiguiendo = new ArrayList<Amistad>();
+		
+		String sSQL = "SELECT "+ DatosAmistad.TABLE_NAME +" FROM "
+				+ DatosUsuario.TABLE_NAME + ", "
+				+ DatosAmistad.TABLE_NAME + " WHERE "
+				+ DatosAmistad.COLUMN_NAME_NICKORIGEN + " = '"
+				+ nickO + "' AND "
+				+ DatosAmistad.COLUMN_NAME_NICKDESTINO + " = '"
+				+ nickD + "' AND "+ DatosUsuario.COLUMN_NAME_NICK +" = '"+ nickD+"'";
+		ResultSet resultLista = oStmt.executeQuery(sSQL);
+		while (resultLista.next()) {
+			listaSiguiendo.add(new Amistad(
+					resultLista.getString(DatosAmistad.COLUMN_NAME_NICKORIGEN),
+					resultLista.getString(DatosAmistad.COLUMN_NAME_NICKDESTINO)));
+			
+			}
+		boolean amigo=false;
+		for (Amistad a:listaSiguiendo) {
+			
+			if (a.getNickDestino()==nickD) {
+				amigo=true;
+			}
+			
+		}
+		if (amigo) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public void seguir(String nickO, String nickD) throws NamingException, SQLException {
+		Connection conexion = conectarDb();
+		Statement oStmt = conexion.createStatement();
+		String sSQL = "INSERT INTO " + DatosAmistad.TABLE_NAME + " VALUES ("
+				+ " '" + nickO
+				+ "', '" + nickD+"')";
+		oStmt.executeUpdate(sSQL);	
+		oStmt.close();
+	}
+	
+	
+	public void dejarSeguir(String nickO, String nickD) throws NamingException, SQLException {
+		Connection conexion = conectarDb();
+		Statement oStmt = conexion.createStatement();
+		String sSQL = "DELETE * FROM" + DatosAmistad.TABLE_NAME + " WHERE '"
+				+ nickO +"' = " + DatosAmistad.COLUMN_NAME_NICKORIGEN +" AND '" + nickD
+				+ "' = " + DatosAmistad.COLUMN_NAME_NICKDESTINO; 
+		oStmt.executeUpdate(sSQL);	
+		oStmt.close();
+	}
 	
 }
