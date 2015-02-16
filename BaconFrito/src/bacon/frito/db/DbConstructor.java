@@ -347,6 +347,17 @@ public class DbConstructor {
 	public void insertarMensaje(Mensaje sms) throws NamingException, SQLException {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		
+		//Hacemos unos Strings en los que daremos el formato a la fecha para la base de datos
+		
+		Calendar c = new GregorianCalendar();
+		String fecha = c.get(Calendar.HOUR_OF_DAY) 	+ ":"
+					 + c.get(Calendar.MINUTE)		+ ":"
+					 + c.get(Calendar.SECOND) 		+ "-"
+					 + c.get(Calendar.DAY_OF_MONTH) + "/"
+					 + (c.get(Calendar.MONTH) + 1)	+ "/"
+					 + c.get(Calendar.YEAR);
+		
 		ResultSet rs = oStmt.executeQuery(Db.DATABASE_GRUPO_NEXT_ID);
 		rs.first();
 		int id = rs.getInt(1);
@@ -356,7 +367,8 @@ public class DbConstructor {
 				+ ", '" + sms.getTexto()
 				+ "', '" + sms.getDestino()
 				+ "', '" + sms.getOrigen()
-				+ "', '" + sms.getOrigen()+"')";
+				+ "', '" + sms.getOrigen()
+				+ ", to_date('"+fecha+"', 'hh24:mi:ss-dd/mm/yyyy')" +"')";
 		System.out.println(sSQL);
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
@@ -409,6 +421,7 @@ public class DbConstructor {
 				+ DatosMensaje.COLUMN_NAME_ID + ", "
 				+ DatosMensaje.COLUMN_NAME_TEXTO + ", "
 				+ DatosMensaje.COLUMN_NAME_DESTINO + ", "
+				+ DatosMensaje.COLUMN_NAME_FECHA + ", "
 				+ DatosMensaje.COLUMN_NAME_NICKUSUARIO + " FROM "
 				+ DatosMensaje.TABLE_NAME + " WHERE ("
 				+ DatosMensaje.COLUMN_NAME_DESTINO + " = '"
@@ -418,7 +431,8 @@ public class DbConstructor {
 			Mensaje mensajeAux = new Mensaje(resultLista.getInt(DatosMensaje.COLUMN_NAME_ID),
 					resultLista.getString(DatosMensaje.COLUMN_NAME_TEXTO),
 					resultLista.getString(DatosMensaje.COLUMN_NAME_DESTINO),
-					resultLista.getString(DatosMensaje.COLUMN_NAME_NICKUSUARIO));
+					resultLista.getString(DatosMensaje.COLUMN_NAME_NICKUSUARIO),
+					resultLista.getDate(DatosMensaje.COLUMN_NAME_FECHA));
 			
 			listaMensajes.add(mensajeAux);
 		}

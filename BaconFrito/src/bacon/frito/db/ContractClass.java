@@ -56,6 +56,7 @@ public class ContractClass {
     	public static final String COLUMN_NAME_TEXTO 		   	= "texto";			//String
     	public static final String COLUMN_NAME_DESTINO  		= "destino";		//String
     	public static final String COLUMN_NAME_ORIGEN  			= "origen";			//String
+    	public static final String COLUMN_NAME_FECHA  			= "fecha";			//String
     	public static final String COLUMN_NAME_NICKUSUARIO		= "nickusuario";	//String clave ajena usuario
     	public static final String CONSTRAINT_MENSAJE			= "idmensaje_pk";
     	public static final String SEQUENCE_MENSAJE_ID			= "mensaje_seq";
@@ -92,9 +93,20 @@ public class ContractClass {
     	public static final String COLUMNAS = COLUMN_NAME_ID + "," + COLUMN_NAME_USER + "," +
 											COLUMN_NAME_TEXT + "," + COLUMN_NAME_DATE;
 	}
+    
+    public static abstract class DatosAmistad {
+    	public static final String TABLE_NAME = "GrupoAmistad";
+    	public static final String COLUMN_NAME_NICKORIGEN		="nickorigen";		//String
+    	public static final String COLUMN_NAME_NICKDESTINO			="nickdestino";			//int
+    	public static final String CONSTRAINT_NICKORIGEN		="origen_fk";		//clave ajena a idusuario
+    	public static final String CONSTRAINT_NICKDESTINO		="destino_fk";			//clave ajena a idgrupo
+    	public static final String[] COLUMNS = {COLUMN_NAME_NICKORIGEN, COLUMN_NAME_NICKDESTINO};
+    	
+    	public static final String COLUMNAS = COLUMN_NAME_NICKORIGEN + "," +
+				COLUMN_NAME_NICKDESTINO;
+    }
+    
  
-    //DESAYUNO
-    //ANYTHING ELSE?
 
 	
 }

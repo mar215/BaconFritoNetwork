@@ -41,6 +41,7 @@ public class Db {
 			+ DatosMensaje.COLUMN_NAME_TEXTO			+ " varchar2(500), "
 			+ DatosMensaje.COLUMN_NAME_DESTINO			+ " varchar2(25) NOT NULL, "
 			+ DatosMensaje.COLUMN_NAME_ORIGEN			+ " varchar2(25) NOT NULL, "
+			+ DatosMensaje.COLUMN_NAME_FECHA			+ " varchar2(10), "
 			+ DatosMensaje.COLUMN_NAME_NICKUSUARIO		+ " varchar2(25) CONSTRAINT fk_nickusuario "
 					+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "))";
 	
