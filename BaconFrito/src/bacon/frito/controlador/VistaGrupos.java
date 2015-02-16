@@ -40,18 +40,17 @@ public class VistaGrupos extends HttpServlet {
 		DbConstructor mapa = DbConstructor.getInstance();
 		
 		HttpSession sesion = request.getSession();
+		String iduser=(String)sesion.getAttribute("user");
+		
 		
 		try {
-			System.out.println("point 1");
+		
 			ArrayList<Grupo> listaGrupos = mapa.listarGrupos();
-			System.out.println("point 2");
-			for(Grupo g : listaGrupos){
-				System.out.println("point 3");
-				System.out.println(g.getNombre());
-			}
-			System.out.println("point 4");
+			ArrayList<Grupo> listaPertenecer= mapa.listarGruposPert(iduser);
+	
 			sesion.setAttribute("grupos",listaGrupos);
-			System.out.println("point 5");
+			sesion.setAttribute("estado",listaPertenecer);
+		
 			response.sendRedirect("PaginaGrupos.jsp");
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block

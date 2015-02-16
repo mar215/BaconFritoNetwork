@@ -17,7 +17,7 @@
 <body>
 
 <% ArrayList<Grupo> listaGrupo;%>
-<% ArrayList<GrupoUsuario> listaEntra;%>
+<% ArrayList<Grupo> listaEntra;%>
 <div id="header">
 <div id="imagenheader">
 <img src="Imagenes\fondoheader.jpg" alt="fondo header">
@@ -82,31 +82,35 @@
 <% listaGrupo = (ArrayList<Grupo>) session.getAttribute("grupos"); 
 	if (listaGrupo == null){	%>
 	<tr><td>lista nula</td></tr>
- <%}else{ for(Grupo g : listaGrupo) { %>
- 
- 
-	<tr><th><%= g.getId()  %></th><th><%= g.getNombre() %></th><td><th><img src ="<%= g.getImagen() %>" style="width:50px; height:50px;"> </th></td></tr>
-	<tr><td colspan="2"><%= g.getDescripcion() %></td></tr> 
+ <%}else{ 
+	 for(Grupo g : listaGrupo) { %>
+	 	<tr><th><%= g.getId()  %></th><th><%= g.getNombre() %></th><td><th><img src ="<%= g.getImagen() %>" style="width:50px; height:50px;"> </th></td></tr>
+		<tr><td colspan="2"><%= g.getDescripcion() %></td></tr>
+	<%  listaEntra = (ArrayList<Grupo>) session.getAttribute("estado"); 
+		boolean encontrado = false;
+		for (Grupo gr:listaEntra) {
+			if (g.getId() == gr.getId()) {
+				encontrado=true;
+			}
+		}
+		if (encontrado) { %>
+			<td> <form action="salirGrupo" method="POST">
+			<input type="hidden" name="id" value="<%=g.getId() %>">
+			<input type="submit" value="salir">
+			</form> </td>
+			 </tr>				
+			 <% 
+		 }else{  %>
+			 <td> <form action="entrarGrupo" method="POST">
+			<input type="hidden" name="id" value="<%=g.getId() %>">
+			<input type="submit" value="entrar">
+			</form> </td>
+			 </tr>
 	
-	<% listaEntra = (ArrayList<GrupoUsuario>) session.getAttribute("id"); 
-	if (listaEntra == null){	%>
-		<td> <form action="entrarGrupo" method="POST">
-		<input type="hidden" name="id" value="<%=g.getId() %>">
-		<input type="submit" value="entrar">
-		</form> </td>
-		 </tr>
-	<%}else{  %>
-		<td> <form action="salirGrupo" method="POST">
-		<input type="hidden" name="id" value="<%=g.getId() %>">
-		<input type="submit" value="salir">
-		</form> </td>
-		 </tr>	 
-	
- <% }}} %>
-	<%-- <tr><td><%= g.getId() %><%if(request.getParameter("grupo")!=null){%> value="<%=request.getAttribute("grupo")%>" <%}%></td></tr><tr><td><%= g.getNombre() %></td></tr> <tr><td><th><img src ="<%= g.getImagen() %>" style="width:50px; height:50px;"> </th></td></tr>
-	<tr><td colspan="2"><%= g.getDescripcion() %></td></tr>
-	<tr></tr>
-	<% }} %>  --%>
+ <%		}
+	}
+  } %>
+ 
 </table>
 </center>
 </div>
