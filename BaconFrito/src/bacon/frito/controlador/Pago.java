@@ -1,13 +1,17 @@
 package bacon.frito.controlador;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
+
+import bacon.frito.db.DbConstructor;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -63,7 +67,19 @@ public class Pago extends HttpServlet {
 						   .accept(MediaType.TEXT_PLAIN)
 						   .get(String.class);
 		
-		System.out.println(respuesta);
+		//System.out.println(respuesta);
+		if(respuesta.equals("Pago correcto")){
+			try {
+				DbConstructor.getInstance().convertirAPremium((String) request.getSession().getAttribute("user"));
+				response.sendRedirect("PaginaPrincipal.jsp");
+			} catch (NamingException | SQLException e) {
+				System.err.println("Error al convertir usuario a premium");
+				e.printStackTrace();
+			} 
+		}else{
+			request.getSession().setAttribute("error", respuesta);
+			response.sendRedirect("error_pago.jsp");
+		}
 		
 	}
 
