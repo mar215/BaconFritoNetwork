@@ -99,13 +99,6 @@ public class ServletConfigPerfil extends HttpServlet {
 				
 				//Comprobamos que las dos contraseñas sean las mismas
 				
-				if(usuarioNuevo.getPass()==null){
-					System.out.println("es null");
-				}
-				else if(usuarioNuevo.getPass()==""){
-					System.out.println("String vacio!");
-				}
-				
 				if(usuarioNuevo.getPass()!="" && request.getParameter("pass1")!=""){
 					if(!usuarioNuevo.getPass().equals(request.getParameter("pass1"))){
 						// No ha pasado el check de las contraseñas

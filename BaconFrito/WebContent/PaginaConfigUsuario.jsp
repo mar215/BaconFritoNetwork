@@ -75,7 +75,7 @@
 	<tr><th>Repita la contraseña:</th><td><input type="password" name="pass1">  </td></tr>
 	<tr><th>Nombre:</th><td><input type="text" name="nombre" value="<%= usuario.getNombre()%>">  </td></tr>
 	<tr><th>Apellidos:</th><td><input type="text" name="apellidos" value="<%= usuario.getApellidos()%>">  </td></tr>
-	<tr><th>Teléfono:</th><td><input type="text" name="" value="<%= usuario.getTelefono()%>">  </td></tr>
+	<tr><th>Teléfono:</th><td><input type="text" name="telefono" value="<%= usuario.getTelefono()%>">  </td></tr>
 	<tr><th>Fecha de nacimiento:<th><td><input type="date" name="bday" min="1910-01-01" value="<%= usuario.getBday()%>"><td></tr>
 	<% System.out.println(usuario.getSexo()); %>
 	<%if(usuario.getSexo().equals("hombre")){ %>
