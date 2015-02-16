@@ -77,7 +77,8 @@
 	<tr><th>Apellidos:</th><td><input type="text" name="apellidos" value="<%= usuario.getApellidos()%>">  </td></tr>
 	<tr><th>Teléfono:</th><td><input type="text" name="" value="<%= usuario.getTelefono()%>">  </td></tr>
 	<tr><th>Fecha de nacimiento:<th><td><input type="date" name="bday" min="1910-01-01" value="<%= usuario.getBday()%>"><td></tr>
-	<%if(usuario.getSexo()=="hombre"){ %>
+	<% System.out.println(usuario.getSexo()); %>
+	<%if(usuario.getSexo().equals("hombre")){ %>
 	<tr><th>Sexo:<th><td><input type="radio" name="sexo" value="hombre" checked>Hombre<td></tr>
 	<tr><td><input type="radio" name="sexo" value="mujer">Mujer<td></tr>
 	<%}else{ %>

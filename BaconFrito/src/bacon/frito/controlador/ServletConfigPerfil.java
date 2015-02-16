@@ -99,54 +99,61 @@ public class ServletConfigPerfil extends HttpServlet {
 				
 				//Comprobamos que las dos contraseñas sean las mismas
 				
-				if(usuarioNuevo.getPass()!=null && request.getParameter("pass1")!=null){
+				if(usuarioNuevo.getPass()==null){
+					System.out.println("es null");
+				}
+				else if(usuarioNuevo.getPass()==""){
+					System.out.println("String vacio!");
+				}
+				
+				if(usuarioNuevo.getPass()!="" && request.getParameter("pass1")!=""){
 					if(!usuarioNuevo.getPass().equals(request.getParameter("pass1"))){
 						// No ha pasado el check de las contraseñas
 						response.sendRedirect("ServletConfigPerfil");
 						return;
 					}
 				}
-				else if((usuarioNuevo.getPass()==null && request.getParameter("pass1")!=null) || (request.getParameter("pass1")==null && usuarioNuevo.getPass()!=null)){
+				else if((usuarioNuevo.getPass()=="" && request.getParameter("pass1")!="") || (request.getParameter("pass1")==null && usuarioNuevo.getPass()!=null)){
 					response.sendRedirect("ServletConfigPerfil");
 					return;
 				}
-				else if (usuarioNuevo.getPass()==null && request.getParameter("pass1")==null){
+				else if (usuarioNuevo.getPass()=="" && request.getParameter("pass1")==""){
 					usuarioNuevo.setPass(usuarioViejo.getPass());
 				}
 				
 				// Nick
 				
-				if(usuarioNuevo.getNick()==null){
+				if(usuarioNuevo.getNick()==""){
 					usuarioNuevo.setNick(usuarioViejo.getNick());
 				}
 				
 				// Nombre
 				
-				if(usuarioNuevo.getNombre()==null){
+				if(usuarioNuevo.getNombre()==""){
 					usuarioNuevo.setNombre(usuarioViejo.getNombre());
 				}
 				
 				//Apellidos
 				
-				if(usuarioNuevo.getApellidos()==null){
+				if(usuarioNuevo.getApellidos()==""){
 					usuarioNuevo.setApellidos(usuarioViejo.getApellidos());
 				}
 				
 				//Telefono 
 				
-				if(usuarioNuevo.getTelefono()==null){
+				if(usuarioNuevo.getTelefono()==""){
 					usuarioNuevo.setTelefono(usuarioViejo.getTelefono());
 				}
 				
 				//Sexo
 				
-				if(usuarioNuevo.getSexo()==null){
+				if(usuarioNuevo.getSexo()==""){
 					usuarioNuevo.setSexo(usuarioViejo.getSexo());
 				}
 				
 				//Bday
 				
-				if(usuarioNuevo.getBday()==null){
+				if(usuarioNuevo.getBday()==""){
 					usuarioNuevo.setBday(usuarioViejo.getBday());
 				}
 
