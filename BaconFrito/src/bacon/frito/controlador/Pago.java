@@ -14,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import bacon.frito.db.DbConstructor;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -71,6 +70,7 @@ public class Pago extends HttpServlet {
 		if(respuesta.equals("Pago correcto")){
 			try {
 				DbConstructor.getInstance().convertirAPremium((String) request.getSession().getAttribute("user"));
+				request.getSession().setAttribute("tipoUsuario", "usuariopremium");
 				response.sendRedirect("PaginaPrincipal.jsp");
 			} catch (NamingException | SQLException e) {
 				System.err.println("Error al convertir usuario a premium");

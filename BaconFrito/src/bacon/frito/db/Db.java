@@ -154,5 +154,12 @@ public class Db {
 			   + " FROM " + DatosUsuario.TABLE_NAME;
 	}
 	//SELECT nick FROM Usuario;
+	
+	public static String getUsuarios(String user){
+		return "SELECT " + DatosAmistad.COLUMN_NAME_NICKDESTINO
+			   + " FROM " + DatosAmistad.TABLE_NAME
+			   + " WHERE " + DatosAmistad.COLUMN_NAME_NICKORIGEN + " = '" + user + "'";
+	}
+	//SELECT nick FROM Usuario;
 
 }

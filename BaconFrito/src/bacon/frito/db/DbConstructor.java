@@ -22,7 +22,6 @@ import bacon.frito.db.ContractClass.DatosGrupoUsuario;
 import bacon.frito.db.ContractClass.DatosMensaje;
 import bacon.frito.db.ContractClass.DatosNotificacion;
 import bacon.frito.db.ContractClass.DatosUsuario;
-import bacon.frito.modelo.Amistad;
 import bacon.frito.modelo.Grupo;
 import bacon.frito.modelo.GrupoUsuario;
 import bacon.frito.modelo.Mensaje;
@@ -519,14 +518,17 @@ public class DbConstructor {
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		ArrayList<Notificacion> result = new ArrayList<Notificacion>();
-		System.out.println(Db.getNotif(dameUsuarios()));
-		ResultSet oRs = oStmt.executeQuery(Db.getNotif(dameUsuarios()));
+		ArrayList<String> usuarios = dameUsuarios(nick);
+		if(usuarios.size() == 0){
+			result.add(new Notificacion("NO HAY", "NOTIFICACIONES", new Date(Calendar.getInstance().getTimeInMillis())));
+			return result;
+		}
+		ResultSet oRs = oStmt.executeQuery(Db.getNotif(usuarios));
 		while(oRs.next()){
 			result.add(new Notificacion(oRs.getString(DatosNotificacion.COLUMN_NAME_USER),
 										oRs.getString(DatosNotificacion.COLUMN_NAME_TEXT),
 										oRs.getDate(DatosNotificacion.COLUMN_NAME_DATE)));			
 		}
-		System.out.println("DEBUG BORRAME CON AMOR "+result.size());
 		return result;
 	}
 
@@ -543,13 +545,13 @@ public class DbConstructor {
 		return result;
 	}
 
-	public ArrayList<String> dameUsuarios() throws SQLException, NamingException{
+	public ArrayList<String> dameUsuarios(String user) throws SQLException, NamingException{
 		Connection conexion = conectarDb();
 		Statement oStmt=conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		ArrayList<String> result = new ArrayList<String>();
-		ResultSet oRs = oStmt.executeQuery(Db.getUsuarios());
+		ResultSet oRs = oStmt.executeQuery(Db.getUsuarios(user));
 		while(oRs.next()){
-			result.add(oRs.getString(DatosUsuario.COLUMN_NAME_NICK));			
+			result.add(oRs.getString(DatosAmistad.COLUMN_NAME_NICKDESTINO));			
 		}
 		return result;
 	}
@@ -572,7 +574,7 @@ public class DbConstructor {
 		return true;
 	}
 	
-	//FUNCIONES AMSITAD
+	//FUNCIONES AMISTAD
 	
 	public void crearTablaAmistad() throws SQLException, NamingException  {
 		Connection conexion=conectarDb();
@@ -630,15 +632,6 @@ public class DbConstructor {
 		
 		Connection conexion = conectarDb();
 		Statement oStmt = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-		ArrayList<Amistad> listaSiguiendo = new ArrayList<Amistad>();
-		
-		/*String sSQL = "SELECT * FROM "
-				+ DatosUsuario.TABLE_NAME + ", "
-				+ DatosAmistad.TABLE_NAME + " WHERE "
-				+ DatosAmistad.COLUMN_NAME_NICKORIGEN + " = '"
-				+ nickO + "' AND "
-				+ DatosAmistad.COLUMN_NAME_NICKDESTINO + " = '"
-				+ nickD + "' AND "+ DatosUsuario.COLUMN_NAME_NICK +" = '"+ nickD+"'";*/
 		String sSQL = "SELECT * FROM " + DatosAmistad.TABLE_NAME 
 				+ " WHERE " + DatosAmistad.COLUMN_NAME_NICKORIGEN + " = '" + nickO
 				+ "' AND "+ DatosAmistad.COLUMN_NAME_NICKDESTINO + " = '" + nickD + "'";
