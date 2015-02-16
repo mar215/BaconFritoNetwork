@@ -20,7 +20,7 @@ if(session.getAttribute("user")!=null){
 <link rel="stylesheet" type="text/css" href="HojaEstilosProyecto.css" >
 </head>
 <body style="background-color:#4DACFF">
-
+<br><br><br>
 <h1 align="center">Bienvenido a Bacon Frito Network</h1>
 
 <form action="Login" method="POST">
@@ -34,7 +34,13 @@ if(session.getAttribute("user")!=null){
 <tr><td colspan="2" style="text-align: center"><input type="submit" value="Login"> <a href="PaginaRegistro.jsp">Registrarse</a></td></tr>
 </table>
 </form>
+<center>
+<br><br><br>
+<br><br><br>
 
+<img src="http://3.bp.blogspot.com/-IwJpf-uFsIs/U2Ut_cMTnWI/AAAAAAAAa2c/1WucDM7oviY/s1600/10.gif"> 
+</iframe>
+</center>
 </body>
 </html>
 <%
