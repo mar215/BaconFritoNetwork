@@ -387,10 +387,12 @@ public class DbConstructor {
 	public void mensajeGrupal(Mensaje sms) throws NamingException, SQLException {
 		Connection conexion = conectarDb();
 		Statement oStmt = conexion.createStatement();
-		String sSQL = "SELECT"
+		Grupo grupoSms = dameGrupo(sms.getDestino());
+		String sSQL = "SELECT "
 				+ DatosGrupoUsuario.COLUMN_NAME_NICKUSUARIO + " FROM "
 				+ DatosGrupoUsuario.TABLE_NAME + " WHERE ('"
-				+ sms.getDestino() + "' = "+DatosGrupoUsuario.COLUMN_NAME_IDGRUPO+")";
+				+ grupoSms.getId() + "' = "+DatosGrupoUsuario.COLUMN_NAME_IDGRUPO+")";
+		System.out.println(sSQL);
 		ResultSet resultUsers = oStmt.executeQuery(sSQL);
 		while(resultUsers.next()){
 			Mensaje mensajeAux = sms;
