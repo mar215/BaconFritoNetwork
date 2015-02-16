@@ -31,7 +31,7 @@
 					<ul id="menu">
 						<li><a href="ServletPaginaPrincipal">Inicio</a>
 							<ul>
-								<li><a href="ServletPaginaUsuario"><%= session.getAttribute("user") %></a></li>
+								<li><a href="ServletPaginaUsuario"><%= (String)session.getAttribute("user") %></a></li>
 								<li><a href="nuevo_estado.jsp"> Compartir notificacion </a></li>
 								<li><a href="Logout">Cerrar sesión</a></li>
 							</ul>
@@ -39,7 +39,7 @@
 						<li><a href="ServletPaginaConsultaMensajes">Mensajes</a>
 							<ul>
 								<li><a href="PaginaMensajes.jsp">Enviar mensaje</a></li>
-								<% if(session.getAttribute("tipoUsuario")=="premium"){ %>
+								<% if(((String)session.getAttribute("tipoUsuario")).toLowerCase().equals("usuariopremium")){ %>
 									<li><a href="PaginaMensajesGrupo.jsp">Enviar mensaje a Grupo</a></li>
 								<%}%>
 								<li><a href="ServletPaginaConsultaMensajes">Consultar mensajes</a></li>
@@ -66,6 +66,7 @@
 		</table>
 	</div>
 </div>
+
 
 <center>
 <div id="contenido">
