@@ -16,15 +16,18 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import bacon.frito.db.ContractClass.DatosAmistad;
 import bacon.frito.db.ContractClass.DatosGrupo;
 import bacon.frito.db.ContractClass.DatosGrupoUsuario;
 import bacon.frito.db.ContractClass.DatosMensaje;
 import bacon.frito.db.ContractClass.DatosNotificacion;
 import bacon.frito.db.ContractClass.DatosUsuario;
+import bacon.frito.modelo.Amistad;
 import bacon.frito.modelo.Grupo;
 import bacon.frito.modelo.GrupoUsuario;
 import bacon.frito.modelo.Mensaje;
 import bacon.frito.modelo.Notificacion;
+import bacon.frito.modelo.Usuario;
 import bacon.frito.modelo.UsuarioBacon;
 import bacon.frito.modelo.UsuarioPremium;
 
@@ -566,5 +569,60 @@ public class DbConstructor {
 		oStmt.executeQuery(Db.addNotif(id, usuario, texto, fecha));
 		return true;
 	}
+	
+	//FUNCIONES AMSITAD
+	
+	public void crearTablaAmistad() throws SQLException, NamingException  {
+		Connection conexion=conectarDb();
+		Statement oStmt=conexion.createStatement();
+		String sSQL = Db.DATABASE_CREATE_AMISTAD;
+		oStmt.executeUpdate(sSQL);
+		oStmt.close();
+	}
+	
+	public void insertarAmistad(String origen, String destino) throws NamingException, SQLException {
+		Connection conexion=conectarDb();
+		Statement oStmt=conexion.createStatement();
+		String sSQL = "INSERT INTO " + DatosGrupoUsuario.TABLE_NAME + " VALUES ("
+				+ " '" + origen
+				+ "', " + destino+")";		
+		oStmt.executeUpdate(sSQL);	
+		oStmt.close();
+	}
+	
+
+	public ArrayList<Usuario> dameSeguidores(String nickO, String nickD) throws NamingException,
+			SQLException {
+		ArrayList<Usuario> listaSeguidores = new ArrayList<Usuario>();
+		Connection conexion = conectarDb();
+		Statement oStmt = conexion.createStatement();
+
+		String sSQL = "SELECT "+ DatosUsuario.TABLE_NAME +" FROM "
+				+ DatosUsuario.TABLE_NAME + ", "
+				+ DatosAmistad.TABLE_NAME + " WHERE "
+				+ DatosAmistad.COLUMN_NAME_NICKORIGEN + " = '"
+				+ nickO + "' AND "
+				+ DatosAmistad.COLUMN_NAME_NICKDESTINO + " = '"
+				+ nickD + "' AND "+ DatosUsuario.COLUMN_NAME_NICK +" = '"+ "nickO'";
+		ResultSet resultLista = oStmt.executeQuery(sSQL);
+		while (resultLista.next()) {
+			listaSeguidores.add(new UsuarioBacon(
+					resultLista.getString(DatosUsuario.COLUMN_NAME_NICK),
+					resultLista.getString(DatosUsuario.COLUMN_NAME_PASS),
+					resultLista.getString(DatosUsuario.COLUMN_NAME_NOMBRE),
+					resultLista.getString(DatosUsuario.COLUMN_NAME_APELLIDOS),
+					resultLista.getString(DatosUsuario.COLUMN_NAME_TELEFONO),
+					resultLista.getString(DatosUsuario.COLUMN_NAME_SEXO),
+					resultLista.getString(DatosUsuario.COLUMN_NAME_BDAY),
+					resultLista.getString(DatosUsuario.COLUMN_NAME_FOTO),
+					resultLista.getString(DatosUsuario.COLUMN_NAME_TIPO),
+					resultLista.getString(DatosUsuario.COLUMN_NAME_ACTIVO)));
+			
+			}
+
+		return listaSeguidores;
+
+	}
+	
 	
 }

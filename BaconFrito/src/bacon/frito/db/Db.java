@@ -3,6 +3,7 @@ package bacon.frito.db;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import bacon.frito.db.ContractClass.DatosAmistad;
 import bacon.frito.db.ContractClass.DatosGrupo;
 import bacon.frito.db.ContractClass.DatosGrupoUsuario;
 import bacon.frito.db.ContractClass.DatosMensaje;
@@ -51,6 +52,14 @@ public class Db {
 			+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "), "
 			+ DatosGrupoUsuario.COLUMN_NAME_IDGRUPO		+ " number(6) CONSTRAINT FK_IDGRUPO "
 			+ "REFERENCES " + DatosGrupo.TABLE_NAME + "(" + DatosGrupo.COLUMN_NAME_ID + "))";
+	
+	public static final String DATABASE_CREATE_AMISTAD = "CREATE TABLE "
+			+ DatosAmistad.TABLE_NAME				+ " ("
+			+ DatosAmistad.COLUMN_NAME_NICKORIGEN + " varchar2(25) CONSTRAINT FK_NICKORIGEN "
+			+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "), "
+			+ DatosAmistad.COLUMN_NAME_NICKDESTINO		+ " number(6) CONSTRAINT FK_NICKDESTINO "
+			+ "REFERENCES " + DatosUsuario.TABLE_NAME + "(" + DatosUsuario.COLUMN_NAME_NICK + "))";
+	
 	
 	//AÑADIENDO CLAVES PRIMARIAS
 	
