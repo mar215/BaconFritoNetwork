@@ -371,7 +371,7 @@ public class DbConstructor {
 				+ "', '" + sms.getDestino()
 				+ "', '" + sms.getOrigen()
 				+ "', '" + sms.getOrigen()
-				+ ", to_date('"+fecha+"', 'hh24:mi:ss-dd/mm/yyyy')" +"')";
+				+ "', to_date('"+fecha+"', 'hh24:mi:ss-dd/mm/yyyy')" +")";
 		System.out.println(sSQL);
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();	
@@ -624,5 +624,6 @@ public class DbConstructor {
 
 	}
 	
+	public boolean esAmigo()
 	
 }
