@@ -93,8 +93,9 @@ public class DbConstructor {
 		Connection conexion=conectarDb();
 		Statement oStmt=conexion.createStatement();
 		UsuarioBacon userAux = dameUsuario(nick);
-		String sSQL = "UPDATE "+ DatosUsuario.TABLE_NAME + ""
-				+ "SET " +DatosUsuario.COLUMN_NAME_TIPO+"='usuariopremium' (WHERE  " +nick+"="+userAux.getNick()+")";
+		String sSQL = "UPDATE "+ DatosUsuario.TABLE_NAME + " "
+				+ "SET " +DatosUsuario.COLUMN_NAME_TIPO+" = 'usuariopremium'" 
+				+ " WHERE " + DatosUsuario.COLUMN_NAME_NICK +" = "+ userAux.getNick();
 		oStmt.executeUpdate(sSQL);	
 		oStmt.close();
 		
