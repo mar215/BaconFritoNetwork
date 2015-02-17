@@ -99,7 +99,7 @@ public class RegistroUsuario extends HttpServlet {
 				}else if (dado==1){
 					fotoUser = "http://fc06.deviantart.net/fs71/f/2011/119/c/2/princesa_grumosa_by_axcell1ben-d3f6mlj.png";
 				}else if (dado==2){
-					fotoUser = "http://images.wikia.com/horadeaventura/es/images/archive/8/81/20120909174630!Princesa_flama.jpg";
+					fotoUser = "http://fc04.deviantart.net/fs70/i/2013/057/0/8/flame_princess___by_janelvalle-d5w9xl5.png";
 				}	
 			}
 		}
