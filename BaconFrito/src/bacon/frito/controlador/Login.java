@@ -1,4 +1,4 @@
-package bacon.frito.vista;
+package bacon.frito.controlador;
 
 import java.io.IOException;
 import java.sql.SQLException;
