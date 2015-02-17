@@ -429,7 +429,7 @@ public class DbConstructor {
 				+ DatosMensaje.COLUMN_NAME_NICKUSUARIO + " FROM "
 				+ DatosMensaje.TABLE_NAME + " WHERE ("
 				+ DatosMensaje.COLUMN_NAME_DESTINO + " = '"
-				+ nick + "')";
+				+ nick + "') ORDER BY " + DatosMensaje.COLUMN_NAME_FECHA + " DESC";
 		ResultSet resultLista = oStmt.executeQuery(sSQL);	
 		while(resultLista.next()){
 			Mensaje mensajeAux = new Mensaje(resultLista.getInt(DatosMensaje.COLUMN_NAME_ID),
