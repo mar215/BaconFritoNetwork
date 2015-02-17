@@ -97,6 +97,8 @@ public class ServletConfigPerfil extends HttpServlet {
 					e.printStackTrace();
 				}
 				
+				usuarioNuevo.setFoto(usuarioViejo.getFoto());
+				
 				//Comprobamos que las dos contraseñas sean las mismas
 				
 				if(usuarioNuevo.getPass()!="" && request.getParameter("pass1")!=""){
