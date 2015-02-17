@@ -18,13 +18,18 @@ if(session.getAttribute("user")!=null){
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Bacon Frito Network</title>
 <link rel="stylesheet" type="text/css" href="HojaEstilosProyecto.css" >
-</head>
-<body style="background-color:#4DACFF">
+</head><br>
+<center>
+<img align="center" width="700" height="200"  src="http://3.bp.blogspot.com/-IwJpf-uFsIs/U2Ut_cMTnWI/AAAAAAAAa2c/1WucDM7oviY/s1600/10.gif">
+</center>
+
+
 <br><br><br>
-<h1 align="center">Bienvenido a Bacon Frito Network</h1>
+<br><br><br>
+<br>
 
 <form action="Login" method="POST">
-<table align="center">
+<table align="center" width="200" cellspacing="1" cellpadding="3" border="0" bgcolor="#FFFF00">
 
 <tr><td><p>Usuario</p></td>
 <td><input type="text" name="user"></td></tr>
@@ -37,8 +42,12 @@ if(session.getAttribute("user")!=null){
 <center>
 <br><br><br>
 <br><br><br>
+<br><br><br>
+<br><br><br>
+<h5>Página creada por:<br><br>-Julián Martínez<br>-Mario Sánchez<br>-Francisco Quero </h5>
 
-<img src="http://3.bp.blogspot.com/-IwJpf-uFsIs/U2Ut_cMTnWI/AAAAAAAAa2c/1WucDM7oviY/s1600/10.gif"> 
+<h5>Nos guardamos los derechos reservados©  de la página...<br> </h5>
+<h5>excepto si nos denuncian. </h5>
 </iframe>
 </center>
 </body>

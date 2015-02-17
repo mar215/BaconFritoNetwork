@@ -24,7 +24,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 @WebServlet("/Pago")
 public class Pago extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static final String REST_URI = "http://localhost:8080/FriedBaconBank/rest/servicio/payday";
+	static final String REST_URI = "http://172.22.7.6:8080/FriedBaconBank/rest/servicio/payday";
 	//static final String PAGO	 = "";
        
     /**
