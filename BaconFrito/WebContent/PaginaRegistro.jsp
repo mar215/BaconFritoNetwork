@@ -54,6 +54,8 @@
 <tr><td><input type="text" name="apellidos" <%if(request.getParameter("apellidos")!=null){%> value="<%=request.getAttribute("apellidos")%>" <%}%>><td></tr>
 <tr><th>Teléfono:<th></tr>
 <tr><td><input type="text" name="telefono"><td></tr>
+<tr><th>Foto de usuario (url):<th></tr>
+<tr><td><input type="text" name="foto"><td></tr>
 <tr><th>Fecha de nacimiento:<th></tr>
 <tr><td><input type="date" name="bday" min="1910-01-01"><td></tr>
 <tr><th>Sexo:<th></tr>
